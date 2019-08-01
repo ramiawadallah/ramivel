@@ -13,8 +13,7 @@ in as a user and an admin, without conflicts!
 
 | Laravel version     | Branch   | Install                                                 |
 | ------------------- | ------   | ------------------------------------------------------- |
-| 5.6, 5.7 and 5.8    | Master   | composer require Ramvel/laravel-multiauth               |
-| JWT Api version     | jwt-auth | composer require Ramvel/laravel-multiauth -b jwt-auth   |
+| 5.6, 5.7 and 5.8    | Master   | composer require Ramivel/laravel-multiauth               |
 
 ## Installation
 
