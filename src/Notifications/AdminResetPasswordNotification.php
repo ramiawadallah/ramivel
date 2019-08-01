@@ -1,6 +1,6 @@
 <?php
 
-namespace Ramvel\Multiauth\Notifications;
+namespace Ramivel\Multiauth\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;

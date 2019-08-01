@@ -1,9 +1,9 @@
 <?php
 
-namespace Ramvel\Multiauth\Tests\Feature;
+namespace Ramivel\Multiauth\Tests\Feature;
 
-use Ramvel\Multiauth\Model\Role;
-use Ramvel\Multiauth\Tests\TestCase;
+use Ramivel\Multiauth\Model\Role;
+use Ramivel\Multiauth\Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class RoleTest extends TestCase

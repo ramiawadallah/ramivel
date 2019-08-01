@@ -1,9 +1,9 @@
 <?php
 
-namespace Ramvel\Multiauth\Tests\Feature;
+namespace Ramivel\Multiauth\Tests\Feature;
 
-use Ramvel\Multiauth\Notifications\AdminResetPasswordNotification;
-use Ramvel\Multiauth\Tests\TestCase;
+use Ramivel\Multiauth\Notifications\AdminResetPasswordNotification;
+use Ramivel\Multiauth\Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;

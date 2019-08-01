@@ -1,11 +1,11 @@
 <?php
 
-namespace Ramvel\Multiauth\Tests\Feature;
+namespace Ramivel\Multiauth\Tests\Feature;
 
 use App\Admin;
 use App\Role;
-use Ramvel\Multiauth\Notifications\RegistrationNotification;
-use Ramvel\Multiauth\Tests\TestCase;
+use Ramivel\Multiauth\Notifications\RegistrationNotification;
+use Ramivel\Multiauth\Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;

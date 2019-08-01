@@ -1,6 +1,6 @@
 <?php
 
-namespace Ramvel\Multiauth\Exception;
+namespace Ramivel\Multiauth\Exception;
 
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as AppHandler;

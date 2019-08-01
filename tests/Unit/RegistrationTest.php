@@ -1,9 +1,9 @@
 <?php
 
-namespace Ramvel\Multiauth\Tests\Unit;
+namespace Ramivel\Multiauth\Tests\Unit;
 
-use Ramvel\Multiauth\Notifications\RegistrationNotification;
-use Ramvel\Multiauth\Tests\TestCase;
+use Ramivel\Multiauth\Notifications\RegistrationNotification;
+use Ramivel\Multiauth\Tests\TestCase;
 use Illuminate\Support\Facades\Notification;
 
 class RegistrationTest extends TestCase

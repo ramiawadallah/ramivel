@@ -1,8 +1,8 @@
 <?php
 
-namespace Ramvel\Multiauth\Tests\Feature;
+namespace Ramviel\Multiauth\Tests\Feature;
 
-use Ramvel\Multiauth\Tests\TestCase;
+use Ramviel\Multiauth\Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class AdminValidationTest extends TestCase

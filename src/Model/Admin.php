@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Ramvel\Multiauth\Notifications\AdminResetPasswordNotification;
+use Ramivel\Multiauth\Notifications\AdminResetPasswordNotification;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 

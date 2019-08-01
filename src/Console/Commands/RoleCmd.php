@@ -1,6 +1,6 @@
 <?php
 
-namespace Ramvel\Multiauth\Console\Commands;
+namespace Ramivel\Multiauth\Console\Commands;
 
 use Ramvel\Multiauth\Model\Role;
 use Illuminate\Console\Command;

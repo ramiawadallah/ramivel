@@ -1,6 +1,6 @@
 <?php
 
-namespace Ramvel\Multiauth\Composers;
+namespace Ramivel\Multiauth\Composers;
 
 use App\Page;
 use App\Setting;

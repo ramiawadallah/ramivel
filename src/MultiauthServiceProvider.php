@@ -1,15 +1,15 @@
 <?php
 
-namespace Ramvel\Multiauth;
+namespace Ramivel\Multiauth;
 
-use Ramvel\Multiauth\Console\Commands\MakeMultiAuthCommand;
-use Ramvel\Multiauth\Console\Commands\RoleCmd;
-use Ramvel\Multiauth\Console\Commands\RollbackMultiAuthCommand;
-use Ramvel\Multiauth\Console\Commands\SeedCmd;
-use Ramvel\Multiauth\Exception\MultiAuthHandler;
-use Ramvel\Multiauth\Http\Middleware\redirectIfAuthenticatedAdmin;
-use Ramvel\Multiauth\Http\Middleware\redirectIfNotWithRoleOfAdmin;
-use Ramvel\Multiauth\Providers\AuthServiceProvider;
+use Ramivel\Multiauth\Console\Commands\MakeMultiAuthCommand;
+use Ramivel\Multiauth\Console\Commands\RoleCmd;
+use Ramivel\Multiauth\Console\Commands\RollbackMultiAuthCommand;
+use Ramivel\Multiauth\Console\Commands\SeedCmd;
+use Ramivel\Multiauth\Exception\MultiAuthHandler;
+use Ramivel\Multiauth\Http\Middleware\redirectIfAuthenticatedAdmin;
+use Ramivel\Multiauth\Http\Middleware\redirectIfNotWithRoleOfAdmin;
+use Ramivel\Multiauth\Providers\AuthServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;

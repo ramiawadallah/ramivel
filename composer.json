@@ -1,6 +1,6 @@
 {
-    "name": "ramvel/laravel-multiauth",
-    "description": "Laravel Multiauth package",
+    "name": "ramivel/ramivel",
+    "description": "Laravel package",
     "type": "library",
     "license": "MIT",
     "keywords": [
@@ -26,18 +26,18 @@
     },
     "autoload": {
         "psr-4": {
-            "Ramvel\\Multiauth\\": "src/"
+            "Ramivel\\Multiauth\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Ramvel\\Multiauth\\Tests\\":"tests/"
+            "Ramivel\\Multiauth\\Tests\\":"tests/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Ramvel\\Multiauth\\MultiauthServiceProvider"
+                "Ramivel\\Multiauth\\MultiauthServiceProvider"
             ]
         }
     }

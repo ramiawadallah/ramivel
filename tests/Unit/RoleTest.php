@@ -1,9 +1,9 @@
 <?php
 
-namespace Ramvel\Multiauth\Tests\Unit;
+namespace Ramivel\Multiauth\Tests\Unit;
 
-use Ramvel\Multiauth\Model\Role;
-use Ramvel\Multiauth\Tests\TestCase;
+use Ramivel\Multiauth\Model\Role;
+use Ramivel\Multiauth\Tests\TestCase;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class RoleTest extends TestCase

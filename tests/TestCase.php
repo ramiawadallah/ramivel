@@ -1,10 +1,10 @@
 <?php
 
-namespace Ramvel\Multiauth\Tests;
+namespace Ramivel\Multiauth\Tests;
 
 use App\Admin;
 use App\Role;
-use Ramvel\Multiauth\MultiauthServiceProvider;
+use Ramivel\Multiauth\MultiauthServiceProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase

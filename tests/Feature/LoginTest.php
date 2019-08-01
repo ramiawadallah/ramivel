@@ -1,9 +1,9 @@
 <?php
 
-namespace Ramvel\Multiauth\Tests\Feature;
+namespace Ramivel\Multiauth\Tests\Feature;
 
 use App\Admin;
-use Ramvel\Multiauth\Tests\TestCase;
+use Ramivel\Multiauth\Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class LoginTest extends TestCase

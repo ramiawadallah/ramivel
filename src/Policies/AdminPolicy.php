@@ -1,6 +1,6 @@
 <?php
 
-namespace Ramvel\Multiauth\Policies;
+namespace Ramivel\Multiauth\Policies;
 
 use App\Admin;
 use Illuminate\Auth\Access\HandlesAuthorization;

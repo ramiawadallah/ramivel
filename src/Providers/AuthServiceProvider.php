@@ -1,9 +1,9 @@
 <?php
 
-namespace Ramvel\Multiauth\Providers;
+namespace Ramivel\Multiauth\Providers;
 
 use App\Admin;
-use Ramvel\Multiauth\Policies\AdminPolicy;
+use Ramivel\Multiauth\Policies\AdminPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider

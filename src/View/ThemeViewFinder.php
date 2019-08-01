@@ -1,6 +1,6 @@
 <?php
 
-namespace Ramvel\Multiauth\View;
+namespace Ramivel\Multiauth\View;
 
 use Illuminate\View\FileViewFinder;
 

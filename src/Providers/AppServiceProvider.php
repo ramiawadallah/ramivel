@@ -1,11 +1,11 @@
 <?php
 
-namespace Ramvel\Multiauth\Providers;
+namespace Ramivel\Multiauth\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
-use Ramvel\Multiauth\View\ThemeViewFinder;
-use Ramvel\Multiauth\View\Composers;
+use Ramivel\Multiauth\View\ThemeViewFinder;
+use Ramivel\Multiauth\View\Composers;
 
 //BY Boomvel
 

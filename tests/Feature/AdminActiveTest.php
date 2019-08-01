@@ -1,6 +1,6 @@
 <?php
 
-namespace Ramvel\Multiauth\Tests\Feature;
+namespace Ramivel\Multiauth\Tests\Feature;
 
 use Ramvel\Multiauth\Tests\TestCase;
 
