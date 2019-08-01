@@ -145,7 +145,7 @@ class MultiauthServiceProvider extends ServiceProvider
                __DIR__ . '/Support' => app_path('Helpers/'), 
                __DIR__ . '/Config/cms.php' => config_path('cms.php'),
            ]
-            ,'ramvel:publish');
+            ,'ramivel:publish');
     }
 
     protected function loadBladeSyntax()

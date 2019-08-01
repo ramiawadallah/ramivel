@@ -13,26 +13,24 @@ in as a user and an admin, without conflicts!
 
 | Laravel version     | Branch   | Install                                                 |
 | ------------------- | ------   | ------------------------------------------------------- |
-| 5.4                 | 5.4      | composer require Ramvel/laravel-multiauth:5.4.x-dev   |
-| 5.5                 | 5.5      | composer require Ramvel/laravel-multiauth:5.5.x-dev   |
-| 5.6, 5.7 and 5.8    | Master   | composer require Ramvel/laravel-multiauth             |
-| JWT Api version     | jwt-auth | composer require Ramvel/laravel-multiauth -b jwt-auth |
+| 5.6, 5.7 and 5.8    | Master   | composer require Ramvel/laravel-multiauth               |
+| JWT Api version     | jwt-auth | composer require Ramvel/laravel-multiauth -b jwt-auth   |
 
 ## Installation
 
 Install via composer.
 
 ```bash
-composer require ramvel/laravel-multiauth
+composer require ramivel/ramivel
 ```
 
 Yuo must publish this line
 
 ```bash
-php artisan vendor:publish --tag="multiauth:publish"
+php artisan vendor:publish --tag="ramivel:publish"
 ```
 
-Run [the Migration](https://github.com/ramvel/laravel-multiauth/database/migrations/create_permission_tables.php) to have tables in your database.
+Run [the Migration](https://github.com/ramivel/laravel-multiauth/database/migrations/create_permission_tables.php) to have tables in your database.
 
 ```bash
 php artisan migrate
