@@ -3,6 +3,8 @@
 namespace Ramivel\Multiauth;
 
 use Ramivel\Multiauth\Console\Commands\MakeMultiAuthCommand;
+use Ramivel\Multiauth\Console\Commands\View;
+use Ramivel\Multiauth\Console\Commands\Controller;
 use Ramivel\Multiauth\Console\Commands\RoleCmd;
 use Ramivel\Multiauth\Console\Commands\RollbackMultiAuthCommand;
 use Ramivel\Multiauth\Console\Commands\SeedCmd;
@@ -169,6 +171,8 @@ class MultiauthServiceProvider extends ServiceProvider
             $this->commands([
                 SeedCmd::class,
                 RoleCmd::class,
+                Controller::class,
+                View::class,
             ]);
         }
     }

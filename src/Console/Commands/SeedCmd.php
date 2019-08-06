@@ -13,7 +13,7 @@ class SeedCmd extends Command
      *
      * @var string
      */
-    protected $signature = 'multiauth:seed {--r|role=}';
+    protected $signature = 'set:seed {--r|role=}';
 
     /**
      * The console command description.

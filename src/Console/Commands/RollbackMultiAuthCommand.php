@@ -15,7 +15,7 @@ class RollbackMultiAuthCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'multiauth:rollback 
+    protected $signature = 'set:rollback 
                                 {name=student : Give a name for guard}';
 
     /**

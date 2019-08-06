@@ -1,6 +1,6 @@
 <?php
 
-namespace Ramvel\Multiauth\Http\Middleware;
+namespace Ramivel\Multiauth\Http\Middleware;
 
 use Auth;
 use Closure;
