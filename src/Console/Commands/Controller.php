@@ -53,57 +53,26 @@ class Controller extends Command
                 }
             }
         }
-
-        if (!is_null($api_path)) 
-        {
-            $api_path = str_replace('\\', '/', $api_path);
-            $apiPathArray = explode('/', $api_path);
-
-            $d ='';
-            $api_paths = [];
-            foreach ($apiPathArray as $key => $dir) {
-                $d .= $key == 0 ? $dir : '/'.$dir;
-                $api_paths[] = $d;
-            }
-            foreach ($api_paths as $folder) 
-            {
-                if (!is_dir($folder)) 
-                {
-                    @mkdir($folder);
-                }
-            }
-        }
     }
 
      public function Controller($data)
      {
         $path = $this->argument('path') == 'null' ? null : $this->argument('path').'\\';
-        $api_path = $this->argument('api_path') == 'null' ? null : $this->argument('api_path').'\\';
 
         $controller_path = app_path('Http/Controllers/'.$data['controller'].'.php');
-        $api_controller_path = app_path('Http/Controllers/Api/'.$data['controller'].'.php');
 
         $path = str_replace('/', '\\', $path);
-        $api_path = str_replace('/', '\\', $api_path);
         
         // $this->createPath($path);
         $myfile = fopen($controller_path,'w');
-        $apimyfile = fopen($api_controller_path,'w');
 
         $txt = "Controller\n";
         fwrite($myfile, $txt);
-        fwrite($apimyfile, $txt);
         fclose($myfile);
-        fclose($apimyfile);
 
         $content = file_get_contents($controller_path);
-        $content = file_get_contents($api_controller_path);
-
         $namespace = $this->argument('path') == 'null' ? null : '/'.$this->argument('path');
-        $namespace = str_replace('/', '\\', $namespace);
 
-        $api_namespace = $this->argument('path') == 'null' ? null : '/'.$this->argument('path');
-        $api_namespace = str_replace('/', '\\', $api_namespace);
         
         $prefix = strtolower(str_singular(snake_case($data['model'])));
         $prefixs = strtolower(str_plural(snake_case($data['model'])));
@@ -112,7 +81,6 @@ class Controller extends Command
         $model = str_replace('/', '\\', ucfirst(str_singular($prefixs)));
 
         $controller = $name.'Controller';
-        $apicontroller = $name.'Controller';
 
         $code ='<?php
 
@@ -287,38 +255,7 @@ class '.$controller.' extends Controller
 }
 ';
 
-$api_code ='<?php
-
-namespace App\Http\Controllers\Api'.$api_namespace.';
-
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use Alert;
-use App\\'.''.$model.';
-
-class '.$apicontroller.' extends Controller
-{
-    
-    public function index()
-    {
-        $data = '.$model.'::paginate(5);
-        return response()->json($data);
-    }
-
-    public function show($id)
-    {
-        $data = '.$model.'::find($id)->paginate(5);
-        return response()->json($data);
-    }
-
-
-}
-';
-
             file_put_contents($controller_path,$code);
-            file_put_contents($api_controller_path,$api_code);
      }
     
     /**

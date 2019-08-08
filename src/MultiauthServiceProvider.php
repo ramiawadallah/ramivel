@@ -136,7 +136,7 @@ class MultiauthServiceProvider extends ServiceProvider
         $prefix = config('multiauth.prefix', 'admin');
 
         $this->publishes([
-               __DIR__ . '/database/migrations/' => database_path('migrations'),        //  Migrations
+               __DIR__ . '/database/' => database_path(),                               //  Database
                __DIR__ . '/Http/Controllers' => app_path('Http/Controllers/admin/'),    //  Controllers
                __DIR__ . '/Resources' => resource_path('views/'),                       //  Views & Layout
                __DIR__ . '/factories' => database_path('factories'),                    //  Factories
