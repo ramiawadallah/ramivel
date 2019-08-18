@@ -286,7 +286,7 @@
                             Crafted with <i class="fa fa-heart text-danger"></i> by <a class="font-w600" href="https://www.ramiawadallah.com" target="_blank">Rami Awadallah</a>
                         </div>
                         <div class="col-sm-6 order-sm-1 py-1 text-center text-sm-left">
-                            <a class="font-w600" href="https://www.rwmiawadallah.com" target="_blank">RAMVEL 1.0</a> &copy; <span data-toggle="year-copy"></span>
+                            <a class="font-w600" href="https://www.ramiawadallah.com" target="_blank">RAMVEL 1.0</a> &copy; <span data-toggle="year-copy"></span>
                         </div>
                     </div>
                 </div>
