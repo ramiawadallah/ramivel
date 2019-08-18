@@ -52,8 +52,8 @@
         
         <!-- Footer -->
             <div class="font-size-sm text-center text-muted py-3">
-                <strong>Crafted with <i class="fa fa-heart text-danger"></i> by <a class="font-w600" href="https://1.envato.market/ydb" target="_blank">Rami Awadallah</a></strong> &copy; 
-                <a class="font-w600" href="http://ramiawadallah.com" target="_blank">RAMVEL 1.0</a> &copy; <span data-toggle="year-copy"></span>
+                <strong>Crafted with <i class="fa fa-heart text-danger"></i> by <a class="font-w600" href="https://www.ramiawadallah.com" target="_blank">Rami Awadallah</a></strong> &copy; 
+                <a class="font-w600" href="https://www.ramiawadallah.com" target="_blank">RAMVEL 1.0</a> &copy; <span data-toggle="year-copy"></span>
             </div>
         <!-- Footer -->
 

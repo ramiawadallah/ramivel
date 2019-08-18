@@ -3,8 +3,6 @@
 namespace Ramivel\Multiauth;
 
 use Ramivel\Multiauth\Console\Commands\MakeMultiAuthCommand;
-use Ramivel\Multiauth\Console\Commands\View;
-use Ramivel\Multiauth\Console\Commands\Controller;
 use Ramivel\Multiauth\Console\Commands\RoleCmd;
 use Ramivel\Multiauth\Console\Commands\RollbackMultiAuthCommand;
 use Ramivel\Multiauth\Console\Commands\SeedCmd;
@@ -12,6 +10,7 @@ use Ramivel\Multiauth\Exception\MultiAuthHandler;
 use Ramivel\Multiauth\Http\Middleware\redirectIfAuthenticatedAdmin;
 use Ramivel\Multiauth\Http\Middleware\redirectIfNotWithRoleOfAdmin;
 use Ramivel\Multiauth\Providers\AuthServiceProvider;
+use Ramivel\Multiauth\Providers\AppServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +40,7 @@ class MultiauthServiceProvider extends ServiceProvider
             $this->loadMiddleware();
             $this->registerExceptionHandler();
             app()->register(AuthServiceProvider::class);
+            app()->register(AppServiceProvider::class);
         }
     }
 
@@ -136,7 +136,7 @@ class MultiauthServiceProvider extends ServiceProvider
         $prefix = config('multiauth.prefix', 'admin');
 
         $this->publishes([
-               __DIR__ . '/database/' => database_path(),                               //  Database
+               __DIR__ . '/database/migrations/' => database_path('migrations'),        //  Migrations
                __DIR__ . '/Http/Controllers' => app_path('Http/Controllers/admin/'),    //  Controllers
                __DIR__ . '/Resources' => resource_path('views/'),                       //  Views & Layout
                __DIR__ . '/factories' => database_path('factories'),                    //  Factories
@@ -171,8 +171,6 @@ class MultiauthServiceProvider extends ServiceProvider
             $this->commands([
                 SeedCmd::class,
                 RoleCmd::class,
-                Controller::class,
-                View::class,
             ]);
         }
     }

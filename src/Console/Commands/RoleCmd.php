@@ -2,7 +2,7 @@
 
 namespace Ramivel\Multiauth\Console\Commands;
 
-use App\Role;
+use Ramvel\Multiauth\Model\Role;
 use Illuminate\Console\Command;
 use Illuminate\Database\QueryException;
 
@@ -13,7 +13,7 @@ class RoleCmd extends Command
      *
      * @var string
      */
-    protected $signature = 'set:role {name}';
+    protected $signature = 'multiauth:role {name}';
 
     /**
      * The console command description.

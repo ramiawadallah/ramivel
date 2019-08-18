@@ -15,8 +15,8 @@ class MakeMultiAuthCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'set:make
-                            {name=student : Give a name for guard}';
+    protected $signature = 'multiauth:make
+                                {name=student : Give a name for guard}';
 
     /**
      * The console command description.

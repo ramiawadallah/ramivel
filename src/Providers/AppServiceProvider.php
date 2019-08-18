@@ -7,8 +7,6 @@ use Illuminate\Support\Facades\Schema;
 use Ramivel\Multiauth\View\ThemeViewFinder;
 use Ramivel\Multiauth\View\Composers;
 
-//BY Boomvel
-
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -18,7 +16,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
         Schema::enableForeignKeyConstraints();
         Schema::defaultStringLength(191);
         $this->app['view']->composer('layouts.frontend', Composers\InjectPages::class);
@@ -33,7 +30,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
         $this->app->singleton('theme.finder', function ($app) {
           $finder = new ThemeViewFinder($app['files'], $app['config']['view.paths']);
 
