@@ -36,6 +36,22 @@
     Route::get('/role/{role}/edit', 'RoleController@edit')->name('admin.role.edit');
     Route::patch('/role/{role}', 'RoleController@update')->name('admin.role.update');
 
+    /* Language Route design */
+    Route::resource('langs', 'LangController');
+    Route::post('langs/store', array('as'=>'store_langs' ,'uses'=>'LangController@store') );
+    Route::post('langs', array('as' => 'update_file' , 'uses' => 'LangController@updateFiles'));
+    Route::delete('langs/destroy/all', 'LangController@multi_delete');
+
+    /* Settings Route design */
+    Route::resource('settings', 'SettingsController');
+
+    /* Language changing Route design */
+    Route::get('main_settings', 'SettingsController@index');
+    
+    /* Pages Route design */
+    Route::resource('pages', 'PageController');
+    Route::delete('pages/destroy/all', 'PageController@multi_delete');
+
     Route::fallback(function () {
         return abort(404);
     });

@@ -9,8 +9,15 @@ use Ramivel\Multiauth\Console\Commands\SeedCmd;
 use Ramivel\Multiauth\Exception\MultiAuthHandler;
 use Ramivel\Multiauth\Http\Middleware\redirectIfAuthenticatedAdmin;
 use Ramivel\Multiauth\Http\Middleware\redirectIfNotWithRoleOfAdmin;
+use Ramivel\Multiauth\Http\Middleware\Localization;
+use Ramivel\Multiauth\Http\Middleware\LogAdminActivity;
+use Ramivel\Multiauth\Http\Middleware\LogUserActivity;
+use Ramivel\Multiauth\Http\Middleware\Maintenance;
 use Ramivel\Multiauth\Providers\AuthServiceProvider;
 use Ramivel\Multiauth\Providers\AppServiceProvider;
+use Ramivel\Multiauth\Relation\LanguagesRelation;
+use Ramivel\Multiauth\Relation\RelationMethods;
+use Ramivel\Multiauth\Eloquent;
 use Illuminate\Database\Eloquent\Factory;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
@@ -137,15 +144,18 @@ class MultiauthServiceProvider extends ServiceProvider
 
         $this->publishes([
                __DIR__ . '/database/migrations/' => database_path('migrations'),        //  Migrations
+               __DIR__ . '/database/seeds/' => database_path('seeds'),                  //  Seeds
                __DIR__ . '/Http/Controllers' => app_path('Http/Controllers/admin/'),    //  Controllers
+               __DIR__ . '/Template' => app_path('Template/'),                          //  Template
+               __DIR__ . '/Http/Helper Controller' => app_path('Http/Controllers/'),    //  Others Controllers
                __DIR__ . '/Resources' => resource_path('views/'),                       //  Views & Layout
                __DIR__ . '/factories' => database_path('factories'),                    //  Factories
                __DIR__ . '/../config/multiauth.php' => config_path('multiauth.php'),    //  Multiauth
                __DIR__ . '/routes/routes.php' => base_path("routes/{$prefix}.php"),     //  Routes
-               __DIR__ . '/Model' => app_path(),
-               __DIR__ . '/Themes' => public_path('/themes/'),
-               __DIR__ . '/Support' => app_path('Helpers/'), 
-               __DIR__ . '/Config/cms.php' => config_path('cms.php'),
+               __DIR__ . '/Model' => app_path(),                                        //  Model
+               __DIR__ . '/Themes' => public_path('/themes/'),                          //  Public file JS & CSS
+               __DIR__ . '/Support' => app_path('Helpers/'),                            //  Helper methods and Function
+               __DIR__ . '/Config/cms.php' => config_path('cms.php'),                   //  CMS
            ]
             ,'ramivel:publish');
     }

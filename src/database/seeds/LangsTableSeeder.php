@@ -12,11 +12,11 @@ class LangsTableSeeder extends Seeder
     public function run()
     {
         //
-         DB::table('langs')->insert(([
+        DB::table('langs')->insert(([
             'name'      =>  'English',
             'code'      =>  'en',
             'direction' =>  'ltr',
             'default'   =>  1,
-        ]);
+        ]));
     }
 }
