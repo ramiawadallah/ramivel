@@ -16,8 +16,8 @@
     }],
     "minimum-stability": "dev",
     "require": {
-        "ramiawadallah/presenter": "dev-master",
-        "baum/baum": "~1.1"
+        "laravelcollective/html":"^5.8.0",
+        "ramiawadallah/presenter": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.4@dev",
