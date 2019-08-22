@@ -13,8 +13,7 @@ in as a user and an admin, without conflicts!
 
 | Laravel version     | Branch   | Install                                                 |
 | ------------------- | ------   | ------------------------------------------------------- |
-| 5.6, 5.7 and 5.8    | Master   | composer require Ramivel/laravel-multiauth               |
-| JWT Api version     | jwt-auth | composer require Ramivel/laravel-multiauth -b jwt-auth   |
+| 5.6, 5.7 and 5.8    | Master   | composer require ramivel/ramivel                        |
 
 ## Installation
 
@@ -27,13 +26,73 @@ composer require ramivel/ramivel
 Yuo must publish this line
 
 ```bash
-php artisan vendor:publish --tag="ramivel:publish"
+php artisan vendor:publish --tag="ramivel:publish" --force
 ```
+
+Add this trait on this following path ../vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php
+
+```bash
+
+if (trait_exists('App\Relation\RelationMethods')) { 
+    trait call_relation_helpers {
+        use \App\Relation\RelationMethods; 
+        } 
+    }else{ 
+        trait call_relation_helpers{} 
+}
+
+
+abstract class Model implements ArrayAccess, Arrayable, Jsonable, JsonSerializable, QueueableEntity, UrlRoutable
+{
+    use call_relation_helpers,
+    ......... atc
+```
+
+config\app.php  --> aliases array
+
+```bash
+        'Up' => App\Http\Controllers\Upload::class,
+
+        'Btn' => App\helpers\Src\Btn::class,
+        'bsForm' => App\helpers\Src\bsForm::class,
+        'langForm' => App\helpers\Src\langForm::class,
+        'MyRoute' => App\helpers\Src\Routes\MyRoute::class,
+        'Files' => App\helpers\Src\Files\Files::class,
+        'Control' => App\helpers\Src\Control::class,
+
+        'Alert' => UxWeb\SweetAlert\SweetAlert::class,
+
+```
+
+composer.json
+
+```bash
+    "autoload-dev": {
+        "files":[
+            "app/Helpers/HelperValidatesRequest.php",
+            "app/Helpers/helpers.php",
+            "app/Helpers/routesMethods.php",
+            "app/Helpers/functions.php",
+            "app/Helpers/Src/bsForm.php",
+            "app/Helpers/Src/Btn.php",
+            "app/Helpers/Src/Control.php",
+            "app/Helpers/Src/langForm.php",
+            "app/Relation/RelationMethods.php"
+        ],
+```
+
+
+Run This Commend 
+
+```bash
+composer dump-autoload
+```
+
 
 Run [the Migration](https://github.com/ramivel/laravel-multiauth/database/migrations/create_permission_tables.php) to have tables in your database.
 
 ```bash
-php artisan migrate
+php artisan migrate --seed
 ```
 
 ## First Admin
