@@ -81,8 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    <img width="80" class="logo-main img-fluid text-primary" src="{{ theme('backend/media/favicons/logo.png') }}">
-                    Ramivel
+                    <img width="150" class="logo-main img-fluid text-primary" src="{{ theme('backend/media/favicons/logo.png') }}">
                 </div>
 
                 <div class="links">

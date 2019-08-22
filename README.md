@@ -59,9 +59,6 @@ config\app.php  --> aliases array
         'MyRoute' => App\helpers\Src\Routes\MyRoute::class,
         'Files' => App\helpers\Src\Files\Files::class,
         'Control' => App\helpers\Src\Control::class,
-
-        'Alert' => UxWeb\SweetAlert\SweetAlert::class,
-
 ```
 
 composer.json
