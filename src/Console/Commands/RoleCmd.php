@@ -2,7 +2,7 @@
 
 namespace Ramivel\Multiauth\Console\Commands;
 
-use Ramvel\Multiauth\Model\Role;
+use Ramivel\Multiauth\Model\Role;
 use Illuminate\Console\Command;
 use Illuminate\Database\QueryException;
 

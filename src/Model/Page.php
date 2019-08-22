@@ -2,11 +2,10 @@
 
 namespace App;
 
-//use Illuminate\Database\Eloquent\Model;
-use Baum\Node;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Page extends Node
+class Page extends Model
 {
     use SoftDeletes;
 
@@ -16,14 +15,7 @@ class Page extends Node
     protected $fillable = ['parent_id','lft','rgt','depth','title' , 'name', 'uri', 'content', 'template', 'photo', 'created_by', 'updated_by'];
 
     public function updateOrder($order, $orderPage){
-        $orderPage = $this->findOrFail($orderPage);
-        if($order == 'before'){
-            $this->moveToLeftOf($orderPage);
-        }elseif($order == 'after'){
-            $this->moveToRightOf($orderPage);
-        }elseif ($order == 'childOf') {
-            $this->makeChildOf($orderPage);
-        }
+       
     }
 
     public function getPrettyUriAttribute(){

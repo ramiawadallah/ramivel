@@ -34,21 +34,14 @@ class SettingsController extends Controller
                 'title'             =>  ['required', 'min:3'],
                 'subtitle'          =>  ['required', 'min:3'],
                 'copyright'         =>  ['required', 'min:3'],
-                'address_jordan'           =>  ['required', 'min:3'],
-                'address_sudan'           =>  ['required', 'min:3'],
+                'address'           =>  ['required', 'min:3'],
             ],
                 'mainvideo'         =>  ['required', 'min:3'],
-                'email_jordan'      =>  ['required', 'min:3'],
-                'phone_jordan'      =>  ['required', 'min:3'],
-                'fax_jordan'        =>  ['required', 'min:3'],
-                'pobox_jordan'      =>  ['required', 'min:3'],
-                'map_jordan'        =>  ['required', 'min:3'],
-
-                'email_sudan'       =>  ['required', 'min:3'],
-                'phone_sudan'       =>  ['required', 'min:3'],
-                'fax_sudan'         =>  ['required', 'min:3'],
-                'pobox_sudan'       =>  ['required', 'min:3'],
-                'map_sudan'         =>  ['required', 'min:3'],
+                'email'             =>  ['required', 'min:3'],
+                'phone'             =>  ['required', 'min:3'],
+                'fax'               =>  ['required', 'min:3'],
+                'pobox'             =>  ['required', 'min:3'],
+                'map'               =>  ['required', 'min:3'],
 
                 'logo'              =>  validate_image(),
                 'facebook'          =>  ['required', 'min:3'],
@@ -61,23 +54,16 @@ class SettingsController extends Controller
                 'title'             =>  trans('lang.title'),
                 'subtitle'          =>  trans('lang.subtitle'),
                 'copyright'         =>  trans('lang.copyright'),
-                'address_sudan'     =>  trans('lang.address_sudan'),
-                'address_jordan'    =>  trans('lang.address_jordan'),
+                'address'           =>  trans('lang.address'),
                 'subtitle'          =>  trans('lang.subtitle'),
                 'logo'              =>  trans('lang.logo'), 
                 'mainvideo'         =>  trans('lang.mainvideo'),
-                
-                'email_jordan'      =>  trans('lang.email_jordan'),
-                'phone_jordan'      =>  trans('lang.phone_jordan'),
-                'fax_jordan'        =>  trans('lang.fax_jordan'),
-                'pobox_jordan'      =>  trans('lang.pobox_jordan'),
-                'map_jordan'        =>  trans('lang.map_jordan'),
-
-                'email_sudan'       =>  trans('lang.email_sudan'),
-                'phone_sudan'       =>  trans('lang.phone_sudan'),
-                'fax_sudan'         =>  trans('lang.fax_sudan'),
-                'pobox_sudan'       =>  trans('lang.pobox_sudan'),
-                'map_sudan'         =>  trans('lang.map_sudan'),
+            
+                'email'             =>  trans('lang.email'),
+                'phone'             =>  trans('lang.phone'),
+                'fax'               =>  trans('lang.fax'),
+                'pobox'             =>  trans('lang.pobox'),
+                'map'               =>  trans('lang.map'),
                 
                 'facebook'          =>  trans('lang.facebook'),
                 'twitter'           =>  trans('lang.twitter'),
@@ -100,64 +86,30 @@ class SettingsController extends Controller
             $data['logo'] = setting()->logo;
         }
 
-
-        if(request()->hasFile('image_one')) {
-           $data['image_one'] = Up()->upload([
-                // 'new_name'      =>  '',
-                'file'          =>  'image_one',
-                'path'          =>  'settings',
-                'upload_type'   =>  'single',
-                'delete_file'   =>  setting()->image_one,
-           ]); 
-        }else{
-            $data['image_one'] = setting()->image_one;
-        }
-
-
-        if(request()->hasFile('image_two')) {
-           $data['image_two'] = Up()->upload([
-                // 'new_name'      =>  '',
-                'file'          =>  'image_two',
-                'path'          =>  'settings',
-                'upload_type'   =>  'single',
-                'delete_file'   =>  setting()->image_two,
-           ]); 
-        }else{
-            $data['image_two'] = setting()->image_two;
-        }
-
         return \Control::update($request,1,'setting',[
-        'mainvideo' => $request->mainvideo,
-        'maintenance' => $request->maintenance,
-        
-        'email_jordan' => $request->email_jordan,
-        'phone_jordan' => $request->phone_jordan,
-        'fax_jordan' => $request->fax_jordan,
-        'pobox_jordan' => $request->pobox_jordan,
-        'map_jordan' => $request->map_jordan,
+            'mainvideo' => $request->mainvideo,
+            'maintenance' => $request->maintenance,
+            
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'fax' => $request->fax,
+            'pobox' => $request->pobox,
+            'map' => $request->map,
 
-        'email_sudan' => $request->email_sudan,
-        'phone_sudan' => $request->phone_sudan,
-        'fax_sudan' => $request->fax_sudan,
-        'pobox_sudan' => $request->pobox_sudan,
-        'map_sudan' => $request->map_sudan,
-
-        'keywords' => $request->keywords,
-        'facebook' => $request->facebook,
-        'twitter' => $request->twitter,
-        'linkedin' => $request->linkedin,
-        'youtube' => $request->youtube,
-        'instagram' => $request->instagram,
-        'logo' => $data['logo'],
-        'image_one' => $data['image_one'],
-        'image_two' => $data['image_two'],
-        'updated_by' => Auth::user()->name,
-        'translate'=>['title','subtitle','desc','copyright','address_jordan','address_sudan'],
+            'keywords' => $request->keywords,
+            'facebook' => $request->facebook,
+            'twitter' => $request->twitter,
+            'linkedin' => $request->linkedin,
+            'youtube' => $request->youtube,
+            'instagram' => $request->instagram,
+            'logo' => $data['logo'],
+            'updated_by' => Auth::user('admin')->name,
+            'translate'=>['title','subtitle','content','copyright','address'],
         ] );
 
-        }
+    }
 
-        public function lang($lang)
+    public function lang($lang)
     {
         $lang = \App\Lang::where('code',$lang);
         $default = \App\Lang::where('default',1);

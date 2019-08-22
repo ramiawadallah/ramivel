@@ -6,6 +6,8 @@ use Ramivel\Multiauth\Console\Commands\MakeMultiAuthCommand;
 use Ramivel\Multiauth\Console\Commands\RoleCmd;
 use Ramivel\Multiauth\Console\Commands\RollbackMultiAuthCommand;
 use Ramivel\Multiauth\Console\Commands\SeedCmd;
+use Ramivel\Multiauth\Console\Commands\Controller;
+use Ramivel\Multiauth\Console\Commands\View;
 use Ramivel\Multiauth\Exception\MultiAuthHandler;
 use Ramivel\Multiauth\Http\Middleware\redirectIfAuthenticatedAdmin;
 use Ramivel\Multiauth\Http\Middleware\redirectIfNotWithRoleOfAdmin;
@@ -146,6 +148,7 @@ class MultiauthServiceProvider extends ServiceProvider
                __DIR__ . '/database/migrations/' => database_path('migrations'),        //  Migrations
                __DIR__ . '/database/seeds/' => database_path('seeds'),                  //  Seeds
                __DIR__ . '/Http/Controllers' => app_path('Http/Controllers/admin/'),    //  Controllers
+               __DIR__ . '/Http/Relation' => app_path('Relation'),                      //  Relation
                __DIR__ . '/Template' => app_path('Template/'),                          //  Template
                __DIR__ . '/Http/Helper Controller' => app_path('Http/Controllers/'),    //  Others Controllers
                __DIR__ . '/Resources' => resource_path('views/'),                       //  Views & Layout
@@ -191,6 +194,8 @@ class MultiauthServiceProvider extends ServiceProvider
             $this->commands([
                 MakeMultiAuthCommand::class,
                 RollbackMultiAuthCommand::class,
+                Controller::class,
+                View::class,
             ]);
         }
     }

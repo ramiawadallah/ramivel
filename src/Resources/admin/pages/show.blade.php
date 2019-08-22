@@ -1,24 +1,18 @@
 @extends('layouts.backend')
-@section('title') {{ trans('lang.pages') }}  @endsection
-@section('content')
-
-<div class="animatedParent animateOnce">
-    <div class="container-fluid my-3">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body b-b">
-                        <h1>{!! $page->trans('title') !!}</h1>
-                            <!-- Input -->
-                            <div class="body">
-                              	<p>{!! $page->trans('content') !!}</p>
+        @section('title') {{ trans('lang.pages') }}  @endsection
+        @section('content')
+            <div class="content">
+                <div class="block py-3">
+                    <div class="block-content">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="block py-3">
+                                    <h1>{!! $page->trans('title') !!}</h1>
+                                    {!! $page->trans('content') !!}
+                                </div>
                             </div>
-                            <!-- #END# Input -->
+                        </div>
                     </div>
-                </div>
+                </div>    
             </div>
-        </div>
-    </div>
-</div>
- 
-@endsection
+        @endsection

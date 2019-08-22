@@ -1,5 +1,5 @@
 <?php
-namespace Ramivel\Multiauth\Relation;
+namespace App\Relation;
 
 trait RelationMethods{
 

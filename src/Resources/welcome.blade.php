@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Ramivel</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
@@ -81,7 +81,8 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Boomvel
+                    <img width="80" class="logo-main img-fluid text-primary" src="{{ theme('backend/media/favicons/logo.png') }}">
+                    Ramivel
                 </div>
 
                 <div class="links">

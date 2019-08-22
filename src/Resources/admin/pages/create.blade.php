@@ -2,55 +2,39 @@
 @section('title') {{ trans('lang.pages') }}  @endsection
 @section('content')
 
-{!! bsForm::start(['route'=>'pages.store','files'=>true]) !!}
-
-<br>
-<div class="row">
-    <div class="col-lg-8">
-        <div class="block">
-            <div class="block-header">
-                <h3 class="block-title">
-                    {{ trans('lang.create-new-page') }}
-                </h3>
+<div class="content">
+    @include('partials.message')
+    {!! bsForm::start(['route'=>'pages.store','enctype'=>'multipart/form-data']) !!}
+        @csrf
+        <div class="row">
+            <div class="col-md-8 col-sm-12">
+                <div class="block py-3">
+                    <div class="block-header">{{ trans('lang.create-new-pages') }}</div>
+                    <div class="block-content">
+                        {!! bsForm::translate(function($form){
+                            $form->text('title');
+                            $form->textarea('content',null,['class'=>'form-control']);
+                        }) !!}
+                        {!! bsForm::uri('uri') !!}
+                    </div>
+                </div>
             </div>
-            <div class="block-content block-content-full">
-                
-                {!! bsForm::translate(function($form){
-                    $form->text('title');
-                    $form->textarea('content',null,['class'=>'form-control','id'=>'editor']);
-                }) !!}
 
-                {!! bsForm::uri('uri') !!}
-                
-            </div>
-        </div>
-    </div>
-
-    <div class="col-lg-4">
-        <div class="block">
-            <div class="block-header">
-                <h3 class="block-title">{{ trans('lang.options') }}</h3>
-            </div>
-            <div class="block-content block-content-full">
-                <small>Image size 1920 X 500</small>
-                {!! bsForm::image('photo') !!}
-
-                {!! bsForm::radio('stutes',[
-                    'active'=> trans('lang.active'),
-                    'not active'=> trans('lang.not-active')
-                ],true) !!}
-                <hr>
-                {!! bsForm::select('template',$templates, null)!!}
-                <br>
-                {!! bsForm::select('order', ['' => 'None' , 'before' => 'Before', 'after' => 'After', 'childOf' => 'Child Of'], null)!!}
-                <br>
-                {!! bsForm::select('orderPage',['' => 'None'] + $orderPages->pluck('padded_title', 'id')->toArray(), null)!!}
+            <div class="col-md-4 col-sm-12">
+                <div class="block py-3">
+                    <div class="block-header">{{ trans('lang.options') }}</div>
+                    <div class="block-content">
+                        {!! bsForm::image('photo') !!}
+                        <hr>
+                        {!! bsForm::radio('stutes',[
+                            'active'=> trans('lang.active'),
+                            'not active'=> trans('lang.not-active'),
+                        ]) !!}
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    {!! bsForm::end() !!}
 </div>
 
-{!! bsForm::end() !!}
 @endsection
-
-

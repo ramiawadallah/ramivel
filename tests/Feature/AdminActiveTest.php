@@ -2,7 +2,7 @@
 
 namespace Ramivel\Multiauth\Tests\Feature;
 
-use Ramvel\Multiauth\Tests\TestCase;
+use Ramivel\Multiauth\Tests\TestCase;
 
 class AdminActiveTest extends TestCase
 {

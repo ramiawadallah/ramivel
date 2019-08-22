@@ -1,6 +1,6 @@
 <?php
 
-namespace Ramvel\Multiauth\Http\Requests;
+namespace Ramivel\Multiauth\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

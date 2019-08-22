@@ -1,25 +1,24 @@
 
 <?php
     $name = !empty($name) ? $name : '';
-    $path = url('/storage/app');
     $url =  !empty($url) ? $url : 'demo/unknown_image.png' ;
 ?>
 
-
- <div class="form-group">
-  <div class="main-img-preview">
-    <img  class="img-fluid img-preview" alt="Responsive image"  src="{{ $path.'/'.$url }}" alt="your image" />
-    <!-- <img class="thumbnail img-preview" src="http://farm4.static.flickr.com/3316/3546531954_eef60a3d37.jpg" title="Preview Logo"> -->
-  </div>
-  <div class="input-group">
-    <input id="fakeUploadLogo" name="{{ $name }}" class="form-control fake-shadow" value="{{ $url }}"  placeholder="Choose File" disabled="disabled">
-    <div class="input-group-btn">
-      <div class="fileUpload btn btn-danger-upload fake-shadow">
-        <span><i class="glyphicon glyphicon-upload"></i> {{ trans('lang.select_image') }}</span>
-        <input id="logo-id" name="{{ $name }}" type="file" class="attachment_upload" >
-      </div>
+<div class="container">
+    <div class="avatar-upload">
+        <div class="avatar-edit">
+            <input type='file' id="imageUpload" value="{{ $url }}" name="{{ $name }}" accept=".png, .jpg, .jpeg" />
+            <label for="imageUpload"><i style="font-size: 20px; position: absolute; left: 7px; top: 8px;" class="far fa-edit"></i></label>
+        </div>
+        <div class="avatar-preview">
+            <div id="imagePreview" style="background-image: url({{ Storage::url($url)  }});">
+            </div>
+        </div>
     </div>
-  </div>
 </div>
+@if($errors->has($name))
+  <small class="font-w600 text-danger animated fadeIn">* Data Required</small>
+@endif()
 
 
+    

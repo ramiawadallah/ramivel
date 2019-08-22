@@ -6,15 +6,15 @@
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'RAMVEL') }} {{ ucfirst(config('multiauth.prefix')) }}</title>
+        <title>{{ config('app.name', 'RAMIVEL') }} {{ ucfirst(config('multiauth.prefix')) }}</title>
 
-        <meta name="description" content="RAMVEL - LARAVEL 4 Admin CONTROLLER &amp; UI Framework created by Rami Awadallah">
+        <meta name="description" content="RAMIVEL - LARAVEL 4 Admin CONTROLLER &amp; UI Framework created by Rami Awadallah">
         <meta name="author" content="Rami Awadallah">
 
         <!-- Open Graph Meta -->
-        <meta property="og:title" content="RAMVEL - LARAVEL 4 Admin CONTROLLER &amp; UI Framework">
-        <meta property="og:site_name" content="RAMVEL">
-        <meta property="og:description" content="RAMVEL - LARAVEL 4 Admin CONTROLLER &amp; UI Framework created by Rami Awadallah">
+        <meta property="og:title" content="RAMIVEL - LARAVEL 4 Admin CONTROLLER &amp; UI Framework">
+        <meta property="og:site_name" content="RAMIVEL">
+        <meta property="og:description" content="RAMIVEL - LARAVEL 4 Admin CONTROLLER &amp; UI Framework created by Rami Awadallah">
         <meta property="og:type" content="website">
         <meta property="og:url" content="">
         <meta property="og:image" content="">
@@ -39,7 +39,7 @@
 
         <!-- Fonts and OneUI framework -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,700%7COpen+Sans:300,400,400italic,600,700">
-        <link rel="stylesheet" id="css-main" href="{{ theme('backend/css/ramvel.css') }}">
+        <link rel="stylesheet" id="css-main" href="{{ theme('backend/css/ramivel.css') }}">
         <link rel="stylesheet" id="css-main" href="{{ theme('backend/css/main.css') }}">
 
         <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
@@ -286,7 +286,7 @@
                             Crafted with <i class="fa fa-heart text-danger"></i> by <a class="font-w600" href="https://www.ramiawadallah.com" target="_blank">Rami Awadallah</a>
                         </div>
                         <div class="col-sm-6 order-sm-1 py-1 text-center text-sm-left">
-                            <a class="font-w600" href="https://www.rwmiawadallah.com" target="_blank">RAMVEL 1.0</a> &copy; <span data-toggle="year-copy"></span>
+                            <a class="font-w600" href="https://www.ramiawadallah.com" target="_blank">RAMIVEL 1.0</a> &copy; <span data-toggle="year-copy"></span>
                         </div>
                     </div>
                 </div>
@@ -294,8 +294,8 @@
             <!-- END Footer -->
         </div>
 
-        <script src="{{ theme('backend/js/ramvel.core.min.js' ) }}"></script>
-        <script src="{{ theme('backend/js/ramvel.app.min.js' ) }}"></script>
+        <script src="{{ theme('backend/js/ramivel.core.min.js' ) }}"></script>
+        <script src="{{ theme('backend/js/ramivel.app.min.js' ) }}"></script>
 
         <!-- Page JS Plugins -->
         <script src="{{ theme('backend/js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js' ) }}"></script>

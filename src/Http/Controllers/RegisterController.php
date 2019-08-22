@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Ramvel\Multiauth\Http\Requests\AdminRequest;
+use Ramivel\Multiauth\Http\Requests\AdminRequest;
 use App\Admin;
 use App\Role;
-use Ramvel\Multiauth\Notifications\RegistrationNotification;
+use Ramivel\Multiauth\Notifications\RegistrationNotification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;

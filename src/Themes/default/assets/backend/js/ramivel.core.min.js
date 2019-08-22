@@ -1,5 +1,5 @@
 /*!
- * Ramvel - v4.2.0
+ * Ramivel - v4.2.0
  * @author Rami Awadallah - https://ramiawadallah.com
  * Copyright (c) 2019
  */

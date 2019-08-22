@@ -17,10 +17,8 @@ $color = !empty($attributes['color']) ? $attributes['color'] : 'dark';
 ?>               
 {!! Form::open($attributes) !!}
 
-<div class="col-md-12">  
-    <button type="submit" class="btn btn-success btn-lg"><i class="icon-save"></i> {{ trans('lang.save') }}</button>
-    <button type="reset" class="btn btn-danger  btn-lg"><i class="icon-refresh"></i> {{ trans('lang.'.'reset') }}</button>
-</div>
+
+
 
 
         
