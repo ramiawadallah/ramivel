@@ -79,7 +79,7 @@ class PageController extends Controller
            $data['photo'] = Up()->upload([
                 // 'new_name'      =>  '',
                 'file'          =>  'photo',
-                'path'          =>  'pages',
+                'path'          =>  'public/pages',
                 'upload_type'   =>  'single',
                 'delete_file'   =>  '',
            ]); 
@@ -240,7 +240,7 @@ class PageController extends Controller
            $data['photo'] = Up()->upload([
                 // 'new_name'      =>  '',
                 'file'          =>  'photo',
-                'path'          =>  'pages',
+                'path'          =>  'public/pages',
                 'upload_type'   =>  'single',
                 'delete_file'   =>  Page::find($id)->photo,
            ]); 

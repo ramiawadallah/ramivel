@@ -78,7 +78,7 @@ class SettingsController extends Controller
            $data['logo'] = Up()->upload([
                 // 'new_name'      =>  '',
                 'file'          =>  'logo',
-                'path'          =>  'settings',
+                'path'          =>  'public/settings',
                 'upload_type'   =>  'single',
                 'delete_file'   =>  setting()->logo,
            ]); 

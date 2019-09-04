@@ -140,7 +140,7 @@
                         <li class="nav-main-item">
                             <a class="nav-main-link" href="{{ url('/admin') }}">
                                 <i class="nav-main-link-icon si si-speedometer"></i>
-                                <span class="nav-main-link-name">Dashboard</span>
+                                <span class="nav-main-link-name">Dashboard {{ trans('main.test_design') }}</span>
                             </a>
                         </li>
                         <li class="nav-main-heading">App Links</li>
@@ -296,6 +296,7 @@
 
         <script src="{{ theme('backend/js/ramivel.core.min.js' ) }}"></script>
         <script src="{{ theme('backend/js/ramivel.app.min.js' ) }}"></script>
+        <script src="{{ theme('backend/js/main.js' ) }}"></script>
 
         <!-- Page JS Plugins -->
         <script src="{{ theme('backend/js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js' ) }}"></script>

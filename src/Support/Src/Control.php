@@ -4,7 +4,6 @@ namespace App\Helpers\Src;
 * 
 */
 use Illuminate\Http\Request;
-use Alert;
 
 
 class Control
@@ -144,10 +143,8 @@ class Control
         \Files::upload($request,$name,$id,$data['files']);
         }
 
-        // alert()->success('You have been logged out.', 'Good bye!');
-        Alert::success(trans('lang.added'), trans('lang.'.$name));
 
-        // session()->flash('success',trans('lang.added',['var'=>trans('lang.'.$name)]));
+        session()->flash('success',trans('lang.added',['var'=>trans('lang.'.$name)]));
        if (is_callable($calback)) 
         {
            call_user_func_array($calback,[$request,$id]);
@@ -215,9 +212,8 @@ class Control
              }
           }
 
-          Alert::success(trans('lang.updated'), trans('lang.'.$name));
+        session()->flash('success',trans('lang.updated',['var'=>trans('lang.'.$name)]));
 
-        // session()->flash('success',trans('lang.updated',['var'=>trans('lang.'.$name)]));
        if (is_callable($calback)) 
         {
            call_user_func_array($calback,[$request,$id]);
@@ -252,9 +248,7 @@ class Control
         {
           $row = $model::find($id);
 
-           Alert::success(trans('lang.deleted'), trans('lang.'.$name));
-
-           // session()->flash('success',trans('lang.deleted',['var'=>trans('lang.'.$name)]));
+          session()->flash('success',trans('lang.deleted',['var'=>trans('lang.'.$name)]));
            if (is_callable($calback)) 
               {
                   call_user_func_array($calback,[$row,$id]);

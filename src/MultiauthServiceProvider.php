@@ -148,7 +148,7 @@ class MultiauthServiceProvider extends ServiceProvider
                __DIR__ . '/database/migrations/' => database_path('migrations'),        //  Migrations
                __DIR__ . '/database/seeds/' => database_path('seeds'),                  //  Seeds
                __DIR__ . '/Http/Controllers' => app_path('Http/Controllers/admin/'),    //  Controllers
-               __DIR__ . '/Relation' => app_path('Relation/'),                      //  Relation
+               __DIR__ . '/Relation' => app_path('Relation/'),                          //  Relation
                __DIR__ . '/Template' => app_path('Template/'),                          //  Template
                __DIR__ . '/Http/Helper Controller' => app_path('Http/Controllers/'),    //  Others Controllers
                __DIR__ . '/Resources' => resource_path('views/'),                       //  Views & Layout
@@ -159,6 +159,7 @@ class MultiauthServiceProvider extends ServiceProvider
                __DIR__ . '/Themes' => public_path('/themes/'),                          //  Public file JS & CSS
                __DIR__ . '/Support' => app_path('Helpers/'),                            //  Helper methods and Function
                __DIR__ . '/Config/cms.php' => config_path('cms.php'),                   //  CMS
+               __DIR__ . '/Config/lang.php' => resource_path('lang/en/lang.php'),       //  Lang trans
            ]
             ,'ramivel:publish');
     }

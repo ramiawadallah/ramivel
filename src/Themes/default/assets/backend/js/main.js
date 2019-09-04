@@ -1,5 +1,5 @@
 $("#checkAll").click(function () {
- 	$('input:checkbox').not(this).prop('checked', this.checked);
+    $('input:checkbox').not(this).prop('checked', this.checked);
 });
 
 $(document).ready(function() {
@@ -20,7 +20,6 @@ $(document).ready(function() {
   });
 });
 
-
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
@@ -32,23 +31,6 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
-
 $("#imageUpload").change(function() {
     readURL(this);
-});
-
-function readURLOne(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            $('#imagePreviewOne').css('background-image', 'url('+e.target.result +')');
-            $('#imagePreviewOne').hide();
-            $('#imagePreviewOne').fadeIn(650);
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-$("#imageUploadOne").change(function() {
-    readURLOne(this);
 });
