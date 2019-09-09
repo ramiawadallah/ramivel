@@ -110,6 +110,7 @@ class MultiauthServiceProvider extends ServiceProvider
     {
         app('router')->aliasMiddleware('admin', redirectIfAuthenticatedAdmin::class);
         app('router')->aliasMiddleware('role', redirectIfNotWithRoleOfAdmin::class);
+        app('router')->aliasMiddleware('maintenance', Maintenance::class);
     }
 
     protected function registerExceptionHandler()
@@ -160,6 +161,7 @@ class MultiauthServiceProvider extends ServiceProvider
                __DIR__ . '/Support' => app_path('Helpers/'),                            //  Helper methods and Function
                __DIR__ . '/Config/cms.php' => config_path('cms.php'),                   //  CMS
                __DIR__ . '/Config/lang.php' => resource_path('lang/en/lang.php'),       //  Lang trans
+               __DIR__ . '/routes/web.php' => base_path('routes/web.php'),              //  Web Route
            ]
             ,'ramivel:publish');
     }
