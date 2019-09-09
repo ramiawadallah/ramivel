@@ -2,12 +2,22 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+//use Illuminate\Database\Eloquent\Model;
+use Baum\Node;
 
-class Page extends Model
+class Page extends Node 
 {
-    use SoftDeletes;
+
+    public function getDefaultLeftColumnName()
+    {
+        return 'lft';
+    }
+
+    public function getDefaultRightColumnName()
+    {
+        return 'rgt';
+    }
+
 
     protected $table = 'pages';
     protected $dates = ['deleted_at'];
@@ -15,7 +25,14 @@ class Page extends Model
     protected $fillable = ['parent_id','lft','rgt','depth','title' , 'name', 'uri', 'content', 'template', 'photo', 'created_by', 'updated_by'];
 
     public function updateOrder($order, $orderPage){
-       
+        $orderPage = $this->findOrFail($orderPage);
+        if($order == 'before'){
+            $this->moveToLeftOf($orderPage);
+        }elseif($order == 'after'){
+            $this->moveToRightOf($orderPage);
+        }elseif ($order == 'childOf') {
+            $this->makeChildOf($orderPage);
+        }
     }
 
     public function getPrettyUriAttribute(){

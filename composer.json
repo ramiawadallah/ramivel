@@ -17,6 +17,7 @@
     "minimum-stability": "dev",
     "require": {
         "laravelcollective/html":"^5.8.0",
+        "baum/baum":"v2.*",
         "ramiawadallah/presenter": "dev-master"
     },
     "require-dev": {

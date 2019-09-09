@@ -26,6 +26,12 @@
                     <div class="block-content">
                         {!! bsForm::image('photo') !!}
                         <hr>
+                        {!! bsForm::select('template',$templates, null)!!}
+                        <hr>
+                        {!! bsForm::select('order', ['' => 'None' , 'before' => 'Before', 'after' => 'After', 'childOf' => 'Child Of'], null)!!}
+                        <hr>
+                        {!! bsForm::select('orderPage',['' => 'None'] + $orderPages->pluck('padded_title', 'id')->toArray(), null)!!}
+                        <hr>
                         {!! bsForm::radio('stutes',[
                             'active'=> trans('lang.active'),
                             'not active'=> trans('lang.not-active'),
