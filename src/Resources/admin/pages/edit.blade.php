@@ -26,7 +26,7 @@
                     <div class="block-content">
                         {!! bsForm::image('photo',$page->photo) !!}
                         <hr>
-                        {!! bsForm::select('template',$templates, null)!!}
+                        {!! bsForm::select('template',$templates, $page->template)!!}
                         <hr>
                         {!! bsForm::select('order', ['' => 'None' , 'before' => 'Before', 'after' => 'After', 'childOf' => 'Child Of'], null)!!}
                         <hr>
