@@ -60,8 +60,6 @@ config\app.php  --> aliases array
         'Files' => App\helpers\Src\Files\Files::class,
         'Control' => App\helpers\Src\Control::class,
 
-        'Alert' => UxWeb\SweetAlert\SweetAlert::class,
-
 ```
 
 composer.json
@@ -81,6 +79,9 @@ composer.json
         ],
 ```
 
+```bash
+php artisan storage:link
+```
 
 Run This Commend 
 
