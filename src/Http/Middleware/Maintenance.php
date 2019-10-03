@@ -1,6 +1,6 @@
 <?php
 
-namespace ARamivel\Multiauth\Http\Middleware;
+namespace Ramivel\Multiauth\Http\Middleware;
 
 use Closure;
 
