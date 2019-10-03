@@ -32,7 +32,6 @@ class CreatePagesTable extends Migration
             $table->integer('depth')->nullable();
             
             $table->timestamps();
-            $table->softDeletes();
         });
 
     }

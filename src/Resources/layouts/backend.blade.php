@@ -140,30 +140,40 @@
                         <li class="nav-main-item">
                             <a class="nav-main-link" href="{{ url('/admin') }}">
                                 <i class="nav-main-link-icon si si-speedometer"></i>
-                                <span class="nav-main-link-name">Dashboard {{ trans('main.test_design') }}</span>
+                                <span class="nav-main-link-name">{{ trans('lang.dashboard') }}</span>
                             </a>
                         </li>
-                        <li class="nav-main-heading">App Links</li>
-                        <!-- <li class="nav-main-item">
+                        <li class="nav-main-heading">{{ trans('lang.app-Links') }}</li>
+
+                        <li class="nav-main-item {{ active_menu('pages')[0] }}">
                             <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                                <i class="nav-main-link-icon si si-energy"></i>
-                                <span class="nav-main-link-name">Blocks</span>
+                                <i class="nav-main-link-icon si si-book-open"></i>
+                                <span class="nav-main-link-name">{{ trans('lang.pages' )}}</span>
                             </a>
                             <ul class="nav-main-submenu">
                                 <li class="nav-main-item">
-                                    <a class="nav-main-link" href="be_blocks_styles.html">
-                                        <span class="nav-main-link-name">Styles</span>
+                                    <a class="nav-main-link" href="{{ url('admin/pages') }}">
+                                        <span class="nav-main-link-name">{{ trans('lang.pages' )}}</span>
+                                    </a>
+                                </li>
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="{{ url('admin/pages/create') }}">
+                                        <span class="nav-main-link-name">{{ trans('lang.add-new-page') }}</span>
                                     </a>
                                 </li>
                             </ul>
-                        </li> -->
+                        </li>
+
+                        <li class="nav-main-item"><a class="nav-main-link" href="{{ url('admin/settings') }}">
+                            <i class="nav-main-link-icon si si-settings"></i><span class="nav-main-link-name">{{ trans('lang.settings') }}</span></a>
+                        </li>
                         
                         @admin('super')
                             <li class="nav-main-item"><a class="nav-main-link" href="{{ route('admin.show') }}">
                                 <i class="nav-main-link-icon si si-user-follow"></i><span class="nav-main-link-name">{{ ucfirst(config('multiauth.prefix')) }}</span></a>
                             </li>
                             <li class="nav-main-item"><a class="nav-main-link" href="{{ route('admin.roles') }}">
-                                <i class="nav-main-link-icon si si-badge"></i><span class="nav-main-link-name">Roles</span></a>
+                                <i class="nav-main-link-icon si si-badge"></i><span class="nav-main-link-name">{{ trans('lang.role') }}</span></a>
                             </li>
                         @endadmin
                     </ul>
@@ -216,17 +226,17 @@
                                     <img class="img-avatar img-avatar48 img-avatar-thumb" src="{{ theme('backend/media/avatars/avatar0.jpg') }}" alt="">
                                 </div>
                                 <div class="p-2">
-                                    <h5 class="dropdown-header text-uppercase">User Options</h5>
+                                    <h5 class="dropdown-header text-uppercase">{{ trans('lang.user-Options') }}</h5>
                                     <!-- Authentication Links -->
                                     @guest('admin')
                                         <a class="dropdown-item d-flex align-items-center justify-content-between" href="{{route('admin.login')}}">
-                                            <span>{{ ucfirst(config('multiauth.prefix')) }} Login </span>
+                                            <span>{{ trans('lang.login') }} </span>
                                         </a>
                                         @else
-                                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="{{ route('admin.password.change') }}"><span>Change Password</span></a>
+                                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="{{ route('admin.password.change') }}"><span>{{ trans('lang.change-Password') }}</span></a>
                                         <a class="dropdown-item d-flex align-items-center justify-content-between" href="/admin/logout" onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
-                                            <span>{{ __('Logout') }}</span>
+                                            <span>{{ trans('lang.logout') }}</span>
                                         </a>
                                         <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
                                                 @csrf
