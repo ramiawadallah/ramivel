@@ -101,7 +101,6 @@ class View extends Command{
                 <table id="datata" class="table table-bordered table-striped table-vcenter js-dataTable-buttons table-vcenter">
                     <thead>
                         <tr>
-                            <th width="10">{!! bsForm::deleteAll() !!}</th>
                             <th>{{ trans(\'lang.title\') }}</th>
                             <th>{{ trans(\'lang.photo\') }}</th>
                             <th>{{ trans(\'lang.stutes\') }}</th>
@@ -112,7 +111,6 @@ class View extends Command{
                     <tbody>
                         @foreach($'.str_plural(snake_case($this->argument('name'))).' as $'.str_singular(snake_case($this->argument('name'))).')
                             <tr>
-                                <td class="text-center">{!! bsForm::deleteSelect($'.str_singular(snake_case($this->argument('name'))).'->id) !!}</td>
                                 <td>{{ $'.str_singular(snake_case($this->argument('name'))).'->trans(\'title\') }}</td>
                                 <td><img  src="{{ Storage::url($'.str_singular(snake_case($this->argument('name'))).'->photo) }}" style="max-width:50px;"></td>
                                 <td>{{ $'.str_singular(snake_case($this->argument('name'))).'->trans(\'stutes\') }}</td>

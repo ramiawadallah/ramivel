@@ -50,7 +50,15 @@
     
     /* Pages Route design */
     Route::resource('pages', 'PageController');
-    Route::delete('pages/destroy/all', 'PageController@multi_delete');
+
+    /* Sliders Route design */
+    Route::resource('sliders', 'SliderController');
+
+    /* Services Route design */
+    Route::resource('services', 'ServiceController');
+
+    /* Partners Route design */
+    Route::resource('partners', 'PartnerController');
 
     Route::fallback(function () {
         return abort(404);
