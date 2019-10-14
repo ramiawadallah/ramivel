@@ -328,24 +328,23 @@ class PageController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, $id = null){
+        $name = 'page';
         $page = Page::findOrFail($id);
 
         foreach ($page->children as $child) {
             $child->makeRoot();
         }
 
+        \Storage::delete($page->photo);
+
         $page->delete();
 
-        alert()->success(trans('lang.deleted'), trans('lang.page'));
+        session()->flash('success',trans('lang.delete',['var'=>trans('lang.'.$name)]));
 
         return back();
         // return \Control::destroy($request,$id,'page');
     }
 
-
-    public function order(Request $request){
-        return \Control::order($request->data,'page',0);
-    }
 
     protected function updatePageOrder(Page $page, Request $request){
         if ($request->has('order', 'orderPage')) {
@@ -377,14 +376,6 @@ class PageController extends Controller
         $page->view = $view;
     }
 
-    public function multi_delete(){
-      if(is_array(request('item'))){
-        Page::destroy(request('item'));
-      }else{
-        Page::find(request('item'))->delete();
-      }
-      alert()->success(trans('lang.deleted'), trans('lang.page'));
-      return back();
-    }
+
 
 }

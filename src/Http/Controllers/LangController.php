@@ -71,9 +71,8 @@ class LangController extends Controller
             $add->save();
             @full_copy(base_path('resources/lang/en'),base_path('resources/lang/'.request('code')));
 
-            alert()->success(trans('lang.added'), trans('lang.lang'));
 
-             session()->flash('success',trans('lang.system_updated'));
+            session()->flash('success',trans('lang.system_updated'));
         return redirect('admin/langs');
         }
     }
@@ -132,8 +131,6 @@ class LangController extends Controller
             $add->updated_by = Auth::user()->name;
             $add->save();
 
-            alert()->success(trans('lang.updated'), trans('lang.lang'));
-
             session()->flash('success',trans('lang.system_updated'));
             return redirect('admin/langs');
     }
@@ -167,7 +164,6 @@ class LangController extends Controller
                             file_put_contents($file_path,$fileContent);
                         
                     }
-        alert()->success(trans('lang.updated'), trans('lang.lang_system'));
 
         session()->flash('success',trans('lang.system_updated'));
         return redirect('admin/langs');
@@ -197,7 +193,7 @@ class LangController extends Controller
             $lang->delete(); 
         }
 
-        alert()->success(trans('lang.deleted'), trans('lang.lang'));
+        session()->flash('success',trans('lang.deleted'));
 
         return back();
        
@@ -214,7 +210,7 @@ class LangController extends Controller
       }else{
         Lang::find(request('item'))->delete();
       }
-      alert()->success(trans('lang.deleted'), trans('lang.lang'));
+      session()->flash('success',trans('lang.deleted'));
       return back();
     }
 

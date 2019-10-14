@@ -39,15 +39,52 @@
 
         <!-- Fonts and OneUI framework -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,700%7COpen+Sans:300,400,400italic,600,700">
+        <link rel="stylesheet" id="css-main" href="{{ theme('backend/css/bootstrap-tagsinput.css') }}">
         <link rel="stylesheet" id="css-main" href="{{ theme('backend/css/ramivel.css') }}">
         <link rel="stylesheet" id="css-main" href="{{ theme('backend/css/main.css') }}">
-
+        
         <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
         <link rel="stylesheet" id="css-theme" href="{{ theme('backend/css/themes/modern.min.css') }}">
         <!-- END Stylesheets -->
+
+        <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+        <script>
+          var editor_config = {
+                path_absolute : "/",
+                selector: "textarea",
+                plugins: [
+                  "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+                  "searchreplace wordcount visualblocks visualchars code fullscreen",
+                  "insertdatetime media nonbreaking save table contextmenu directionality",
+                  "emoticons template paste textcolor colorpicker textpattern"
+                ],
+                toolbar: "insertfile undo redo | styleselect | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | ltr rtl | insertfile media image video| removeformat",
+                relative_urls: false,
+                file_browser_callback : function(field_name, url, type, win) {
+                  var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+                  var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
+                  var cmsURL = editor_config.path_absolute + 'laravel-filemanager?field_name=' + field_name;
+                  if (type == 'image') {
+                    cmsURL = cmsURL + "&type=Images";
+                  } else {
+                    cmsURL = cmsURL + "&type=Files";
+                  }
+                  tinyMCE.activeEditor.windowManager.open({
+                    file : cmsURL,
+                    title : 'Filemanager',
+                    width : x * 0.8,
+                    height : y * 0.8,
+                    resizable : "yes",
+                    close_previous : "no"
+                  });
+                }
+              };
+              tinymce.init(editor_config);
+        </script>
+
     </head>
     <body>
-        <div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed">
+        <div id="page-container" class="sidebar-o sidebar-light enable-page-overlay side-scroll page-header-fixed">
             <nav id="sidebar" aria-label="Main Navigation">
                 <!-- Side Header -->
                 <div class="content-header bg-white-5">
@@ -145,6 +182,8 @@
                         </li>
                         <li class="nav-main-heading">{{ trans('lang.app-Links') }}</li>
 
+
+                        <!-- Pages -->
                         <li class="nav-main-item {{ active_menu('pages')[0] }}">
                             <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                                 <i class="nav-main-link-icon si si-book-open"></i>
@@ -158,11 +197,197 @@
                                 </li>
                                 <li class="nav-main-item">
                                     <a class="nav-main-link" href="{{ url('admin/pages/create') }}">
-                                        <span class="nav-main-link-name">{{ trans('lang.add-new-page') }}</span>
+                                        <span class="nav-main-link-name">{{ trans('lang.create-new-pages') }}</span>
                                     </a>
                                 </li>
                             </ul>
                         </li>
+
+
+                        <!-- Partners -->
+                        <li class="nav-main-item {{ active_menu('partners')[0] }}">
+                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                <i class="nav-main-link-icon si si-bubbles"></i>
+                                <span class="nav-main-link-name">{{ trans('lang.partners' )}}</span>
+                            </a>
+                            <ul class="nav-main-submenu">
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="{{ url('admin/partners') }}">
+                                        <span class="nav-main-link-name">{{ trans('lang.partners' )}}</span>
+                                    </a>
+                                </li>
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="{{ url('admin/partners/create') }}">
+                                        <span class="nav-main-link-name">{{ trans('lang.create-new-partners') }}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+                        <!-- Service -->
+                        <li class="nav-main-item {{ active_menu('services')[0] }}">
+                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                <i class="nav-main-link-icon si si-basket-loaded"></i>
+                                <span class="nav-main-link-name">{{ trans('lang.services' )}}</span>
+                            </a>
+                            <ul class="nav-main-submenu">
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="{{ url('admin/services') }}">
+                                        <span class="nav-main-link-name">{{ trans('lang.services' )}}</span>
+                                    </a>
+                                </li>
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="{{ url('admin/services/create') }}">
+                                        <span class="nav-main-link-name">{{ trans('lang.create-new-services') }}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+                        <!-- Sliders -->
+                        <li class="nav-main-item {{ active_menu('sliders')[0] }}">
+                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                <i class="nav-main-link-icon si si-directions"></i>
+                                <span class="nav-main-link-name">{{ trans('lang.sliders' )}}</span>
+                            </a>
+                            <ul class="nav-main-submenu">
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="{{ url('admin/sliders') }}">
+                                        <span class="nav-main-link-name">{{ trans('lang.sliders' )}}</span>
+                                    </a>
+                                </li>
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="{{ url('admin/sliders/create') }}">
+                                        <span class="nav-main-link-name">{{ trans('lang.create-new-sliders') }}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+                        <!-- Challenges -->
+                        <li class="nav-main-item {{ active_menu('challenges')[0] }}">
+                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                <i class="nav-main-link-icon si si-anchor"></i>
+                                <span class="nav-main-link-name">{{ trans('lang.challenges' )}}</span>
+                            </a>
+                            <ul class="nav-main-submenu">
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="{{ url('admin/challenges') }}">
+                                        <span class="nav-main-link-name">{{ trans('lang.challenges' )}}</span>
+                                    </a>
+                                </li>
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="{{ url('admin/challenges/create') }}">
+                                        <span class="nav-main-link-name">{{ trans('lang.create-new-challenges') }}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+                        <!-- Numbers -->
+                        <li class="nav-main-item {{ active_menu('numbers')[0] }}">
+                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                <i class="nav-main-link-icon si si-bar-chart"></i>
+                                <span class="nav-main-link-name">{{ trans('lang.numbers' )}}</span>
+                            </a>
+                            <ul class="nav-main-submenu">
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="{{ url('admin/numbers') }}">
+                                        <span class="nav-main-link-name">{{ trans('lang.numbers' )}}</span>
+                                    </a>
+                                </li>
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="{{ url('admin/numbers/create') }}">
+                                        <span class="nav-main-link-name">{{ trans('lang.create-new-numbers') }}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- Offer -->
+                        <li class="nav-main-item {{ active_menu('offers')[0] }}">
+                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                <i class="nav-main-link-icon si si-bag"></i>
+                                <span class="nav-main-link-name">{{ trans('lang.offers' )}}</span>
+                            </a>
+                            <ul class="nav-main-submenu">
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="{{ url('admin/offers') }}">
+                                        <span class="nav-main-link-name">{{ trans('lang.offers' )}}</span>
+                                    </a>
+                                </li>
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="{{ url('admin/offers/create') }}">
+                                        <span class="nav-main-link-name">{{ trans('lang.create-new-offers') }}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- Data -->
+                        <li class="nav-main-item {{ active_menu('data')[0] }}">
+                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                <i class="nav-main-link-icon si si-globe"></i>
+                                <span class="nav-main-link-name">{{ trans('lang.data' )}}</span>
+                            </a>
+                            <ul class="nav-main-submenu">
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="{{ url('admin/data') }}">
+                                        <span class="nav-main-link-name">{{ trans('lang.data' )}}</span>
+                                    </a>
+                                </li>
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="{{ url('admin/data/create') }}">
+                                        <span class="nav-main-link-name">{{ trans('lang.create-new-data') }}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- Portfolio -->
+                        <li class="nav-main-item {{ active_menu('portfolios')[0] }}">
+                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                <i class="nav-main-link-icon si si-wallet"></i>
+                                <span class="nav-main-link-name">{{ trans('lang.portfolios' )}}</span>
+                            </a>
+                            <ul class="nav-main-submenu">
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="{{ url('admin/portfolios') }}">
+                                        <span class="nav-main-link-name">{{ trans('lang.portfolios' )}}</span>
+                                    </a>
+                                </li>
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="{{ url('admin/portfolios/create') }}">
+                                        <span class="nav-main-link-name">{{ trans('lang.create-new-portfolios') }}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- Assets -->
+                        <li class="nav-main-item {{ active_menu('assets')[0] }}">
+                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                <i class="nav-main-link-icon si si-magic-wand"></i>
+                                <span class="nav-main-link-name">{{ trans('lang.assets' )}}</span>
+                            </a>
+                            <ul class="nav-main-submenu">
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="{{ url('admin/assets') }}">
+                                        <span class="nav-main-link-name">{{ trans('lang.assets' )}}</span>
+                                    </a>
+                                </li>
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="{{ url('admin/assets/create') }}">
+                                        <span class="nav-main-link-name">{{ trans('lang.create-new-assets') }}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
 
                         <li class="nav-main-item"><a class="nav-main-link" href="{{ url('admin/settings') }}">
                             <i class="nav-main-link-icon si si-settings"></i><span class="nav-main-link-name">{{ trans('lang.settings') }}</span></a>
@@ -226,14 +451,14 @@
                                     <img class="img-avatar img-avatar48 img-avatar-thumb" src="{{ theme('backend/media/avatars/avatar0.jpg') }}" alt="">
                                 </div>
                                 <div class="p-2">
-                                    <h5 class="dropdown-header text-uppercase">{{ trans('lang.user-Options') }}</h5>
+                                    <h5 class="dropdown-header text-uppercase">{{ trans('lang.user-options') }}</h5>
                                     <!-- Authentication Links -->
                                     @guest('admin')
                                         <a class="dropdown-item d-flex align-items-center justify-content-between" href="{{route('admin.login')}}">
                                             <span>{{ trans('lang.login') }} </span>
                                         </a>
                                         @else
-                                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="{{ route('admin.password.change') }}"><span>{{ trans('lang.change-Password') }}</span></a>
+                                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="{{ route('admin.password.change') }}"><span>{{ trans('lang.s') }}</span></a>
                                         <a class="dropdown-item d-flex align-items-center justify-content-between" href="/admin/logout" onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
                                             <span>{{ trans('lang.logout') }}</span>
@@ -307,6 +532,7 @@
         <script src="{{ theme('backend/js/ramivel.core.min.js' ) }}"></script>
         <script src="{{ theme('backend/js/ramivel.app.min.js' ) }}"></script>
         <script src="{{ theme('backend/js/main.js' ) }}"></script>
+        <script src="{{ theme('backend/js/bootstrap-tagsinput.js' ) }}"></script>
 
         <!-- Page JS Plugins -->
         <script src="{{ theme('backend/js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js' ) }}"></script>

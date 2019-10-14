@@ -19,7 +19,6 @@
                         <table id="datata" class="table table-bordered table-striped table-vcenter js-dataTable-buttons table-vcenter">
                             <thead>
                                 <tr>
-                                    <th width="10">{!! bsForm::deleteAll() !!}</th>
                                     <th>{{ trans('lang.title') }}</th>
                                     <th>{{ trans('lang.photo') }}</th>
                                     <th>{{ trans('lang.stutes') }}</th>
@@ -30,7 +29,6 @@
                             <tbody>
                                 @foreach($pages as $page)
                                     <tr>
-                                        <td class="text-center">{!! bsForm::deleteSelect($page->id) !!}</td>
                                         <td>{{ $page->trans('title') }}</td>
                                         <td><img  src="{{ Storage::url($page->photo) }}" style="max-width:50px;"></td>
                                         <td>{{ $page->trans('stutes') }}</td>

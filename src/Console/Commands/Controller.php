@@ -135,6 +135,7 @@ class '.$controller.' extends Controller
                 \'title\' => \'required\',
                 \'content\' => \'required\',
             ],
+            \'photo\' => \'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048\',
             \'stutes\' => \'required\',
             \'uri\' => \'required\',
         ]);
@@ -144,7 +145,7 @@ class '.$controller.' extends Controller
            $data[\'photo\'] = Up()->upload([
                 // \'new_name\'      =>  \'\',
                 \'file\'          =>  \'photo\',
-                \'path\'          =>  \''.$prefixs.'\',
+                \'path\'          =>  \'public/'.$prefixs.'\',
                 \'upload_type\'   =>  \'single\',
                 \'delete_file\'   =>  \'\',
            ]); 
@@ -205,7 +206,7 @@ class '.$controller.' extends Controller
            $data[\'photo\'] = Up()->upload([
                 // \'new_name\'      =>  \'\',
                 \'file\'          =>  \'photo\',
-                \'path\'          =>  \''.$prefixs.'\',
+                \'path\'          =>  \'public/'.$prefixs.'\',
                 \'upload_type\'   =>  \'single\',
                 \'delete_file\'   =>  '.ucfirst(str_singular($prefixs)).'::find($id)->photo,
            ]); 
