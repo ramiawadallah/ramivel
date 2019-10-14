@@ -2,9 +2,9 @@
 @section('title') {{ trans('lang.languages') }}  @endsection
 @section('content')
 
-<div class="col-lg-12">
+<div class="content">
     <div class="block block-mode-loading-oneui">
-        <div class="block-header border-bottom">
+        <div class="block-header">
             {{ trans('lang.languages') }} 
             <hr>
             {!! Btn::create() !!} 
@@ -130,9 +130,11 @@
 
                                  </td>
                                  <td>
+                                    <div class="btn-group"> 
                                      {!! Btn::view($language->id) !!}
                                      {!! Btn::edit($language->id) !!}
                                      {!! Btn::delete($language->id,$language->trans('name')) !!}
+                                    </div>
                                  </td>
                             </tr>
                         @endforeach

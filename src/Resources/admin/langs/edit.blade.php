@@ -4,7 +4,8 @@
 
 {!! bsForm::start(['route'=>['langs.update',$lang->id],'files'=>true,'method'=>'put']) !!}
 
-<br>
+<div class="content">
+
 <div class="row">
     <div class="col-lg-8">
         <div class="block">
@@ -46,6 +47,9 @@
             </div>
         </div>
     </div>
+</div>
+
+{!!  bsForm::end() !!}
 </div>
 
 
