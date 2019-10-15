@@ -81,11 +81,11 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    <img width="150" class="logo-main img-fluid text-primary" src="{{ Storage::url(setting()->logo) }}">
+                    <img width="150" class="logo-main img-fluid text-primary" src="{{ theme('backend/media/favicons/logo.png') }}">
                 </div>
                 
                 <div class="links">
-                    @foreach( \App\Page::all() as $page)
+                    @foreach( \App\Page::where('stutes' == 'active')->get() as $page)
                         <a href="{{ url($page->uri) }}"> {{ $page->trans('title') }} </a>
                     @endforeach
                 </div>
