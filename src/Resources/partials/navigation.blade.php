@@ -6,7 +6,7 @@ $lang = app()->getLocale();
 
 
 @foreach($pages as $page)
-    @if($page->stutes=="active")
+    @if($page->status=="active")
       <li  class="{{Request::is($page->uri_wildcard) ? '' : '' }}{{count($page->children) ? ($page->isChild() ? '' : 'submenu') : ''}}">
           <a class="{{count($page->children) ? ($page->isChild() ? '' : 'dropdown-toggle') : ''}}"
         href="{{ url($page->uri) }}">{{ $page->trans('title',$lang) }} </a>
