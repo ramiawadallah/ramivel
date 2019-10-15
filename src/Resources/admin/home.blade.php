@@ -14,8 +14,6 @@
         </div>
         <!-- END Hero -->
 
-        @include('partials.message')
-
         <!-- Page Content -->
         <div class="content content-narrow">
             <!-- Stats -->

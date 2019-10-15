@@ -99,5 +99,6 @@ return [
 	'not-available' => 'Not available',
 	
 	'delete_msg' => 'Are you sure you want to delete this!',
+	'updated'	=> 'You updated the data successfully!',
 
 ];

@@ -42,6 +42,8 @@
         <link rel="stylesheet" id="css-main" href="{{ theme('backend/css/bootstrap-tagsinput.css') }}">
         <link rel="stylesheet" id="css-main" href="{{ theme('backend/css/ramivel.css') }}">
         <link rel="stylesheet" id="css-main" href="{{ theme('backend/css/main.css') }}">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@2.1.0/dark.css">
         
         <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
         <link rel="stylesheet" id="css-theme" href="{{ theme('backend/css/themes/modern.min.css') }}">
@@ -336,7 +338,7 @@
                                             <span>{{ trans('lang.login') }} </span>
                                         </a>
                                         @else
-                                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="{{ route('admin.password.change') }}"><span>{{ trans('lang.s') }}</span></a>
+                                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="{{ route('admin.password.change') }}"><span>{{ trans('lang.change-password') }}</span></a>
                                         <a class="dropdown-item d-flex align-items-center justify-content-between" href="/admin/logout" onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
                                             <span>{{ trans('lang.logout') }}</span>
@@ -411,6 +413,7 @@
         <script src="{{ theme('backend/js/ramivel.app.min.js' ) }}"></script>
         <script src="{{ theme('backend/js/main.js' ) }}"></script>
         <script src="{{ theme('backend/js/bootstrap-tagsinput.js' ) }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8.18.3/dist/sweetalert2.all.min.js"></script>
 
         <!-- Page JS Plugins -->
         <script src="{{ theme('backend/js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js' ) }}"></script>
@@ -431,10 +434,30 @@
 
         <script src="{{ theme('backend/js/pages/be_tables_datatables.min.js') }}"></script>
 
+        @if(Session::has('success'))
+            <script type="text/javascript">
+                Swal.fire({
+                    type: 'success',
+                    text: '{{ session()->get('success') }}',
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+            </script>
+        @endif
 
+        @if ($errors->count() > 0) 
+            <script type="text/javascript">
+                Swal.fire({
+                    type: 'error',
+                    text: 'Something went wrong!',
+                    html: '@foreach ($errors->all() as $error)<div class="alert alert-warning alert-dismissible fade show" role="alert"> {{ $error }}  </div>@endforeach'
+                })
+            </script>
+        @endif
 
         <!-- Page JS Helpers (BS Datepicker + BS Colorpicker + BS Maxlength + Select2 + Masked Inputs + Ion Range Slider plugins) -->
-        <script>jQuery(function(){ One.helpers(['datepicker', 'colorpicker', 'maxlength', 'select2', 'masked-inputs', 'rangeslider']); });</script>
+        <script>jQuery(function(){ One.helpers(['notify','datepicker', 'colorpicker', 'maxlength', 'select2', 'masked-inputs', 'rangeslider']); });</script>
+
     </body>
 
 </html>

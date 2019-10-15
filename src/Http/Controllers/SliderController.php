@@ -69,7 +69,7 @@ class SliderController extends Controller
         }
 
         return \Control::store($request,'slider',[
-            'translate' => ['title'],
+            'translate' => ['title','content'],
             'status' => $request->status,
             'photo' => $data['photo'],
             'created_by' => Auth::user('admin')->name,
@@ -128,7 +128,7 @@ class SliderController extends Controller
         }
 
         return \Control::update($request,$id,'slider',[
-            'translate' => ['title'],
+            'translate' => ['title','content'],
             'status' => $request->status,
             'photo' => $data['photo'],
             'updated_by' => Auth::user('admin')->name,

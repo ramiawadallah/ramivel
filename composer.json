@@ -18,7 +18,8 @@
     "require": {
         "laravelcollective/html":"^5.8.0",
         "baum/baum":"v2.*",
-        "ramiawadallah/presenter": "dev-master"
+        "ramiawadallah/presenter": "dev-master",
+        "unisharp/laravel-filemanager": "~1.8"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.4@dev",

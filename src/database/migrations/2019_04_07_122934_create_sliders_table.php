@@ -16,6 +16,7 @@ class CreateSlidersTable extends Migration
         Schema::create('sliders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
+            $table->text('content');
             $table->text('photo')->nullable();
             $table->enum('status',['active','not active'])->default('not active');
             $table->string('created_by')->nullable();
