@@ -26,10 +26,10 @@
                     <div class="block-content">
                         {!! bsForm::image('photo',$service->photo) !!}
                         <hr>
-                        {!! bsForm::radio('stutes',[
+                        {!! bsForm::radio('status',[
                                 'active'=> trans('lang.active'),
                                 'not active'=> trans('lang.not-active'),
-                            ],$service->stutes) 
+                            ],$service->status) 
                         !!}
                     </div>
                 </div>

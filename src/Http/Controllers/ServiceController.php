@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Alert;
 use App\Service;
+use Auth;
 
 class ServiceController extends Controller
 {
@@ -52,7 +53,7 @@ class ServiceController extends Controller
                 'content' => 'required',
             ],
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'stutes' => 'required',
+            'status' => 'required',
             'uri' => 'required',
         ]);
 
@@ -71,8 +72,9 @@ class ServiceController extends Controller
 
         return \Control::store($request,'service',[
             'translate' => ['title','content'],
-            'stutes' => $request->stutes,
+            'status' => $request->status,
             'uri' => $request->uri,
+            'created_by' => Auth::user('admin')->name,
             'photo' => $data['photo'],
         ],aurl().'/services');
     }
@@ -113,7 +115,7 @@ class ServiceController extends Controller
                 'title' => 'required',
                 'content' => 'required',
             ],
-            'stutes' => 'required',
+            'status' => 'required',
             'uri' => 'required',
         ]);
 
@@ -132,9 +134,10 @@ class ServiceController extends Controller
 
         return \Control::update($request,$id,'service',[
             'translate' => ['title','content'],
-            'stutes' => $request->stutes,
+            'status' => $request->status,
             'uri' => $request->uri,
             'photo' => $data['photo'],
+            'updated_by' => Auth::user('admin')->name,
         ],aurl().'/services');
     }
 

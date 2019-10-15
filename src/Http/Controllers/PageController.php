@@ -71,7 +71,7 @@ class PageController extends Controller
                 'content' => 'required',
             ],
             'uri' => ['required'],
-            'stutes' => 'required',
+            'status' => 'required',
         ]);
 
         
@@ -93,7 +93,7 @@ class PageController extends Controller
             'uri'           => $request['uri'],
             'name'          => $request['name'],
             'template'      => $request['template'],
-            'stutes'        => $request['stutes'],
+            'status'        => $request['status'],
             'photo'         => $data['photo'],
             'created_by'    => Auth::user('admin')->name,
         ];
@@ -233,7 +233,7 @@ class PageController extends Controller
                 'title' => ['required', 'min:3'],
             ],
             'uri' => ['required'],
-            'stutes' => 'required',
+            'status' => 'required',
         ]);
 
         if(request()->hasFile('photo')) {
@@ -254,7 +254,7 @@ class PageController extends Controller
             'uri'           => $request['uri'],
             'name'          => $request['name'],
             'template'      => $request['template'],
-            'stutes'        => $request['stutes'],
+            'status'        => $request['status'],
             'photo'         => $data['photo'],
             'updated_by'    => Auth::user('admin')->name,
         ];

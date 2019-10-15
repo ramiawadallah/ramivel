@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Alert;
 use App\Slider;
+use Auth;
 
 class SliderController extends Controller
 {
@@ -50,7 +51,7 @@ class SliderController extends Controller
             'translate' => [
                 'title' => 'required',
             ],
-            'stutes' => 'required',
+            'status' => 'required',
             'photo' => 'required',
         ]);
 
@@ -69,8 +70,9 @@ class SliderController extends Controller
 
         return \Control::store($request,'slider',[
             'translate' => ['title'],
-            'stutes' => $request->stutes,
+            'status' => $request->status,
             'photo' => $data['photo'],
+            'created_by' => Auth::user('admin')->name,
         ],aurl().'/sliders');
     }
 
@@ -109,7 +111,7 @@ class SliderController extends Controller
             'translate' => [
                 'title' => 'required',
             ],
-            'stutes' => 'required',
+            'status' => 'required',
         ]);
 
         //Request Photo Upload
@@ -127,8 +129,9 @@ class SliderController extends Controller
 
         return \Control::update($request,$id,'slider',[
             'translate' => ['title'],
-            'stutes' => $request->stutes,
+            'status' => $request->status,
             'photo' => $data['photo'],
+            'updated_by' => Auth::user('admin')->name,
         ],aurl().'/sliders');
     }
 

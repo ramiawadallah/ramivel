@@ -21,7 +21,7 @@
                         <tr>
                             <th>{{ trans('lang.title') }}</th>
                             <th>{{ trans('lang.photo') }}</th>
-                            <th>{{ trans('lang.stutes') }}</th>
+                            <th>{{ trans('lang.status') }}</th>
                             <th>{{ trans('lang.create-at') }}</th>
                             <th>{{ trans('lang.action') }}</th>
                         </tr>
@@ -31,7 +31,7 @@
                             <tr>
                                 <td>{{ $slider->trans('title') }}</td>
                                 <td><img  src="{{ Storage::url($slider->photo) }}" style="max-width:50px;"></td>
-                                <td>{{ $slider->trans('stutes') }}</td>
+                                <td>{{ $slider->trans('status') }}</td>
                                 <td>{{ date('Y/m/d',strtotime($slider->created_at)) }}</td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic example">

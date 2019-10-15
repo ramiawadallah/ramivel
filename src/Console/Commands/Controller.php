@@ -136,7 +136,7 @@ class '.$controller.' extends Controller
                 \'content\' => \'required\',
             ],
             \'photo\' => \'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048\',
-            \'stutes\' => \'required\',
+            \'status\' => \'required\',
             \'uri\' => \'required\',
         ]);
 
@@ -155,7 +155,7 @@ class '.$controller.' extends Controller
 
         return \Control::store($request,\''.$prefix.'\',[
             \'translate\' => [\'title\',\'content\'],
-            \'stutes\' => $request->stutes,
+            \'status\' => $request->status,
             \'uri\' => $request->uri,
             \'photo\' => $data[\'photo\'],
         ],aurl().\'/'.$prefixs.'\');
@@ -197,7 +197,7 @@ class '.$controller.' extends Controller
                 \'title\' => \'required\',
                 \'content\' => \'required\',
             ],
-            \'stutes\' => \'required\',
+            \'status\' => \'required\',
             \'uri\' => \'required\',
         ]);
 
@@ -216,7 +216,7 @@ class '.$controller.' extends Controller
 
         return \Control::update($request,$id,\''.$prefix.'\',[
             \'translate\' => [\'title\',\'content\'],
-            \'stutes\' => $request->stutes,
+            \'status\' => $request->status,
             \'uri\' => $request->uri,
             \'photo\' => $data[\'photo\'],
         ],aurl().\'/'.$prefixs.'\');

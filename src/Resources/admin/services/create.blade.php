@@ -26,7 +26,7 @@
                     <div class="block-content">
                         {!! bsForm::image('photo') !!}
                         <hr>
-                        {!! bsForm::radio('stutes',[
+                        {!! bsForm::radio('status',[
                             'active'=> trans('lang.active'),
                             'not active'=> trans('lang.not-active'),
                         ]) !!}

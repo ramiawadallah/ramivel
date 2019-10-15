@@ -17,7 +17,9 @@ class CreateSlidersTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->text('photo')->nullable();
-            $table->enum('stutes',['active','not active'])->default('not active');
+            $table->enum('status',['active','not active'])->default('not active');
+            $table->string('created_by')->nullable();
+            $table->string('updated_by')->nullable();
             $table->timestamps();
         });
     }

@@ -5,7 +5,7 @@ return [
 	'dashboard' => 'Dashboard',
 	'website-main-setting' => 'Website main setting',
 	'title' => 'Title',
-	'stutes' => 'Stutes',
+	'status' => 'status',
 	'create-at' => 'Create at',
 	'action'	=> 'Action',
 	'create'	=> 'Create',

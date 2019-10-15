@@ -21,7 +21,7 @@
                         <tr>
                             <th>{{ trans('lang.title') }}</th>
                             <th>{{ trans('lang.photo') }}</th>
-                            <th>{{ trans('lang.stutes') }}</th>
+                            <th>{{ trans('lang.status') }}</th>
                             <th>{{ trans('lang.create-at') }}</th>
                             <th>{{ trans('lang.action') }}</th>
                         </tr>
@@ -31,7 +31,7 @@
                             <tr>
                                 <td>{{ $partner->trans('title') }}</td>
                                 <td><img  src="{{ Storage::url($partner->photo) }}" style="max-width:50px;"></td>
-                                <td>{{ $partner->trans('stutes') }}</td>
+                                <td>{{ $partner->trans('status') }}</td>
                                 <td>{{ date('Y/m/d',strtotime($partner->created_at)) }}</td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic example">

@@ -51,7 +51,7 @@ class PartnerController extends Controller
             'translate' => [
                 'title' => 'required',
             ],
-            'stutes' => 'required',
+            'status' => 'required',
             'uri' => 'required',
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
@@ -71,7 +71,7 @@ class PartnerController extends Controller
 
         return \Control::store($request,'partner',[
             'translate' => ['title'],
-            'stutes' => $request->stutes,
+            'status' => $request->status,
             'uri' => $request->uri,
             'created_by' => Auth::user('admin')->name,
             'photo' => $data['photo'],
@@ -113,7 +113,7 @@ class PartnerController extends Controller
             'translate' => [
                 'title' => 'required',
             ],
-            'stutes' => 'required',
+            'status' => 'required',
             'uri' => 'required',
         ]);
 
@@ -132,7 +132,7 @@ class PartnerController extends Controller
 
         return \Control::update($request,$id,'partner',[
            'translate' => ['title'],
-            'stutes' => $request->stutes,
+            'status' => $request->status,
             'uri' => $request->uri,
             'updated_by' => Auth::user('admin')->name,
             'photo' => $data['photo'],

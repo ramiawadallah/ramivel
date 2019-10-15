@@ -103,7 +103,7 @@ class View extends Command{
                         <tr>
                             <th>{{ trans(\'lang.title\') }}</th>
                             <th>{{ trans(\'lang.photo\') }}</th>
-                            <th>{{ trans(\'lang.stutes\') }}</th>
+                            <th>{{ trans(\'lang.status\') }}</th>
                             <th>{{ trans(\'lang.create-at\') }}</th>
                             <th>{{ trans(\'lang.action\') }}</th>
                         </tr>
@@ -113,7 +113,7 @@ class View extends Command{
                             <tr>
                                 <td>{{ $'.str_singular(snake_case($this->argument('name'))).'->trans(\'title\') }}</td>
                                 <td><img  src="{{ Storage::url($'.str_singular(snake_case($this->argument('name'))).'->photo) }}" style="max-width:50px;"></td>
-                                <td>{{ $'.str_singular(snake_case($this->argument('name'))).'->trans(\'stutes\') }}</td>
+                                <td>{{ $'.str_singular(snake_case($this->argument('name'))).'->trans(\'status\') }}</td>
                                 <td>{{ date(\'Y/m/d\',strtotime($'.str_singular(snake_case($this->argument('name'))).'->created_at)) }}</td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic example">
@@ -184,7 +184,7 @@ class View extends Command{
                     <div class="block-content">
                         {!! bsForm::image(\'photo\') !!}
                         <hr>
-                        {!! bsForm::radio(\'stutes\',[
+                        {!! bsForm::radio(\'status\',[
                             \'active\'=> trans(\'lang.active\'),
                             \'not active\'=> trans(\'lang.not-active\'),
                         ]) !!}
@@ -246,10 +246,10 @@ class View extends Command{
                     <div class="block-content">
                         {!! bsForm::image(\'photo\',$'.str_singular(snake_case($this->argument('name'))).'->photo) !!}
                         <hr>
-                        {!! bsForm::radio(\'stutes\',[
+                        {!! bsForm::radio(\'status\',[
                                 \'active\'=> trans(\'lang.active\'),
                                 \'not active\'=> trans(\'lang.not-active\'),
-                            ],$'.str_singular(snake_case($this->argument('name'))).'->stutes) 
+                            ],$'.str_singular(snake_case($this->argument('name'))).'->status) 
                         !!}
                     </div>
                 </div>

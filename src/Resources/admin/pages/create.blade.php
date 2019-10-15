@@ -32,7 +32,7 @@
                         <hr>
                         {!! bsForm::select('orderPage',['' => 'None'] + $orderPages->pluck('padded_title', 'id')->toArray(), null)!!}
                         <hr>
-                        {!! bsForm::radio('stutes',[
+                        {!! bsForm::radio('status',[
                             'active'=> trans('lang.active'),
                             'not active'=> trans('lang.not-active'),
                         ]) !!}
