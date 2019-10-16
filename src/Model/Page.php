@@ -3,7 +3,7 @@
 namespace App;
 
 //use Illuminate\Database\Eloquent\Model;
-use Baum\Node;
+use Neste\Node;
 
 class Page extends Node 
 {
