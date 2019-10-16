@@ -17,7 +17,7 @@
     "minimum-stability": "dev",
     "require": {
         "laravelcollective/html":"^5.8.0",
-        "baum/baum":"v2.*",
+        "ramiawadallah/neste":"dev-master",
         "ramiawadallah/presenter": "dev-master",
         "unisharp/laravel-filemanager": "~1.8"
     },
