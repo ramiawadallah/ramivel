@@ -18,6 +18,7 @@
     "require": {
         "laravelcollective/html":"6.*",
         "baum/baum":"v2.*",
+        "laravel/helpers": "^1.1",
         "ramiawadallah/presenter": "dev-master",
         "unisharp/laravel-filemanager": "~1.8"
     },
