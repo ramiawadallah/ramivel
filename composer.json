@@ -16,7 +16,7 @@
     }],
     "minimum-stability": "dev",
     "require": {
-        "laravelcollective/html":"^6.*",
+        "laravelcollective/html":"6.*",
         "ramiawadallah/neste":"dev-master",
         "ramiawadallah/presenter": "dev-master",
         "unisharp/laravel-filemanager": "~1.8"
