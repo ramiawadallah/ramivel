@@ -100,5 +100,6 @@ return [
 	
 	'delete_msg' => 'Are you sure you want to delete this!',
 	'updated'	=> 'You updated the data successfully!',
+	'delete'	=> 'You deleted the data successfully!',
 
 ];
