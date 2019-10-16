@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="content">
-    @include('partials.message')
+    
     {!! bsForm::start(['route'=>['pages.update',$page->id],'files'=>true,'method'=>'put']) !!}
         @csrf
         <div class="row">

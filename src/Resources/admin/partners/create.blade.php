@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="content">
-    @include('partials.message')
+    
     {!! bsForm::start(['route'=>'partners.store','enctype'=>'multipart/form-data']) !!}
         @csrf
         <div class="row">

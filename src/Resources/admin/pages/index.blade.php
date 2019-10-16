@@ -14,7 +14,7 @@
                 </div>
 
                 <div class="block-content">
-                    @include('partials.message')
+                    
                     <div class="table-responsive">
                         <table id="datata" class="table table-bordered table-striped table-vcenter js-dataTable-buttons table-vcenter">
                             <thead>

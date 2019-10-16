@@ -4,7 +4,7 @@
     <div class="block py-3 col-md-8">
         <div class="block-header">Register New {{ ucfirst(config('multiauth.prefix')) }}</div>
         <div class="block-content">
-            @include('partials.message')
+            
             <form method="POST" action="{{ route('admin.register') }}">
                 @csrf
                 <div class="form-group">

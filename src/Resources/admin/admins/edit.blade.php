@@ -6,7 +6,7 @@
             <div class="block-header">Edit details of {{$admin->name}}</div>
 
             <div class="block-content">
-                @include('partials.message')
+                
                 <form action="{{route('admin.update',[$admin->id])}}" method="post">
                     @csrf @method('patch')
                     <div class="form-group">
