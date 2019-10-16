@@ -20,13 +20,15 @@ in as a user and an admin, without conflicts!
 Install via composer.
 
 ```bash
-composer require ramivel/ramivel
+ composer require ramivel/ramivel
 ```
 
 Yuo must publish this line
 
 ```bash
-php artisan vendor:publish --tag="ramivel:publish" --force
+ php artisan vendor:publish --tag="ramivel:publish" --force
+ php artisan vendor:publish --tag=lfm_config
+ php artisan vendor:publish --tag=lfm_public
 ```
 
 Add this trait on this following path ../vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php

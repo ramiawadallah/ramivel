@@ -13,6 +13,7 @@
                     <div class="block-content">
                         {!! bsForm::translate(function($form,$lang) use($slider){
                             $form->text('title',$slider->trans('title',$lang));
+                            $form->textarea('content',$slider->trans('content',$lang),['class'=>'form-control']);
                         }) !!}
                     </div>
                 </div>

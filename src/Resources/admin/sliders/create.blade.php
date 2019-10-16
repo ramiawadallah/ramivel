@@ -13,6 +13,7 @@
                     <div class="block-content">
                         {!! bsForm::translate(function($form){
                             $form->text('title');
+                            $form->textarea('content',null,['class'=>'form-control']);
                         }) !!}
                     </div>
                 </div>
