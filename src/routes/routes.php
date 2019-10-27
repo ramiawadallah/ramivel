@@ -60,9 +60,9 @@
     /* Partners Route design */
     Route::resource('partners', 'PartnerController');
 
-    Route::group(['middleware' => 'auth:admin'], function () {
-    Route::get('/laravel-filemanager', '\UniSharp\LaravelFilemanager\Controllers\LfmController@show');
-    Route::post('/laravel-filemanager/upload', '\UniSharp\LaravelFilemanager\Controllers\UploadController@upload');
+    // Route::group(['middleware' => 'auth:admin'], function () {
+    // Route::get('/laravel-filemanager', '\UniSharp\LaravelFilemanager\Controllers\LfmController@show');
+    // Route::post('/laravel-filemanager/upload', '\UniSharp\LaravelFilemanager\Controllers\UploadController@upload');
 
     Route::fallback(function () {
         return abort(404);
