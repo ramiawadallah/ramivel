@@ -16,7 +16,7 @@
     }],
     "minimum-stability": "dev",
     "require": {
-        "laravelcollective/html":"^5.8.0",
+        "laravelcollective/html":"^6.0",
         "baum/baum":"v2.*",
         "ramiawadallah/presenter": "dev-master",
         "unisharp/laravel-filemanager": "~1.8"
