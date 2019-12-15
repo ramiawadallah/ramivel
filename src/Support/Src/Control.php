@@ -4,6 +4,7 @@ namespace App\Helpers\Src;
 * 
 */
 use Illuminate\Http\Request;
+Use Alert;
 
 
 class Control
@@ -55,7 +56,6 @@ class Control
     if ($row->exists()) 
     {
       $compact = array_add($compact, strtolower(str_singular($name)), $row->first());
-
       return view($view,$compact);
     }else{
       return view('Helper::main_error404');
@@ -143,9 +143,10 @@ class Control
         \Files::upload($request,$name,$id,$data['files']);
         }
 
-
+        alert()->success(trans('lang.added',['var'=>trans('lang.'.$name)]));
         session()->flash('success',trans('lang.added',['var'=>trans('lang.'.$name)]));
-       if (is_callable($calback)) 
+
+        if (is_callable($calback)) 
         {
            call_user_func_array($calback,[$request,$id]);
         }
@@ -212,6 +213,8 @@ class Control
              }
           }
 
+        alert()->success(trans('lang.updated',['var'=>trans('lang.'.$name)]));
+
         session()->flash('success',trans('lang.updated',['var'=>trans('lang.'.$name)]));
 
        if (is_callable($calback)) 
@@ -247,7 +250,8 @@ class Control
         if ($id != null) 
         {
           $row = $model::find($id);
-
+          
+          alert()->success(trans('lang.deleted',['var'=>trans('lang.'.$name)]));
           session()->flash('success',trans('lang.deleted',['var'=>trans('lang.'.$name)]));
            if (is_callable($calback)) 
               {

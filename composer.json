@@ -19,7 +19,9 @@
         "laravelcollective/html":"^6.0",
         "baum/baum":"v2.*",
         "ramiawadallah/presenter": "dev-master",
-        "unisharp/laravel-filemanager": "~1.8"
+        "unisharp/laravel-filemanager": "~1.8",
+        "laravel/helpers": "^1.1",
+        "realrashid/sweet-alert": "^2.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.4@dev",

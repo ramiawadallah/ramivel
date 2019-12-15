@@ -157,7 +157,7 @@ class PageController extends Controller
 
         $id = $model::all()->last()->id;
         
-        // alert()->success(trans('lang.added'), trans('lang.page'));
+        alert()->success(trans('lang.added'), trans('lang.page'));
         session()->flash('success',trans('lang.added',['var'=>trans('lang.'.$name)]));
         
         if (is_null($redirect)) 
@@ -308,7 +308,7 @@ class PageController extends Controller
          }
         }
 
-        // alert()->success(trans('lang.updated'), trans('lang.page'));
+        alert()->success(trans('lang.updated'), trans('lang.page'));
         session()->flash('success',trans('lang.updated',['var'=>trans('lang.'.$name)]));
         
 
@@ -338,7 +338,8 @@ class PageController extends Controller
         \Storage::delete($page->photo);
 
         $page->delete();
-
+        alert()->success(trans('lang.deleted',['var'=>trans('lang.'.$name)]));
+        
         session()->flash('success',trans('lang.delete',['var'=>trans('lang.'.$name)]));
 
         return back();
