@@ -205,6 +205,46 @@
                             </ul>
                         </li>
 
+                        <!-- Category -->
+                        <li class="nav-main-item {{ active_menu('categories')[0] }}">
+                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                <i class="nav-main-link-icon si si-briefcase"></i>
+                                <span class="nav-main-link-name">{{ trans('lang.categories' )}}</span>
+                            </a>
+                            <ul class="nav-main-submenu">
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="{{ url('admin/categories') }}">
+                                        <span class="nav-main-link-name">{{ trans('lang.categories' )}}</span>
+                                    </a>
+                                </li>
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="{{ url('admin/categories/create') }}">
+                                        <span class="nav-main-link-name">{{ trans('lang.create-new-categories') }}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- Post -->
+                        <li class="nav-main-item {{ active_menu('posts')[0] }}">
+                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                <i class="nav-main-link-icon si si-book-open"></i>
+                                <span class="nav-main-link-name">{{ trans('lang.posts' )}}</span>
+                            </a>
+                            <ul class="nav-main-submenu">
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="{{ url('admin/posts') }}">
+                                        <span class="nav-main-link-name">{{ trans('lang.posts' )}}</span>
+                                    </a>
+                                </li>
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="{{ url('admin/posts/create') }}">
+                                        <span class="nav-main-link-name">{{ trans('lang.create-new-posts') }}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
 
                         <!-- Partners -->
                         <li class="nav-main-item {{ active_menu('partners')[0] }}">

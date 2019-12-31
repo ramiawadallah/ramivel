@@ -15,6 +15,7 @@ return [
 	'template'	=> 'Template',
 	'order'	=> 'Order',
 	'orderPage'	=> 'Order page',
+	'orderCategory'	=> 'Order category',
 	'active'	=> 'Active',
 	'not-active' => 'Not active',
 	'save'	=> 'Save',
@@ -86,12 +87,17 @@ return [
 	'edit-sliders' => 'Edit slider',
 	'create-new-sliders' => 'Create new slider',
 
-	'pipeline_registrations' => 'Pipeline registrations',
-	'market_authorizations' => 'Market authorizations',
-	'prices' => 'Prices',
-	'ip_patent' => 'Ip patent',
-	'ip_applications' => 'Ip applications',
-	'pi_insight' => 'Pi insight',
+	'posts'	=> 'Posts',
+	'edit-posts' => 'Edit post',
+	'create-new-posts' => 'Create new post',
+
+	'comments'	=> 'Comments',
+	'edit-comments' => 'Edit comment',
+	'create-new-comments' => 'Create new comment',
+
+	'categories'	=> 'Categories',
+	'edit-categories' => 'Edit category',
+	'create-new-categories' => 'Create new category',
 
 	'number' => 'Number',
 
@@ -101,5 +107,7 @@ return [
 	'delete_msg' => 'Are you sure you want to delete this!',
 	'updated'	=> 'You updated the data successfully!',
 	'delete'	=> 'You deleted the data successfully!',
+	'deleted'	=> 'You deleted the data successfully!',
+	'added'		=> 'You addedd the data successfully!',
 
 ];

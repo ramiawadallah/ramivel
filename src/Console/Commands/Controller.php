@@ -230,12 +230,12 @@ class '.$controller.' extends Controller
      */
     public function destroy(Request $request, $id = null)
     {
+        $name = \''.$prefixs.'\';
         $'.$prefixs.' = '.ucfirst(str_singular($prefixs)).'::findOrFail($id);
+        \Storage::delete($'.$prefixs.'->photo);
         $'.$prefixs.'->delete();
-        alert()->success(trans(\'lang.deleted\'), trans(\'lang.'.$prefix.'\'));
+        session()->flash(\'success\',trans(\'lang.delete\',[\'var\'=>trans(\'lang.\'.$name)]));
         return back();
-
-        //return \Control::destroy($request,$id,\''.$prefix.'\');
     }
 
     public function order(Request $request)

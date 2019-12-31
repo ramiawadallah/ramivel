@@ -6,6 +6,9 @@
     Route::POST('/', 'LoginController@login');
     Route::POST('/logout', 'LoginController@logout')->name('admin.logout');
 
+    Route::get('/laravel-filemanager', '\UniSharp\LaravelFilemanager\Controllers\LfmController@show');
+    Route::post('/laravel-filemanager/upload', '\UniSharp\LaravelFilemanager\Controllers\UploadController@upload');
+
     // Password Resets
     Route::POST('/password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
     Route::GET('/password/reset', 'ForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
@@ -59,6 +62,12 @@
 
     /* Partners Route design */
     Route::resource('partners', 'PartnerController');
+
+    /* Categories Route design */
+    Route::resource('categories', 'CategoryController');
+
+    /* Posts Route design */
+    Route::resource('posts', 'PostController');
 
     Route::fallback(function () {
         return abort(404);

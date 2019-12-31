@@ -96,7 +96,6 @@ class View extends Command{
         </div>
 
         <div class="block-content">
-            @include(\'partials.message\')
             <div class="table-responsive">
                 <table id="datata" class="table table-bordered table-striped table-vcenter js-dataTable-buttons table-vcenter">
                     <thead>
@@ -161,7 +160,6 @@ class View extends Command{
 @section(\'content\')
 
 <div class="content">
-    @include(\'partials.message\')
     {!! bsForm::start([\'route\'=>\''.str_plural(snake_case($this->argument('name'))).'.store\',\'enctype\'=>\'multipart/form-data\']) !!}
         @csrf
         <div class="row">
@@ -223,7 +221,6 @@ class View extends Command{
 @section(\'content\')
 
 <div class="content">
-    @include(\'partials.message\')
     {!! bsForm::start([\'route\'=>[\''.str_plural(snake_case($this->argument('name'))).'.update\',$'.str_singular(snake_case($this->argument('name'))).'->id],\'files\'=>true,\'method\'=>\'put\']) !!}
         @csrf
         <div class="row">

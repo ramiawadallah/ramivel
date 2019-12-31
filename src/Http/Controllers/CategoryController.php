@@ -3,36 +3,31 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Page;
-use App\Setting;
-use DB;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Baum\MoveNotPossibleException;
+use Alert;
+use App\Category;
 use Auth;
-
-class PageController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    protected $pages;
-    protected $settings;
 
-    public function __construct(page $pages, setting $settings)
+     protected $categories; 
+
+    public function __construct(category $categories)
     {
-        // $this->middleware(['auth:web']);
-        $this->middleware(['web','auth:admin']);
-
-        $this->pages = $pages;
-        $this->settings = $settings;
+        $this->middleware('auth:admin');
+        $this->categories = $categories;
     }
 
     public function index()
     {
-        return \Control::index('page');
+        return \Control::index('category');
     }
 
     /**
@@ -42,11 +37,9 @@ class PageController extends Controller
      */
     public function create()
     {
-        $page = Page::all();
-        $templates = $this->getPageTemplate();
-        $orderPages = $this->pages->all();
-        return view('admin.pages.create',compact('page','orderPages', 'templates'));
-        //return \Control::create('page');
+        $categories = Category::all();
+        $orderCategories = $this->categories->all();
+        return \Control::create('category')->with(compact('categories','orderCategories'));
     }
 
     /**
@@ -55,31 +48,26 @@ class PageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-
-
     public function store(Request $request)
     {
-
-        $name = 'page';
-        $redirect = 'admin/pages';
+        $name = 'categories';
+        $redirect = 'admin/categories';
         $calback = null;
-
 
         $this->validate($request,[
             'translate' => [
-                'title' => ['required', 'min:3'],
-                'content' => 'required',
+                'title' => 'required',
             ],
-            'uri' => ['required'],
             'status' => 'required',
+            'uri' => 'required',
         ]);
 
-        
+        //Request Photo Upload
         if(request()->hasFile('photo')) {
            $data['photo'] = Up()->upload([
                 // 'new_name'      =>  '',
                 'file'          =>  'photo',
-                'path'          =>  'public/pages',
+                'path'          =>  'public/categories',
                 'upload_type'   =>  'single',
                 'delete_file'   =>  '',
            ]); 
@@ -89,17 +77,14 @@ class PageController extends Controller
 
         // get data from form
         $data = [
-            'translate'     => ['title','content'],
+            'translate'     => ['title'],
             'uri'           => $request['uri'],
-            'name'          => $request['name'],
-            'template'      => $request['template'],
             'status'        => $request['status'],
             'photo'         => $data['photo'],
             'created_by'    => Auth::user('admin')->name,
         ];
 
-
-         $model = '\App\\'.ucfirst(str_singular(camel_case($name)));
+        $model = '\App\\'.ucfirst(str_singular(camel_case($name)));
          if (isset($data['translate'])) 
          {
             foreach ($data['translate'] as $k => $field) 
@@ -118,9 +103,10 @@ class PageController extends Controller
             }
          }
 
-          $create = new $model;
-          $currentLang = \App\Lang::where('code',app()->getLocale())->first();
-          if (isset($data['translate'])) 
+
+        $create = new $model;
+        $currentLang = \App\Lang::where('code',app()->getLocale())->first();
+        if (isset($data['translate'])) 
             {
               foreach ($data['translate'] as $k => $trans) 
               {
@@ -136,30 +122,15 @@ class PageController extends Controller
            foreach (array_except($data, ['translate','lang','files']) as $key => $value) 
            {
               $create->{$key} = $value;
-          }
-        
-        $page = $this->pages->create($data);
+           }
 
-        if($request->order || $request->orderPages){
-          $this->updatePageOrder($page, $request);
+        $category = $this->categories->create($data);
+
+        if($request->order || $request->orderCategories){
+          $this->updateCategoryOrder($category, $request);
         }  
 
-        //$create; 
-        if (isset($data['lang'])) 
-          {
-             foreach ($data['lang'] as $key => $value) 
-             {
-              $colum = explode('-', $key)[0];
-              $lang = explode('-', $key)[1];
-              updateLang($lang,$name,$page->id,$colum,$value); 
-             }
-          }
-
-        $id = $model::all()->last()->id;
-        
-        // alert()->success(trans('lang.added'), trans('lang.page'));
-        session()->flash('success',trans('lang.added',['var'=>trans('lang.'.$name)]));
-        
+        session()->flash('success',trans('lang.added',['var'=>trans('lang.category')]));
         if (is_null($redirect)) 
         {
             return back();
@@ -167,9 +138,7 @@ class PageController extends Controller
         {
             return redirect($redirect);
         }
-        
     }
-
 
     /**
      * Display the specified resource.
@@ -177,14 +146,9 @@ class PageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id){
-        return \Control::show('page',$id);
-    }
-
-    public function showpage(Page $page, array $parmaeters){
-        //$this->prepaerTemplate($page, $parmaeters);
-        //return view('page', compact('page'));
-        return \Control::show('page',$id);
+    public function show($id)
+    {
+        return \Control::show('category',$id);
     }
 
     /**
@@ -193,15 +157,11 @@ class PageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
-
-
-
-    public function edit($id){
-        $page = $this->pages->findOrFail($id);
-        $templates = $this->getPageTemplate();
-        $orderPages = $this->pages->all();
-        return view('admin.pages.edit',compact('page','orderPages', 'templates'));
+    public function edit($id)
+    {
+        $categories = $this->categories->findOrFail($id);
+        $orderCategories = $this->categories->all();
+        return \Control::edit('category',$id)->with(compact('categories','orderCategories'));
     }
 
     /**
@@ -211,54 +171,39 @@ class PageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
-
-
-
-
-    public function update(Request $request, $id){
-        $name = 'page';
-        $redirect = 'admin/pages';
-
-        $page = $this->pages->findOrFail($id);
-
-        if($request->order || $request->orderPages){
-          if ($response = $this->updatePageOrder($page, $request)) {
-              return $response;
-          }
-        }
+    public function update(Request $request, $id)
+    {
+        $name = 'category';
+        $redirect = 'admin/categories';
 
         $this->validate($request,[
             'translate' => [
-                'title' => ['required', 'min:3'],
+                'title' => 'required',
             ],
-            'uri' => ['required'],
             'status' => 'required',
+            'uri' => 'required',
         ]);
 
+        //Request Photo Upload
         if(request()->hasFile('photo')) {
            $data['photo'] = Up()->upload([
                 // 'new_name'      =>  '',
                 'file'          =>  'photo',
-                'path'          =>  'public/pages',
+                'path'          =>  'public/categories',
                 'upload_type'   =>  'single',
-                'delete_file'   =>  Page::find($id)->photo,
+                'delete_file'   =>  Category::find($id)->photo,
            ]); 
         }else{
-            $data['photo'] = Page::find($id)->photo;
+          $data['photo'] = Category::find($id)->photo;
         }
 
-        // get data from form
+         // get data from form
         $data = [
-            'translate'     => ['title','content'],
-            'uri'           => $request['uri'],
-            'name'          => $request['name'],
-            'template'      => $request['template'],
+            'translate'     => ['title'],
             'status'        => $request['status'],
             'photo'         => $data['photo'],
             'updated_by'    => Auth::user('admin')->name,
         ];
-
 
         if (isset($data['translate'])){
           foreach ($data['translate'] as $k => $field) 
@@ -297,8 +242,16 @@ class PageController extends Controller
           $create->{$key} = $value;
         }
 
-        $create->save();
+        $category = $this->categories->findOrFail($id);
 
+        if($request->order || $request->orderCategories){
+          if ($response = $this->updateCategoryOrder($category, $request)) {
+              return $response;
+          }
+        }
+
+
+        $create->save();
 
         if (isset($data['lang'])){
          foreach ($data['lang'] as $key => $value){
@@ -308,9 +261,7 @@ class PageController extends Controller
          }
         }
 
-        // alert()->success(trans('lang.updated'), trans('lang.page'));
         session()->flash('success',trans('lang.updated',['var'=>trans('lang.'.$name)]));
-        
 
         if (is_null($redirect)) 
         {
@@ -319,6 +270,7 @@ class PageController extends Controller
         {
             return redirect($redirect);
         }
+
     }
 
     /**
@@ -327,54 +279,48 @@ class PageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id = null){
-        $name = 'page';
-        $page = Page::findOrFail($id);
+    public function destroy(Request $request, $id = null)
+    {   
+        $name = 'category';
+        $category = Category::findOrFail($id);
 
-        foreach ($page->children as $child) {
+        foreach ($category->children as $child) {
             $child->makeRoot();
         }
 
-        \Storage::delete($page->photo);
+        \Storage::delete($category->photo);
 
-        $page->delete();
+        $category->delete();
 
         session()->flash('success',trans('lang.delete',['var'=>trans('lang.'.$name)]));
 
         return back();
     }
 
-
-    protected function updatePageOrder(Page $page, Request $request){
-        if ($request->has('order', 'orderPage')) {
+    protected function updateCategoryOrder(Category $category, Request $request){
+        if ($request->has('order', 'orderCategory')) {
             try {
-                $page->updateOrder($request->input('order'), $request->input('orderPage'));
+                $category->updateOrder($request->input('order'), $request->input('orderCategory'));
             } catch (MoveNotPossibleException $e) {
-                return redirect(route('admin.pages.edit', $page->id))->with('success', trans('lang.cannot_make_page_child'));
+                session()->flash('error',trans('lang.cannot_make_page_child',['var'=>trans('lang.'.$name)]));
+                return redirect(route('admin.categories.edit', $category->id));
             }
         }
     }
 
-    protected function getPageTemplate(){
-        $templates = config('cms.templates');
-        return ['' => 'None'] + array_combine(array_keys($templates), array_keys($templates));
+    public function order(Request $request)
+    {
+        return \Control::order($request->data,'category',0);
     }
 
-    public function prepaerTemplate(Page $page, array $parmaeters){
-        $templates = config('cms.templates');
-
-        if (! $page->template || ! isset($templates[$page->template])) {
-            return;
-        }
-        $template = app($templates[$page->template]);
-        $view = sprintf('templates.%s', $template->getView());
-        if (! view()->exists($view)) {
-            return;
-        }
-        $template->prepare($view = view($view), $parmaeters);
-        $page->view = $view;
+    public function multi_delete(){
+      if(is_array(request('item'))){
+        Category::destroy(request('item'));
+      }else{
+        Category::find(request('item'))->delete();
+      }
+      alert()->success(trans('lang.deleted'), trans('lang.category'));
+      return back();
     }
-
-
 
 }
