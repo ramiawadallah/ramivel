@@ -98,6 +98,7 @@ return [
 	'categories'	=> 'Categories',
 	'edit-categories' => 'Edit category',
 	'create-new-categories' => 'Create new category',
+	'category_id' => 'Category',
 
 	'number' => 'Number',
 
