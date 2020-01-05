@@ -53,6 +53,7 @@ class PostController extends Controller
             ],
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'status' => 'required',
+            'category_id' => 'required',
             'uri' => 'required',
         ]);
 
@@ -115,6 +116,7 @@ class PostController extends Controller
                 'content' => 'required',
             ],
             'status' => 'required',
+            'category_id' => 'required',
             'uri' => 'required',
         ]);
 

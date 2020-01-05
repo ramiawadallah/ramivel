@@ -16,9 +16,7 @@
         </div>
     </div>
 </div>
-@if($errors->has($name))
-  <small class="font-w600 text-danger animated fadeIn">* Data Required</small>
-@endif()
+
 
 
     

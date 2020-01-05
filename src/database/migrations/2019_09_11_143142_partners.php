@@ -15,7 +15,7 @@ class Partners extends Migration
     {
         //
         Schema::create('partners', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('title');
             $table->string('uri')->unique()->nullable();
             $table->text('photo')->nullable();
