@@ -92,6 +92,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Alert;
 use App\\'.''.$model.';
+use Auth;
+use App\Admin;
 
 class '.$controller.' extends Controller
 {
@@ -158,6 +160,7 @@ class '.$controller.' extends Controller
             \'status\' => $request->status,
             \'uri\' => $request->uri,
             \'photo\' => $data[\'photo\'],
+            \'created_by\'    => Auth::user(\'admin\')->name,
         ],aurl().\'/'.$prefixs.'\');
     }
 
@@ -219,6 +222,7 @@ class '.$controller.' extends Controller
             \'status\' => $request->status,
             \'uri\' => $request->uri,
             \'photo\' => $data[\'photo\'],
+            \'updated_by\'    => Auth::user(\'admin\')->name,
         ],aurl().\'/'.$prefixs.'\');
     }
 
