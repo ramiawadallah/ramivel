@@ -317,6 +317,29 @@
                             <li class="nav-main-item"><a class="nav-main-link" href="{{ route('admin.show') }}">
                                 <i class="nav-main-link-icon si si-user-follow"></i><span class="nav-main-link-name">{{ ucfirst(config('multiauth.prefix')) }}</span></a>
                             </li>
+
+
+                            <!-- Sliders -->
+                            <li class="nav-main-item {{ active_menu('profiles')[0] }}">
+                                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                    <i class="nav-main-link-icon si si-emoticon-smile"></i>
+                                    <span class="nav-main-link-name">{{ trans('lang.profiles' )}}</span>
+                                </a>
+                                <ul class="nav-main-submenu">
+                                    <li class="nav-main-item">
+                                        <a class="nav-main-link" href="{{ url('admin/profiles') }}">
+                                            <span class="nav-main-link-name">{{ trans('lang.profiles' )}}</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-main-item">
+                                        <a class="nav-main-link" href="{{ url('admin/profiles/create') }}">
+                                            <span class="nav-main-link-name">{{ trans('lang.create-new-profiles') }}</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+
                             <li class="nav-main-item"><a class="nav-main-link" href="{{ route('admin.roles') }}">
                                 <i class="nav-main-link-icon si si-badge"></i><span class="nav-main-link-name">{{ trans('lang.role') }}</span></a>
                             </li>
