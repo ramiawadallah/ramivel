@@ -9,12 +9,10 @@
 <div class="form-group">
     <label>{{ trans('lang.select_file') }}</label>
     <div class="input-group">
-        <span class="input-group-btn">
-            <span class="btn btn-default btn-file">
-                Uploade File <input type="file" multiple="" id="file" name="{{ $name }}" value="{{ $url }}">
-            </span>
-        </span>
-        <input type="text" name="{{ $name }}" class="form-control"  readonly value="{{ $url }}">
+        <input class="col-12" type="file" multiple="" id="file" name="{{ $name }}" value="{{ $url }}">
+        <br>
+        <br>
+        <input type="text" name="{{ $name }}" class="form-control col-12"  readonly value="{{ $url }}">
     </div>
 </div>
 

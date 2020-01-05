@@ -8,6 +8,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Alert;
 use App\Post;
+use App\Admin;
+use Auth;
 
 class PostController extends Controller
 {
@@ -76,6 +78,7 @@ class PostController extends Controller
             'uri' => $request->uri,
             'category_id' => $request->category_id,
             'photo' => $data['photo'],
+            'created_by'    => Auth::user('admin')->name,
         ],aurl().'/posts');
     }
 
@@ -139,6 +142,7 @@ class PostController extends Controller
             'uri' => $request->uri,
             'category_id' => $request->category_id,
             'photo' => $data['photo'],
+            'updated_by'    => Auth::user('admin')->name,
         ],aurl().'/posts');
     }
 

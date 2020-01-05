@@ -9,6 +9,7 @@
     Route::get('/laravel-filemanager', '\UniSharp\LaravelFilemanager\Controllers\LfmController@show');
     Route::post('/laravel-filemanager/upload', '\UniSharp\LaravelFilemanager\Controllers\UploadController@upload');
 
+
     // Password Resets
     Route::POST('/password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
     Route::GET('/password/reset', 'ForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
@@ -68,6 +69,9 @@
 
     /* Posts Route design */
     Route::resource('posts', 'PostController');
+
+    /* Profile Route design */
+    Route::resource('profiles', 'ProfileController');
 
     Route::fallback(function () {
         return abort(404);

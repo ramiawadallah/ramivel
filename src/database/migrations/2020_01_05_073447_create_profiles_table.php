@@ -22,13 +22,13 @@ class CreateProfilesTable extends Migration
             // Information
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
-            $table->string('Specialization')->nullable();
+            $table->string('specialization')->nullable();
             $table->string('phone')->nullable();
             $table->string('birth')->nullable();
             $table->string('location')->nullable();
             $table->text('bio')->nullable();
             $table->text('photo')->nullable();
-            $table->text('file')->nullable();
+            $table->text('cv')->nullable();
 
             // Social media
             $table->string('facebook')->nullable();
@@ -39,6 +39,9 @@ class CreateProfilesTable extends Migration
             $table->string('behance')->nullable();
             $table->string('pinterest')->nullable();
             $table->string('youtube')->nullable();
+
+            $table->string('created_by')->nullable();
+            $table->string('updated_by')->nullable();
 
             $table->timestamps();
         });

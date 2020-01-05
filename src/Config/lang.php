@@ -33,6 +33,7 @@ return [
 	'subtitle' => 'Subtitle',
 	'copyright' => 'Copyright',
 	'address'	=> 'Address',
+	'location'	=> 'Location',
 	'mainvideo' => 'Main video',
 	'email'	=> 'Email',
 	'phone'	=> 'Phone',
@@ -45,6 +46,9 @@ return [
 	'linkedin' => 'Linkedin',
 	'instagram' => 'Instagram',
 	'youtube' => 'Youtube',
+	'github' => 'Github',
+	'behance' => 'Behance',
+	'pinterest' => 'Pinterest',
 	'photo' => 'photo',
 
 	'pages'	=> 'Pages',
@@ -100,7 +104,9 @@ return [
 	'create-new-categories' => 'Create new category',
 	'category_id' => 'Category',
 
+
 	'number' => 'Number',
+	'name' => 'Name',
 
 	'available' => 'Available',
 	'not-available' => 'Not available',
@@ -110,5 +116,18 @@ return [
 	'delete'	=> 'You deleted the data successfully!',
 	'deleted'	=> 'You deleted the data successfully!',
 	'added'		=> 'You addedd the data successfully!',
+	
+	'profiles'	=> 'Profiles',
+	'edit-profiles' => 'Edit profile',
+	'create-new-profiles' => 'Create new profile',
+
+	'he_she_has_profile' => 'He/She has profile',
+	'first_name' => 'First name',
+	'last_name' => 'Last name',
+	'specialization' => 'Specialization',
+	'birth' => 'Birth',
+	'bio' => 'BIO',
+	'admin_id' => 'Admin',
+	'select_file' => 'Select file'
 
 ];
