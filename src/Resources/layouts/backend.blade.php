@@ -508,6 +508,17 @@
             </script>
         @endif
 
+        @if(Session::has('error'))
+            <script type="text/javascript">
+                Swal.fire({
+                    type: 'error',
+                    text: '{{ session()->get('error') }}',
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+            </script>
+        @endif
+
         @if ($errors->count() > 0) 
             <script type="text/javascript">
                 Swal.fire({
