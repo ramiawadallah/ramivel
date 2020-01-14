@@ -7,6 +7,7 @@ use Ramivel\Multiauth\Console\Commands\RoleCmd;
 use Ramivel\Multiauth\Console\Commands\RollbackMultiAuthCommand;
 use Ramivel\Multiauth\Console\Commands\SeedCmd;
 use Ramivel\Multiauth\Console\Commands\Controller;
+use Ramivel\Multiauth\Console\Commands\Api;
 use Ramivel\Multiauth\Console\Commands\View;
 use Ramivel\Multiauth\Exception\MultiAuthHandler;
 use Ramivel\Multiauth\Http\Middleware\redirectIfAuthenticatedAdmin;
@@ -199,6 +200,7 @@ class MultiauthServiceProvider extends ServiceProvider
                 RollbackMultiAuthCommand::class,
                 Controller::class,
                 View::class,
+                Api::class,
             ]);
         }
     }
