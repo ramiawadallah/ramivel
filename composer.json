@@ -21,7 +21,6 @@
   ],
   "minimum-stability": "dev",
   "require": {
-    "laravel/ui": "^2.0",
     "laravelcollective/html":"6.*",
     "laravel/helpers": "^1.1",
     "baum/baum":"v2.*",
