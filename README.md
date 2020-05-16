@@ -9,11 +9,10 @@ in as a user and an admin, without conflicts!
 
 | Laravel version    	 | Branch | Install                                       |
   ------------------ 	 | ------ | --------------------------------------------- |
-| 6.0	 				 | 1.6 	  | composer require ramivel/ramivel:1.6.0-dev    |
+| 6.0	 				         | 1.6 	  | composer require ramivel/ramivel:1.6.4.x-dev  |
 
 
 php artisan ramivel:insall  
-
 
 composer.json
 
