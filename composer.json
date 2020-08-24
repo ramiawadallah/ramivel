@@ -21,7 +21,7 @@
   ],
   "minimum-stability": "dev",
   "require": {
-    "laravel/helpers": "^1.1",
+    "laravel/helpers": "^1.1"
   },
   "require-dev": {
     "phpunit/phpunit": "^8.5",
