@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Str;
-use Bitfumes\Multiauth\Model\Admin;
+use App\Model\Admin;
 
 $factory->define(Admin::class, function (Faker\Generator $faker) {
     return [

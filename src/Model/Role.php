@@ -1,6 +1,6 @@
 <?php
 
-namespace Ramivel\Application\Model;
+namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 

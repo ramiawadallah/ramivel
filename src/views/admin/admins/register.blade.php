@@ -1,4 +1,4 @@
-@extends('multiauth::layouts.app') 
+@extends('layouts.app') 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header">Register New {{ ucfirst(config('multiauth.prefix')) }}</div>
                 <div class="card-body">
-    @include('multiauth::message')
+                    @include('message')
                     <form method="POST" action="{{ route('admin.register') }}">
                         @csrf
                         <div class="form-group row">

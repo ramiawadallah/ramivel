@@ -73,7 +73,7 @@ class MultiauthServiceProvider extends ServiceProvider
     private function routeConfiguration()
     {
         return [
-            'namespace'  => "App\Http\Controllers",
+            'namespace'  => "App\Http\Controllers\Admin",
             'middleware' => 'web',
             'prefix'     => config('multiauth.prefix', 'admin'),
         ];
@@ -143,10 +143,9 @@ class MultiauthServiceProvider extends ServiceProvider
                __DIR__ . '/database/migrations/'        => database_path('migrations'),            //  Migrations
                __DIR__ . '/Http/Controllers'            => app_path('Http/Controllers/admin/'),    //  Controllers
                __DIR__ . '/views'                       => resource_path('views/'),                //  Views & Layout
-               __DIR__ . '/factories'                   => database_path('factories'),             //  Factories
                __DIR__ . '/../config/multiauth.php'     => config_path('multiauth.php'),           //  Multiauth
                __DIR__ . '/routes/routes.php'           => base_path("routes/{$prefix}.php"),      //  Routes
-               __DIR__ . '/Model'                       => app_path(),                             //  Model
+               __DIR__ . '/Model'                       => app_path('/Model/'),                    //  Model
            ]
         ,'ramivel:publish');
 

@@ -1,4 +1,4 @@
-@extends('multiauth::layouts.app') @section('content')
+@extends('layouts.app') @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -6,7 +6,7 @@
                 <div class="card-header">Edit details of {{$admin->name}}</div>
 
                 <div class="card-body">
-                    @include('multiauth::message')
+                    @include('message')
                     <form action="{{route('admin.update',[$admin->id])}}" method="post">
                         @csrf @method('patch')
                         <div class="form-group row">

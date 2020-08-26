@@ -2,7 +2,7 @@
 
 /* @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use Bitfumes\Multiauth\Model\Role;
+use App\Model\Role;
 
 $factory->define(Role::class, function (Faker\Generator $faker) {
     return [

@@ -1,4 +1,4 @@
-@extends('multiauth::layouts.app') 
+@extends('layouts.app') 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -11,7 +11,7 @@
                     </span>
                 </div>
                 <div class="card-body">
-    @include('multiauth::message')
+                    @include('message')
                     <ul class="list-group">
                         @foreach ($admins as $admin)
                         <li class="list-group-item d-flex justify-content-between align-items-center">
