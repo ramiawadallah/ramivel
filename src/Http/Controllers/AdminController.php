@@ -32,7 +32,7 @@ class AdminController extends Controller
     {
         $admins = Admin::where('id', '!=', auth()->id())->get();
 
-        return view('admin.admins.show', compact('admins'));
+        return view('admin.admins.index', compact('admins'));
     }
 
     public function showChangePasswordForm()

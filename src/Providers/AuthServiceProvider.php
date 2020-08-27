@@ -38,5 +38,6 @@ class AuthServiceProvider extends ServiceProvider
     protected function isSuperAdmin($admin)
     {
         return in_array('super', $admin->roles->pluck('name')->toArray());
+
     }
 }

@@ -19,6 +19,7 @@ use Ramivel\Application\Console\Commands\RollbackMultiAuthCommand;
 use Ramivel\Application\Http\Middleware\redirectIfAuthenticatedAdmin;
 use Ramivel\Application\Http\Middleware\redirectIfNotWithRoleOfAdmin;
 
+
 class MultiauthServiceProvider extends ServiceProvider
 {
     public function boot()
@@ -215,6 +216,11 @@ class MultiauthServiceProvider extends ServiceProvider
                 Install::class,
             ]);
         }
+    }
+
+    protected function loadHelper()
+    {
+        
     }
 
     protected function canHaveAdminBackend()
