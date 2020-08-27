@@ -11,7 +11,7 @@ class SeedCmd extends Command
      *
      * @var string
      */
-    protected $signature = 'multiauth:seed {--r|role=}';
+    protected $signature = 'ramivel:seed {--r|role=}';
 
     /**
      * The console command description.

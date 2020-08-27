@@ -12,7 +12,7 @@ class Install extends Command
      *
      * @var string
      */
-    protected $signature = 'multiauth:install';
+    protected $signature = 'Ramivel:install';
 
     /**
      * The console command description.
@@ -44,40 +44,27 @@ class Install extends Command
 
         $this->seedSuperAdmin();
 
-        $this->publishAndCompileUI();
     }
 
     protected function publishAssets()
     {
         $this->warn('1. Publishing Configurations');
-        Artisan::call('vendor:publish --tag=multiauth:config');
-        $this->info(Artisan::output());
-
-        $this->warn('2. Publishing Migrations');
-        Artisan::call('vendor:publish --tag=multiauth:migrations');
+        Artisan::call('vendor:publish --tag=ramivel:publish');
         $this->info(Artisan::output());
     }
 
     protected function runMigration()
     {
         $this->warn('3. Running Migrations');
-        Artisan::call('migrate');
+        Artisan::call('migrate --seed');
         $this->info(Artisan::output());
     }
 
     protected function seedSuperAdmin()
     {
         $this->warn('4. Seeding New Super Admin');
-        Artisan::call('multiauth:seed --role=super');
+        Artisan::call('ramivel:seed --role=super');
         $this->info(Artisan::output());
     }
 
-    protected function publishAndCompileUI()
-    {
-        $this->warn('5. Publishing UI bootstrap copmonent');
-        Artisan::call('ui bootstrap');
-        $this->info(Artisan::output());
-        $this->warn('Running npm, please wait...');
-        $this->info(shell_exec('npm install && npm run dev'));
-    }
 }
