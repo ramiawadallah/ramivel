@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -52,7 +52,7 @@ class PermissionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Bitfumes\Multiauth\Permission  $permission
+     * @param  \Ramivel\Application\Permission  $permission
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Permission $permission)
@@ -64,7 +64,7 @@ class PermissionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Bitfumes\Multiauth\Permission  $permission
+     * @param  \Ramivel\Application\Permission  $permission
      * @return \Illuminate\Http\Response
      */
     public function destroy(Permission $permission)

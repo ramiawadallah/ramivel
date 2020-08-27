@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Model\Role;
@@ -9,7 +9,7 @@ use App\Model\Admin;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Ramivel\Application\Http\Requests\AdminRequest;
-use Bitfumes\Multiauth\Notifications\RegistrationNotification;
+use Ramivel\Application\Notifications\RegistrationNotification;
 
 class RegisterController extends Controller
 {
