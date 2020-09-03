@@ -1,50 +1,64 @@
-@extends('layouts.app')
+@extends('layouts.backend') 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header bg-info text-white">
-                    Roles
-                    @permitTo('CreateRole')
-                    <span class="float-right">
-                        <a href="{{ route('admin.role.create') }}" class="btn btn-sm btn-success">New Role</a>
+
+    <div class="content">
+        <div class="block py-2">
+            <div class="block-header">
+                <h3 class="block-title">
+                {{ __('roles list') }}                    
+                <span class="float-right">
+                        <a href="{{ route('admin.role.create') }}" class="btn btn-sm btn-dark"><i class="fa fa-plus"></i></a>
                     </span>
-                    @endpermitTo
-                </div>
+                </h3>
+            </div>
+            <div class="block-content block-content-full">
+                <div class="table-responsive">
+                    <table id="datata" class="table table-bordered table-striped table-vcenter js-dataTable-buttons table-vcenter">
+                        <thead>
+                            <tr>
+                                <th>{{ __('name')}}</th>
+                                <th class="hidden-xs">{{ __('role') }}</th>
+                                <th class="hidden-xs">{{ __('permissions') }}</th>
+                                <th class="text-center" style="width: 10%;">{{ __('action')}}</th>
+                            </tr>
+                        </thead>
 
-                <div class="card-body">
-                    @include('message')
-                    <ol class="list-group">
-                        @foreach ($roles as $role)
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            {{ $role->name }}
-                            <span class="badge badge-primary badge-pill">{{ $role->admins->count() }} {{
-                                ucfirst(config('multiauth.prefix')) }}</span>
-                            <span class="badge badge-warning badge-pill">{{ $role->permissions->count() }}
-                                Permissions</span>
-                            <div class="float-right">
-                                @permitTo('DeleteRole,UpdateRole')
-                                <a href="" class="btn btn-sm btn-secondary mr-3"
-                                    onclick="event.preventDefault(); document.getElementById('delete-form-{{ $role->id }}').submit();">Delete</a>
-                                <form id="delete-form-{{ $role->id }}"
-                                    action="{{ route('admin.role.delete',$role->id) }}" method="POST"
-                                    style="display: none;">
-                                    @csrf @method('delete')
-                                </form>
-                                @endpermitTo
+                        <tbody>
+                            @foreach ($roles as $role)
+                                <tr>
+                                    <td class="font-w600">{{ $role->name }}</td>
+                                    <td class="hidden-xs">
+                                        <span class="badge badge-primary badge-pill">
+                                            {{ $role->admins->count() }} {{ ucfirst(config('multiauth.prefix')) }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-primary badge-pill">
+                                            {{ $role->permissions->count() }} {{ __('permissions') }}
+                                        </span>
+                                    </td>
+                                     <td class="text-center">
+                                        <div class="btn-group">
+                                            <a class="btn btn-sm btn-light js-tooltip-enabled" href="{{route('admin.role.edit',[$role->id])}}">
+                                                <i class="fa fa-fw fa-pencil-alt text-info"></i>
+                                            </a>
 
-                                @permitTo('UpdateRole')
-                                <a href="{{ route('admin.role.edit',$role->id) }}"
-                                    class="btn btn-sm btn-primary mr-3">Edit</a>
-                                @endpermitTo
-                            </div>
-                        </li>
-                        @endforeach
-                    </ol>
+                                            <a class="btn btn-sm btn-light js-tooltip-enabled" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $role->id }}').submit();">
+                                                <i class="fa fa-fw fa-times text-danger"></i>
+                                            </a>
+
+                                            <form id="delete-form-{{ $role->id }}" action="{{ route('admin.role.delete',$role->id) }}" method="POST" style="display: none;">
+                                                @csrf @method('delete')
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach 
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
 @endsection

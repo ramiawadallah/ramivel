@@ -5,6 +5,8 @@ namespace Ramivel\Application\Providers;
 use App\Model\Admin;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\File;
+
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -24,6 +26,11 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // LOADF HELPER FILE
+        if (File::exists(str_replace('/Providers','',__DIR__ . '/Helper/Helpers.php'))) {
+           require_once str_replace('/Providers','',__DIR__ . '/Helper/Helpers.php');
+        }
+
         $this->registerPolicies();
         Gate::before(function ($admin, $ability) {
             if ($admin instanceof Admin) {
@@ -33,6 +40,7 @@ class AuthServiceProvider extends ServiceProvider
                 return $admin->hasPermission($ability);
             }
         });
+        
     }
 
     protected function isSuperAdmin($admin)

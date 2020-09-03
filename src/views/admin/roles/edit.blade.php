@@ -1,44 +1,57 @@
-@extends('layouts.app')
+@extends('layouts.backend') 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Edit this Role</div>
 
-                <div class="card-body">
-                    <form action="{{ route('admin.role.update', $role->id) }}" method="post">
-                        @csrf @method('patch')
-                        <div class="form-group">
-                            <label for="role">Role Name</label>
-                            <input type="text" value="{{ $role->name }}" name="name" class="form-control" id="role">
-                        </div>
-                        <div class="form-group">
-                            <label for="role">Assign Permissions</label>
-                            <div class="container">
-                                @foreach($permissions as $key => $value)
-                                <label for="role">{{$key}}</label>
-                                <div class="d-flex justify-content-between">
-                                    @foreach($value as $permission)
-                                    <div class="form-group">
-                                        <label for="{{$permission->id}}">{{$permission->name}}</label>
-                                        <input type="checkbox" name="permissions[]" class="form-control"
-                                            @if(in_array($permission->id,$role->permissions->pluck('id')->toArray()))
-                                        checked
-                                        @endif
-                                        value="{{$permission->id}}" id="{{$permission->id}}">
-                                    </div>
-                                    @endforeach
+<div class="content">
+    <div class="col-md-12">
+        <div class="block">
+             <div class="block-content">
+                <div class="block-header">
+                    <h3 class="block-title">
+                        {{ __('Edit role') }}
+                    </h3>
+                </div>
+                <div class="block-content block-content-full">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form action="{{ route('admin.role.update', $role->id) }}" method="post">
+                                @csrf @method('patch')
+                                <div class="form-group">
+                                    <label for="role">{{ __('Role') }}</label>
+                                    <input type="text" value="{{ $role->name }}" name="name" class="form-control" id="role" required>
                                 </div>
-                                @endforeach
-                            </div>
+
+                                 <table class="table table-borderless">
+                                    <tbody>
+                                        @foreach($permissions as $key => $value)
+                                            <tr>
+                                                @foreach($value as $permission)
+                                                    <td>
+                                                        <div class="custom-control custom-switch">
+                                                            <input type="checkbox" class="custom-control-input checkbox"  name="permissions[]" id="{{$permission->id}}" 
+                                                            value="{{$permission->id}}" id="{{$permission->id}}"  @if(in_array($permission->id,$role->permissions->pluck('id')->toArray()))
+                                                                checked
+                                                            @endif>
+                                                            <label class="custom-control-label font-w400" for="{{$permission->id}}">{{$permission->name}}</label>
+                                                        </div>
+                                                    </td>
+                                                @endforeach
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+
+                                <button type="submit" class="btn btn-dark btn-sm">{{ __('Change') }}</button>
+                                <a href="{{ route('admin.roles') }}" class="btn btn-light btn-sm">{{ __('Back') }}</a>
+                            </form>
+
+
                         </div>
-                        <button type="submit" class="btn btn-primary btn-sm">Change</button>
-                        <a href="{{ route('admin.roles') }}" class="btn btn-danger btn-sm float-right">Back</a>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
 @endsection
