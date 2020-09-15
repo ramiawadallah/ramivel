@@ -52,7 +52,7 @@ class PermissionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Ramivel\Application\Permission  $permission
+     * @param  \Bitfumes\Multiauth\Permission  $permission
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Permission $permission)
@@ -64,7 +64,7 @@ class PermissionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Ramivel\Application\Permission  $permission
+     * @param  \Bitfumes\Multiauth\Permission  $permission
      * @return \Illuminate\Http\Response
      */
     public function destroy(Permission $permission)
