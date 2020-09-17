@@ -12,7 +12,7 @@ class RoleCmd extends Command
      *
      * @var string
      */
-    protected $signature = 'multiauth:role {name}';
+    protected $signature = 'ramivel:role {name}';
 
     /**
      * The console command description.

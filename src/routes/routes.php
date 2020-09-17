@@ -1,4 +1,9 @@
 <?php
+    
+    //Settings
+    Route::get('settings','SettingController@index')->name('admin.settings');
+    Route::get('settings/edit','SettingController@edit')->name('admin.settings.edit');
+    Route::patch('settings/{setting}','SettingController@update')->name('admin.settings.update');
 
     Route::GET('/home', 'AdminController@index')->name('admin.home');
     // Login and Logout
@@ -37,10 +42,20 @@
     Route::get('/role/{role}/edit', 'RoleController@edit')->name('admin.role.edit');
     Route::patch('/role/{role}', 'RoleController@update')->name('admin.role.update');
 
-    // active status
+    // Active status
     Route::post('activation/{admin}', 'ActivationController@activate')->name('admin.activation');
     Route::delete('activation/{admin}', 'ActivationController@deactivate');
     Route::resource('permission', 'PermissionController');
+
+    //Make new guard
+    Route::get('guards','CommendController@indexGuard')->name('admin.guards');
+    Route::get('guards/create','CommendController@createGuard')->name('admin.guards.create');
+    Route::post('/guards/store', 'CommendController@storeGuard')->name('admin.guards.store');
+    Route::delete('/guards/{guard}', 'CommendController@destroyGuard')->name('admin.guards.delete');
+
+    //Migrate commend
+    Route::get('migrate','CommendController@migrate')->name('admin.migrate');
+
 
     Route::fallback(function () {
         return abort(404);

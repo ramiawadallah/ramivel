@@ -19,7 +19,6 @@ use Ramivel\Application\Console\Commands\RollbackMultiAuthCommand;
 use Ramivel\Application\Http\Middleware\redirectIfAuthenticatedAdmin;
 use Ramivel\Application\Http\Middleware\redirectIfNotWithRoleOfAdmin;
 
-
 class MultiauthServiceProvider extends ServiceProvider
 {
     public function boot()
@@ -38,6 +37,7 @@ class MultiauthServiceProvider extends ServiceProvider
 
     public function register()
     {
+
         if ($this->canHaveAdminBackend()) {
             $this->loadFactories();
             $this->loadMiddleware();
@@ -65,6 +65,7 @@ class MultiauthServiceProvider extends ServiceProvider
             $this->loadRoutesFrom(__DIR__ . '/routes/routes.php');
         });
     }
+
 
     /**
      * Get the Blogg route group configuration array.
@@ -200,30 +201,29 @@ class MultiauthServiceProvider extends ServiceProvider
 
     protected function loadAdminCommands()
     {
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                SeedCmd::class,
-                RoleCmd::class,
-            ]);
-        }
+
+    // if ($this->app->runningInConsole()) {
+        $this->commands([
+            SeedCmd::class,
+            RoleCmd::class,
+        ]);
+    // }
     }
 
     protected function loadCommands()
     {
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                MakeMultiAuthCommand::class,
-                RollbackMultiAuthCommand::class,
-                PermissionCommand::class,
-                Install::class,
-            ]);
-        }
+        $this->commands([
+            MakeMultiAuthCommand::class,
+            RollbackMultiAuthCommand::class,
+            PermissionCommand::class,
+            Install::class,
+        ]);
     }
 
-    protected function loadHelper()
-    {
+    // protected function loadHelper()
+    // {
         
-    }
+    // }
 
     protected function canHaveAdminBackend()
     {

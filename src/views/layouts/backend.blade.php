@@ -186,11 +186,6 @@
                             </a>
                         </li>
                         <li class="nav-main-heading">{{ __('App links') }}</li>
-
-
-                        <li class="nav-main-item"><a class="nav-main-link" href="{{ url('admin/settings') }}">
-                            <i class="nav-main-link-icon si si-settings"></i><span class="nav-main-link-name">{{ __('Settings') }}</span></a>
-                        </li>
                         
                         @admin('super')
                             <li class="nav-main-item"><a class="nav-main-link" href="{{ route('admin.show') }}">
@@ -198,6 +193,14 @@
                             </li>
                             <li class="nav-main-item"><a class="nav-main-link" href="{{ route('admin.roles') }}">
                                 <i class="nav-main-link-icon si si-badge"></i><span class="nav-main-link-name">{{ __('Role') }}</span></a>
+                            </li>
+
+                            <li class="nav-main-item"><a class="nav-main-link" href="{{ url('admin/settings') }}">
+                                <i class="nav-main-link-icon si si-settings"></i><span class="nav-main-link-name">{{ __('Settings') }}</span></a>
+                            </li>
+
+                            <li class="nav-main-item"><a class="nav-main-link" href="{{ url('admin/guards') }}">
+                                <i class="nav-main-link-icon si si-anchor"></i><span class="nav-main-link-name">{{ __('Guards') }}</span></a>
                             </li>
                         @endadmin
                     </ul>

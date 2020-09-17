@@ -28,7 +28,7 @@
                                                     <td>
                                                         <div class="custom-control custom-switch">
                                                             <input type="checkbox" class="custom-control-input checkbox"  name="permissions[]" id="{{$permission->id}}" 
-                                                            value="{{$permission->id}}" id="{{$permission->id}}"  @if(in_array($permission->id,$role->permissions->pluck('id')->toArray()))
+                                                            value="{{$permission->id}}" {{ (is_array(old('permissions')) && in_array($permission->id, old('permissions'))) ? ' checked' : '' }} id="{{$permission->id}}"  @if(in_array($permission->id,$role->permissions->pluck('id')->toArray()))
                                                                 checked
                                                             @endif>
                                                             <label class="custom-control-label font-w400" for="{{$permission->id}}">{{$permission->name}}</label>

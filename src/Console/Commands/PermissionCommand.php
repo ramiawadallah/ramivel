@@ -11,7 +11,7 @@ class PermissionCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'multiauth:permissions {model} {--name=}';
+    protected $signature = 'ramivel:permissions {model} {--name=}';
     /**
      * The console command description.
      *
