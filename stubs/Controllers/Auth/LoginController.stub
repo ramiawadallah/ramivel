@@ -3,7 +3,7 @@
 namespace {{namespace}}\Http\Controllers\{{singularClass}}\Auth;
 
 use {{namespace}}\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Ramivel\Application\Traits\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 

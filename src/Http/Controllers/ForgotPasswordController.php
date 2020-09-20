@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Password;
-use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Ramivel\Application\Traits\SendsPasswordResetEmails;
 
 class ForgotPasswordController extends Controller
 {
