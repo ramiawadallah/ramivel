@@ -6,7 +6,7 @@ use {{namespace}}\{{singularClass}};
 use {{namespace}}\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use Ramivel\Application\Traits\RegistersUsers;
 
 class RegisterController extends Controller
 {

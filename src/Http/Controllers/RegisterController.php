@@ -7,7 +7,7 @@ use App\Model\Role;
 use Illuminate\Routing\Controller;
 use App\Model\Admin;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use Ramivel\Application\Traits\RegistersUsers;
 use Ramivel\Application\Http\Requests\AdminRequest;
 use Ramivel\Application\Notifications\RegistrationNotification;
 

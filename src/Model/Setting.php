@@ -20,7 +20,7 @@ class Setting extends Model
 			'map',
 			'mainvideo',
             // About your website
-			'desc',
+			'content',
 			'logo',
 			'icon',
 			'maintenance',
