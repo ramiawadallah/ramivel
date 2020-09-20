@@ -26,9 +26,14 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // LOADF HELPER FILE
+        // LOADF HELPER FILE FOR MAC AND LINUX
         if (File::exists(str_replace('/Providers','',__DIR__ . '/Helper/Helpers.php'))) {
            require_once str_replace('/Providers','',__DIR__ . '/Helper/Helpers.php');
+        }
+
+        // LOADF HELPER FILE FOR WINDOWS
+        if (File::exists(str_replace('\Providers','',__DIR__ . '\Helper\Helpers.php'))) {
+           require_once str_replace('\Providers','',__DIR__ . '\Helper\Helpers.php');
         }
 
         $this->registerPolicies();
