@@ -102,31 +102,33 @@
 
                 <div class="col-md-4 col-sm-12">
                     <div class="block py-3">
-                        <div class="block-header">{{ __('Application options and image') }}   </div>
+                        <div class="block-header mb-3">{{ __('Application options and image') }}   </div>
 
-                        <div class="avatar-upload">
-                            <div class="avatar-edit">
-                                <input type='file' id="imageUpload" value="{{ $setting->logo }}" name="logo" accept=".png, .jpg, .jpeg" />
-                                <label for="imageUpload"><i style="font-size: 20px; position: absolute; left: 7px; top: 8px;" class="far fa-edit"></i></label>
-                            </div>
-                            <div class="avatar-preview">
-                                <div id="imagePreview" style="background-image: url();">
-                                </div>
+                        <div class="box m-auto">
+                            <div class="js--image-preview"></div>
+                            <div class="upload-options">
+                              <label>
+                                <i class="far fa-edit icon-fa"></i>
+                                <input type="file" name="logo" class="image-upload" accept="image/*" />
+                              </label>
                             </div>
                         </div>
 
-                        <div class="avatar-upload-icon">
-                            <div class="avatar-edit-icon">
-                                <input type='file' id="imageUploadIcon" value="{{ $setting->icon }}" name="icon" accept=".png, .jpg, .jpeg" />
-                                <label for="imageUploadIcon"><i style="font-size: 20px; position: absolute; left: 7px; top: 8px;" class="far fa-edit"></i></label>
-                            </div>
-                            <div class="avatar-preview-icon">
-                                <div id="imagePreviewIcon" style="background-image: url();">
-                                </div>
+                        <hr/>
+
+                        <div class="box m-auto">
+                            <div class="js--image-preview"></div>
+                            <div class="upload-options">
+                              <label>
+                                <i class="far fa-edit icon-fa"></i>
+                                <input type="file" name="icon" class="image-upload" accept="image/*" />
+                              </label>
                             </div>
                         </div>
 
-                        <div class="form-group col-md-12 ml-2">
+                        <hr/>
+
+                        <div class="form-group col-md-12 ml-2 mt-3">
                             <label class="d-block">{{ __('Maintenance') }}</label>
                             <div class="custom-control custom-radio custom-control-inline">
                                 <input type="radio" class="custom-control-input" id="example-radio-custom-inline2" value="open" name="maintenance" @if($setting->maintenance == 'open') checked @endif>

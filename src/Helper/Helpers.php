@@ -31,3 +31,17 @@ if (! function_exists('count_row')){
 		}
 	}
 }
+
+// Function TO Upload any media files
+if (! function_exists('up')) {
+	function up(){
+		return new \App\Http\Controllers\Upload;
+	}
+}
+
+//Direct Setting Data
+if (! function_exists('setting')) {
+	function setting(){
+		return \App\Model\Setting::OrderBy('id','desc')->first();
+	}
+}
