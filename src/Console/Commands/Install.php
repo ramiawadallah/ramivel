@@ -50,19 +50,21 @@ class Install extends Command
     {
         $this->warn('1. Publishing Configurations');
         Artisan::call('vendor:publish --tag=ramivel:publish');
+        Artisan::call('vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag="migrations');
+        Artisan::call('vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag="config');
         $this->info(Artisan::output());
     }
 
     protected function runMigration()
     {
-        $this->warn('3. Running Migrations');
+        $this->warn('2. Running Migrations');
         Artisan::call('migrate --seed');
         $this->info(Artisan::output());
     }
 
     protected function seedSuperAdmin()
     {
-        $this->warn('4. Seeding New Super Admin');
+        $this->warn('3. Seeding New Super Admin');
         Artisan::call('ramivel:seed --role=super');
         $this->info(Artisan::output());
     }
