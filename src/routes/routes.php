@@ -1,9 +1,12 @@
 <?php
     
+
     //Settings
     Route::get('settings','SettingController@index')->name('admin.settings');
     Route::get('settings/edit','SettingController@edit')->name('admin.settings.edit');
     Route::patch('settings/{setting}','SettingController@update')->name('admin.settings.update');
+    Route::post('settings/updatetheme/{setting}','SettingController@updateTheme')->name('admin.settings.updatetheme');
+
 
     Route::GET('/home', 'AdminController@index')->name('admin.home');
     // Login and Logout
@@ -56,6 +59,12 @@
     //Migrate commend
     Route::get('migrate','CommendController@migrate')->name('admin.migrate');
 
+    //Media
+    Route::get('media','MediaController@index')->name('admin.media');
+    Route::post('media/store','MediaController@store')->name('admin.media.store');
+    Route::post('media/vatar/{id}','MediaController@updateAvatar')->name('admin.media.updateavatar');
+    Route::post('media/vatar/setting','MediaController@updateAvatarSetting')->name('admin.media.updateavatarsetting');
+    Route::delete('media/destroyavatar/{id}','MediaController@destroy')->name('admin.media.destroyavatar');
 
     Route::fallback(function () {
         return abort(404);

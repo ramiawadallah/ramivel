@@ -13399,7 +13399,7 @@ a.item.item-link-pop:active {
 
 @media (max-width: 767.98px) {
   .options-container .options-overlay {
-    display: none;
+    /*display: none;*/
   }
   .options-container .options-overlay:hover .options-overlay {
     display: block;

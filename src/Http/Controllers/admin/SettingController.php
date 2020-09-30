@@ -137,4 +137,11 @@ class SettingController extends Controller
         return redirect(route('admin.settings.edit'))->with('message', 'You have updated Setting successfully');
     }
 
+    public function updateTheme(Request $request, $id){
+        $setting = Setting::find($id);
+        $setting->theme = $request->theme;
+        $setting->save();
+        return redirect()->back()->with('message', 'You have updated theme color successfully to be '. $setting->theme);
+    }
+
 }

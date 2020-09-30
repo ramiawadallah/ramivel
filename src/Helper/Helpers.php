@@ -45,3 +45,5 @@ if (! function_exists('setting')) {
 		return \App\Model\Setting::OrderBy('id','desc')->first();
 	}
 }
+
+

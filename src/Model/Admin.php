@@ -6,10 +6,15 @@ use Illuminate\Notifications\Notifiable;
 use Ramivel\Application\Traits\hasPermissions;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Ramivel\Application\Notifications\AdminResetPasswordNotification;
+use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
-class Admin extends Authenticatable
+class Admin extends Authenticatable implements HasMedia
 {
-    use Notifiable, hasPermissions;
+
+    use Notifiable, hasPermissions, HasMediaTrait;
 
     protected $casts = ['active' => 'boolean'];
 
@@ -45,4 +50,32 @@ class Admin extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function registerMediaCollections()
+    {
+        $this
+        ->addMediaCollection('media')
+        ->registerMediaConversions(function (Media $media) {
+            $this
+                ->addMediaConversion('thumb')
+                ->width(250)
+                ->height(250);
+            $this
+                ->addMediaConversion('avatar')
+                ->width(100)
+                ->height(100);
+        });
+    }
+
+    public function avatar(){
+        return $this->hasOne(Media::class,'id','avatar_id');
+    }
+
+    public function getAvatarUrlAttribute(){
+        if(auth()->user()->avatar_id != null){
+            return $this->avatar->getUrl('avatar');
+        }else{
+            return null;
+        }
+    }
 }

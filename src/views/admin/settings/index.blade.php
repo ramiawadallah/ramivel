@@ -1,6 +1,6 @@
 @extends('layouts.backend') 
 @section('content')
-    <form action="{{ route('admin.settings.update', $setting->id) }}" method="post">
+    <form action="{{ route('admin.settings.update', $setting->id) }}" method="post" enctype="multipart/form-data">
         @csrf @method('patch')
         <div class="content">
             <div class="row">
@@ -105,7 +105,8 @@
                         <div class="block-header mb-3">{{ __('Application options and image') }}   </div>
 
                         <div class="box m-auto">
-                            <div class="js--image-preview"></div>
+                            <div class="js--image-preview" style="background-image: url({{ Storage::url($setting->logo) }});">
+                            </div>
                             <div class="upload-options">
                               <label>
                                 <i class="far fa-edit icon-fa"></i>
@@ -117,7 +118,9 @@
                         <hr/>
 
                         <div class="box m-auto">
-                            <div class="js--image-preview"></div>
+                            <div class="js--image-preview" style="background-image: url({{ Storage::url($setting->icon) }});">
+                                
+                            </div>
                             <div class="upload-options">
                               <label>
                                 <i class="far fa-edit icon-fa"></i>

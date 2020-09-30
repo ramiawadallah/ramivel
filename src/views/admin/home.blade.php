@@ -1,25 +1,26 @@
 @extends('layouts.backend')
 @section('content')
-<main>
-    <div class="bg-body-light">
-        <div class="col-md-12 content content-full">
-            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center py-2 text-center text-sm-left">
-                <div class="flex-sm-fill">
-                    <h1 class="h3 font-w700 mb-2">
-                        {{ __('Main dashboard') }}
-                    </h1>
-                    <h2 class="h6 font-w500 text-muted mb-0">
-                        Welcome <a class="font-w600" href="javascript:void(0)">{{ Auth::user()->name }}</a>, everything looks great.
-                        <br/>
-                        You are logged in to {{ config('multiauth.prefix') }} side!
-                    </h2>
+    <main>
+        <div class="bg-body-light">
+            <div class="col-md-12 content content-full">
+                <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center py-2 text-center text-sm-left">
+                    <div class="flex-sm-fill">
+                        <h1 class="h3 font-w700 mb-2">
+                            {{ __('Main dashboard') }}
+                        </h1>
+                        <h2 class="h6 font-w500 text-muted mb-0">
+                            Welcome <a class="font-w600" href="javascript:void(0)">{{ Auth::user()->name }}</a>, everything looks great.
+                            <br/>
+                            You are logged in to {{ config('multiauth.prefix') }} side!
+                        </h2>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</main>
+    </main>
 
     @include('message')
+    
     <div class="col-md-12 mt-3">
         <div class="row row-deck">
             <div class="col-sm-6 col-xl-3">

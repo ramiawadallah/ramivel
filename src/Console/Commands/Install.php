@@ -50,8 +50,6 @@ class Install extends Command
     {
         $this->warn('1. Publishing Configurations');
         Artisan::call('vendor:publish --tag=ramivel:publish');
-        Artisan::call('vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag="migrations');
-        Artisan::call('vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag="config');
         $this->info(Artisan::output());
     }
 

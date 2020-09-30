@@ -29,6 +29,7 @@
 
         <!-- Stylesheets -->
         <!-- Page JS Plugins CSS -->
+        <link rel="stylesheet" href="{{ theme('backend/js/plugins/magnific-popup/magnific-popup.css') }}">
         <link rel="stylesheet" href="{{ theme('backend/js/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}">
         <link rel="stylesheet" href="{{ theme('backend/js/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}">
         <link rel="stylesheet" href="{{ theme('backend/js/plugins/select2/css/select2.min.css') }}">
@@ -47,7 +48,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@2.1.0/dark.css">
         
         <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
-        <link rel="stylesheet" id="css-theme" href="{{ theme('backend/css/themes/modern.min.css') }}">
+        <link rel="stylesheet" id="css-theme" href="{{ theme('backend/css/themes/' . setting()->theme . '.min.css') }}">
         <!-- END Stylesheets -->
 
         <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
@@ -111,56 +112,28 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right font-size-sm smini-hide border-0" aria-labelledby="sidebar-themes-dropdown">
                                 <!-- Color Themes -->
+
                                 <!-- Layout API, functionality initialized in Template._uiHandleTheme() -->
-                                <a class="dropdown-item d-flex align-items-center justify-content-between" data-toggle="theme" data-theme="default" href="#">
-                                    <span>Default</span>
-                                    <i class="fa fa-circle text-default"></i>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-between" data-toggle="theme" data-theme="{{ theme('backend/css/themes/amethyst.min.css') }}" href="#">
-                                    <span>Amethyst</span>
-                                    <i class="fa fa-circle text-amethyst"></i>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-between" data-toggle="theme" data-theme="{{ theme('backend/css/themes/city.min.css') }}" href="#">
-                                    <span>City</span>
-                                    <i class="fa fa-circle text-city"></i>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-between" data-toggle="theme" data-theme="{{ theme('backend/css/themes/flat.min.css') }}" href="#">
-                                    <span>Flat</span>
-                                    <i class="fa fa-circle text-flat"></i>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-between" data-toggle="theme" data-theme="{{ theme('backend/css/themes/modern.min.css') }}" href="#">
-                                    <span>Modern</span>
-                                    <i class="fa fa-circle text-modern"></i>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-between" data-toggle="theme" data-theme="{{ theme('backend/css/themes/smooth.min.css') }}" href="#">
-                                    <span>Smooth</span>
-                                    <i class="fa fa-circle text-smooth"></i>
-                                </a>
-                                <!-- END Color Themes -->
+                                @foreach($thems = app('config')->get('cms.design') as $key => $value)
 
-                                <div class="dropdown-divider"></div>
+                                    <a  class="dropdown-item d-flex align-items-center justify-content-between" 
+                                            data-toggle="theme" 
+                                            data-theme="{{ ucfirst($value) }}" 
+                                            href="#" 
+                                            onclick="event.preventDefault();
+                                            document.getElementById('updateSetting{{ $value }}').submit();">
+                                        <span>{{ ucfirst($value) }}</span>
+                                        <i class="fa fa-circle text-{{ $value }}"></i>
+                                    </a>
 
-                                <!-- Sidebar Styles -->
-                                <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-                                <a class="dropdown-item" data-toggle="layout" data-action="sidebar_style_light" href="#">
-                                    <span>Sidebar Light</span>
-                                </a>
-                                <a class="dropdown-item" data-toggle="layout" data-action="sidebar_style_dark" href="#">
-                                    <span>Sidebar Dark</span>
-                                </a>
-                                <!-- Sidebar Styles -->
+                                    <form action="{{ route('admin.settings.updatetheme',setting()->id) }}" style="display:none;" id="updateSetting{{ $value }}" method="POST">
+                                        @csrf
+                                        <input type="submit" type="hidden">
+                                        <input type="hidden" name="theme" value="{{ $value }}">
+                                    </form>
 
-                                <div class="dropdown-divider"></div>
-
-                                <!-- Header Styles -->
-                                <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-                                <a class="dropdown-item" data-toggle="layout" data-action="header_style_light" href="#">
-                                    <span>Header Light</span>
-                                </a>
-                                <a class="dropdown-item" data-toggle="layout" data-action="header_style_dark" href="#">
-                                    <span>Header Dark</span>
-                                </a>
-                                <!-- Header Styles -->
+                                @endforeach
+                                
                             </div>
                         </div>
                         <!-- END Themes -->
@@ -244,13 +217,13 @@
                         <!-- User Dropdown -->
                         <div class="dropdown d-inline-block ml-2">
                             <button type="button" class="btn btn-sm btn-dual" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="rounded" src="{{ theme('backend/media/avatars/avatar0.jpg') }}" alt="Header Avatar" style="width: 18px;">
+                                <img class="rounded" src="{{ isset(auth()->user()->avatarUrl) ? auth()->user()->avatarUrl : theme('backend/media/avatars/avatar0.jpg') }}" alt="Avatar" style="width: 18px;">
                                 <span class="d-none d-sm-inline-block ml-1">{{ auth('admin')->user()->name }}</span>
                                 <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="page-header-user-dropdown">
                                 <div class="p-3 text-center bg-primary">
-                                    <img class="img-avatar img-avatar48 img-avatar-thumb" src="{{ theme('backend/media/avatars/avatar0.jpg') }}" alt="">
+                                    <img class="img-avatar img-avatar48 img-avatar-thumb" src="{{ isset(auth()->user()->avatarUrl) ? auth()->user()->avatarUrl  : theme('backend/media/avatars/avatar0.jpg') }}" alt="Avatar">
                                 </div>
                                 <div class="p-2">
                                     <h5 class="dropdown-header text-uppercase">{{ __('User options') }}</h5>
@@ -261,6 +234,7 @@
                                         </a>
                                         @else
                                         <a class="dropdown-item d-flex align-items-center justify-content-between" href="{{ route('admin.password.change') }}"><span>{{ __('Change password') }}</span></a>
+                                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="{{ route('admin.media') }}"><span>{{ __('Media') }}</span></a>
                                         <a class="dropdown-item d-flex align-items-center justify-content-between" href="/admin/logout" onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
                                             <span>{{ __('Logout') }}</span>
@@ -338,6 +312,7 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8.18.3/dist/sweetalert2.all.min.js"></script>
 
         <!-- Page JS Plugins -->
+        <script src="{{ theme('backend/js/plugins/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
         <script src="{{ theme('backend/js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js' ) }}"></script>
         <script src="{{ theme('backend/js/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js' ) }}"></script>
         <script src="{{ theme('backend/js/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js' ) }}"></script>
@@ -356,6 +331,7 @@
         <script src="{{ theme('backend/js/plugins/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
 
         <script src="{{ theme('backend/js/pages/be_tables_datatables.min.js') }}"></script>
+        
 
         <script>
             $(document).ready(function(){
@@ -364,8 +340,15 @@
             });
         </script>
 
+        <script type="text/javascript">
+            $('.test-popup-link').magnificPopup({
+              type: 'image'
+              // other options
+            });
+        </script>
+
         <!-- Page JS Helpers (BS Datepicker + BS Colorpicker + BS Maxlength + Select2 + Masked Inputs + Ion Range Slider plugins) -->
-        <script>jQuery(function(){ One.helpers(['notify','datepicker', 'colorpicker', 'maxlength', 'select2', 'masked-inputs', 'rangeslider']); });</script>
+        <script>jQuery(function(){ One.helpers(['magnific-popup','notify','datepicker', 'colorpicker', 'maxlength', 'select2', 'masked-inputs', 'rangeslider']); });</script>
 
     </body>
 

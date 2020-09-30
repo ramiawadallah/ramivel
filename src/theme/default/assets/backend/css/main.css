@@ -376,16 +376,18 @@
 .js--image-preview::after {
   content: "PHOTO PREVIEW";
   font-family: 'Arial';
-  font-size: 2.5em;
+  font-size: .9em;
   font-weight: bold;
   text-shadow: currentColor;
   line-height: 1.1;
   color: #e6e6e6;
   position: absolute;
-  top: 60%;
+  top: 90%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 0;
+  background-color: #000;
+  padding: 10px 100%;
 }
 
 .js--image-preview.js--no-default::after {
@@ -438,6 +440,21 @@ i.material-icons {
   left: 47%; top: 25%; 
   transform: translate(-25% -50%); 
   color: #fff;
+}
+
+.toast {
+    right: 25px;
+    top: 85px;
+    position: fixed;
+    /*transform: translate(-50%, 0px);*/
+    z-index: 9999 !important;
+}
+
+.icon-image{
+    height: 20px; 
+    width: 20px;
+    margin-bottom: 10px;
+    margin-left: 3px; 
 }
 
 
