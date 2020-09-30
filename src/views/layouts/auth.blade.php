@@ -39,7 +39,7 @@
         <link rel="stylesheet" id="css-main" href="{{ theme('backend/css/ramivel.css') }}">
 
         <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
-        <link rel="stylesheet" id="css-theme" href="{{ theme('backend/css/themes/modern.min.css') }}">
+        <link rel="stylesheet" id="css-theme" href="{{ theme('backend/css/themes/' . setting()->theme . '.min.css') }}">
         <!-- END Stylesheets -->
     </head>
     <body>

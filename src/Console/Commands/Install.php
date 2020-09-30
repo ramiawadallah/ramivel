@@ -40,9 +40,13 @@ class Install extends Command
     {
         $this->publishAssets();
 
+        $this->publishMedia();
+
         $this->runMigration();
 
         $this->seedSuperAdmin();
+
+        $this->seedSetting();
 
     }
 
@@ -53,18 +57,31 @@ class Install extends Command
         $this->info(Artisan::output());
     }
 
+    protected function publishMedia()
+    {
+        $this->warn('2. Publishing Media Configurations');
+        Artisan::call('vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag="config"');
+        $this->info(Artisan::output());
+    }
+
     protected function runMigration()
     {
-        $this->warn('2. Running Migrations');
+        $this->warn('3. Running Migrations');
         Artisan::call('migrate --seed');
         $this->info(Artisan::output());
     }
 
     protected function seedSuperAdmin()
     {
-        $this->warn('3. Seeding New Super Admin');
+        $this->warn('4. Seeding New Super Admin');
         Artisan::call('ramivel:seed --role=super');
         $this->info(Artisan::output());
+    }
+
+    protected function seedSetting(){
+        $this->warn('5. Updating data Setting');
+        factory('App\Model\Setting', 1)->create();
+   
     }
 
 }

@@ -1667,3 +1667,16 @@ a.block.block-link-shadow:active {
   border-top-color: #eeeaec;
   background-color: #fcfbfb;
 }
+
+#page-header .content-header {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  background-color: #ff6c9d !important;
+}
+
+@media (min-width: 768px) {
+  #page-header .content-header {
+    padding-left: 1.875rem;
+    padding-right: 1.875rem;
+  }
+}

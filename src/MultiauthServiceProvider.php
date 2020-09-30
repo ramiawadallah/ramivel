@@ -142,14 +142,15 @@ class MultiauthServiceProvider extends ServiceProvider
         $prefix = config('application.prefix', 'admin');
 
         $this->publishes([
-               __DIR__ . '/database/migrations/'        => database_path('migrations'),            //  Migrations
-               __DIR__ . '/Http/Controllers'            => app_path('Http/Controllers'),           //  Controllers
-               __DIR__ . '/views'                       => resource_path('views/'),                //  Views & Layout
-               __DIR__ . '/theme'                       => base_path('public/theme'),              //  Theme
-               __DIR__ . '/../config/multiauth.php'     => config_path('multiauth.php'),           //  Multiauth
-               __DIR__ . '/../config/cms.php'           => config_path('cms.php'),                 //  CMS
-               __DIR__ . '/routes/routes.php'           => base_path("routes/{$prefix}.php"),      //  Routes
-               __DIR__ . '/Model'                       => app_path('/Model/'),                    //  Model
+               __DIR__ . '/database/migrations/'                   => database_path('migrations'),                      //  Migrations
+               __DIR__ . '/Http/Controllers'                       => app_path('Http/Controllers'),                     //  Controllers
+               __DIR__ . '/views'                                  => resource_path('views/'),                          //  Views & Layout
+               __DIR__ . '/theme'                                  => base_path('public/theme'),                        //  Theme
+               __DIR__ . '/../config/multiauth.php'                => config_path('multiauth.php'),                     //  Multiauth
+               __DIR__ . '/../config/cms.php'                      => config_path('cms.php'),                           //  CMS
+               __DIR__ . '/routes/routes.php'                      => base_path("routes/{$prefix}.php"),                //  Routes
+               __DIR__ . '/Model'                                  => app_path('/Model/'),                              //  Model
+               __DIR__ . '/database/factories/SettingFactory.php'  => database_path('factories/SettingFactory.php'),    //  Factories
            ]
         ,'ramivel:publish');
 
