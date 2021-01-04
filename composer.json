@@ -26,7 +26,6 @@
       "ramiawadallah/presenter": "dev-master",
       "unisharp/laravel-filemanager": "~1.8",
       "laravel/helpers": "^1.1",
-      "realrashid/sweet-alert": "^2.0",
       "spatie/laravel-medialibrary":"^7.0.0"
   },
   "require-dev": {
