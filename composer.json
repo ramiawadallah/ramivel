@@ -26,6 +26,7 @@
       "ramiawadallah/presenter": "1.8.x-dev",
       "unisharp/laravel-filemanager": "~1.8",
       "laravel/helpers": "^1.1",
+      "laravel/legacy-factories": "^1.1",
       "spatie/laravel-medialibrary":"^7.0.0"
   },
   "require-dev": {
