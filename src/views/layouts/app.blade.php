@@ -47,7 +47,7 @@
                         <!-- Authentication Links -->
                         @guest('admin')
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('admin.login')}}">{{ ucfirst(config('multiauth.prefix'))
+                            <a class="nav-link" href="{{route('admin')}}">{{ ucfirst(config('multiauth.prefix'))
                                 }} Login</a>
                         </li>
                         @else

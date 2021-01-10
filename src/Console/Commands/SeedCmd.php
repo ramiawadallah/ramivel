@@ -32,6 +32,7 @@ class SeedCmd extends Command
         $this->roleModel            = config('multiauth.models.role');
         $this->adminModel           = config('multiauth.models.admin');
         $this->permissionModel      = config('multiauth.models.permission');
+        $this->settingModel         = config('multiauth.models.setting');
     }
 
     /**
@@ -42,7 +43,12 @@ class SeedCmd extends Command
     public function handle()
     {
         if ($this->superAdminExists()) {
-            $this->error('admin with email "super@admin.com" already exists');
+            $this->error('admin with email "super@admin.com" already exists!');
+            return ;
+        }
+
+        if ($this->settingExists()) {
+            $this->error('Setting are already exists!');
             return ;
         }
 
@@ -54,6 +60,7 @@ class SeedCmd extends Command
 
         $role      = $this->roleModel::whereName($rolename)->first();
         $admin     = $this->createSuperAdmin($role, $rolename);
+        $admin     = $this->createFirstSetting();
 
         $this->info("You have created an admin name '{$admin->name}' with role of '{$admin->roles->first()->name}' ");
         $this->info("Now log-in with {$admin->email} email and password as 'secret123'");
@@ -77,6 +84,39 @@ class SeedCmd extends Command
         return $admin;
     }
 
+    protected function createFirstSetting(){
+        $setting = $this->settingModel::create([
+            'title' => 'Ramivel',
+            'subtitle' => 'Ramivel CMS',
+            'email' => 'rami.moh.awadallah@gmail.com',
+            'phone' => null,
+            'address' => null,
+            'fax' => null,
+            'pobox' => '11118',
+            'map' => null,
+            'mainvideo' => null,
+            // About your website
+            'content' => null,
+            'logo' => null,
+            'icon' => null,
+            'maintenance' => null,
+            'keywords' => null,
+            'copyright' => null,
+            // Social media
+            'facebook' => null,
+            'twitter' => null,
+            'instagram' => null,
+            'linkedin' => null,
+            'youtube' => null,
+
+            'theme' => 'modern',
+
+            'updated_by' => 'admin'
+        ]);
+
+        return $setting;
+    }
+
     protected function createAndLinkPermissionsTo($role)
     {
         $models        = ['Admin', 'Role'];
@@ -93,5 +133,10 @@ class SeedCmd extends Command
     public function superAdminExists()
     {
         return $this->adminModel::where('email', 'super@admin.com')->exists();
+    }
+
+    public function settingExists()
+    {
+        return $this->settingModel::where('id', 1)->exists(); 
     }
 }

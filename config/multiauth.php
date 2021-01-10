@@ -74,5 +74,6 @@ return [
         'admin'          => App\Model\Admin::class,
         'role'           => App\Model\Role::class,
         'permission'     => App\Model\Permission::class,
+        'setting'        => App\Model\Setting::class,
     ],
 ];

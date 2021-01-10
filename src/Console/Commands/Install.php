@@ -46,8 +46,6 @@ class Install extends Command
 
         $this->seedSuperAdmin();
 
-        $this->seedSetting();
-
     }
 
     protected function publishAssets()
@@ -75,13 +73,8 @@ class Install extends Command
     {
         $this->warn('4. Seeding New Super Admin');
         Artisan::call('ramivel:seed --role=super');
-        $this->info(Artisan::output());
+        $this->info(Artisan::output().'Your Application is ready to use');
     }
 
-    protected function seedSetting(){
-        $this->warn('5. Updating data Setting');
-        factory('App\Model\Setting', 1)->create();
-   
-    }
 
 }
