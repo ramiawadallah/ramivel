@@ -7,7 +7,7 @@
 
 
 <div class="form-group{{ $errors->has($name) ? ' has-error' : '' }}">
-   <label for="{{ $name }}" class="control-label">{{ trans('lang.'.$name) }}</label>
+   <label for="{{ $name }}" class="control-label">{{ __(ucfirst($name)) }}</label>
 <div class="input-icon right">   
    @if($errors->has($name))
 	<i class="fa fa-warning tooltips" data-original-title="{{ $errors->first($name) }}"></i>

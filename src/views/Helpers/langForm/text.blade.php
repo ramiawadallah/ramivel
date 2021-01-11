@@ -5,13 +5,13 @@
    $name = $name.$lang_id;
 ?>
 
-<label for="{{ $name }}" class="control-label">{{ trans('lang.'.$name1) }}</label>
+<label for="{{ $name }}" class="control-label">{{ __(ucfirst($name1)) }}</label>
 <div class="form-group">
    <div class="form-line {{ $errors->has(trim($name,'[]')) ? 'focused error' : ' ' }}">
          {!! Form::text($name,$value,array_merge([
             'id'=>'name',
             'class'=>'form-control',
-            'placeholder' => trans('lang.'.$name1)
+            'placeholder' => __(ucfirst($name1))
             ],$attributes)) 
         !!}
    </div>

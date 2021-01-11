@@ -5,15 +5,11 @@ namespace App\Http\Controllers\Frontend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
-use App\Page;
-use App\Gallary;
-use App\University;
-use App\Quicknews;
-use App\Event;
-use App\Category;
-use App\Youtube;
-use App\File;
-use App\Lang;
+use App\Model\Page;
+use App\Model\Event;
+use App\Model\Category;
+use App\Model\File;
+use App\Model\Lang;
 
 class PagesController extends Controller
 {

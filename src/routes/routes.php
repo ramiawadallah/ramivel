@@ -9,12 +9,12 @@
 
 
     Route::GET('/home', 'AdminController@index')->name('admin.home');
-    // Login and Logout
+    //Login and Logout
     Route::GET('/', 'LoginController@showLoginForm')->name('admin.login');
     Route::POST('/', 'LoginController@login');
     Route::POST('/logout', 'LoginController@logout')->name('admin.logout');
 
-    // Password Resets
+    //Password Resets
     Route::POST('/password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
     Route::GET('/password/reset', 'ForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
     Route::POST('/password/reset', 'ResetPasswordController@reset');
@@ -22,22 +22,22 @@
     Route::GET('/password/change', 'AdminController@showChangePasswordForm')->name('admin.password.change');
     Route::POST('/password/change', 'AdminController@changePassword');
 
-    // Register Admins
+    //Register Admins
     Route::get('/register', 'RegisterController@showRegistrationForm')->name('admin.register');
     Route::post('/register', 'RegisterController@register');
     Route::get('/{admin}/edit', 'RegisterController@edit')->name('admin.edit');
     Route::delete('/{admin}', 'RegisterController@destroy')->name('admin.delete');
     Route::patch('/{admin}', 'RegisterController@update')->name('admin.update');
 
-    // Admin Lists
+    //Admin Lists
     Route::get('/show', 'AdminController@show')->name('admin.show');
     Route::get('/me', 'AdminController@me')->name('admin.me');
 
-    // Admin Roles
+    //Admin Roles
     Route::post('/{admin}/role/{role}', 'AdminRoleController@attach')->name('admin.attach.roles');
     Route::delete('/{admin}/role/{role}', 'AdminRoleController@detach');
 
-    // Roles
+    //Roles
     Route::get('/roles', 'RoleController@index')->name('admin.roles');
     Route::get('/role/create', 'RoleController@create')->name('admin.role.create');
     Route::post('/role/store', 'RoleController@store')->name('admin.role.store');
@@ -45,7 +45,7 @@
     Route::get('/role/{role}/edit', 'RoleController@edit')->name('admin.role.edit');
     Route::patch('/role/{role}', 'RoleController@update')->name('admin.role.update');
 
-    // Active status
+    //Active status
     Route::post('activation/{admin}', 'ActivationController@activate')->name('admin.activation');
     Route::delete('activation/{admin}', 'ActivationController@deactivate');
     Route::resource('permission', 'PermissionController');
@@ -65,6 +65,22 @@
     Route::post('media/vatar/{id}','MediaController@updateAvatar')->name('admin.media.updateavatar');
     Route::post('media/vatar/setting','MediaController@updateAvatarSetting')->name('admin.media.updateavatarsetting');
     Route::delete('media/destroyavatar/{id}','MediaController@destroy')->name('admin.media.destroyavatar');
+
+    //Language
+    Route::get('main_settings', 'SettingsController@index');
+    
+    //Pages
+    Route::resource('pages', 'PageController');
+
+    //Sliders
+    Route::resource('sliders', 'SliderController');
+
+    //Services
+    Route::resource('services', 'ServiceController');
+
+    //Partners
+    Route::resource('partners', 'PartnerController');
+
 
     Route::fallback(function () {
         return abort(404);

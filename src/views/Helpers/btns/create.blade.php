@@ -4,22 +4,22 @@
 ?>
 
 @if(!empty($attr))
-
-	<a href="{{ $href }}" class="btn btn-sm btn-success"
-
-	@foreach($attr as $key => $value)
-	{{ $key }}="{{ $value }}" &nbsp
-	@endforeach
-
-	>
-	<i class="fa fa-plus"></i>
-	</a>
+	
+	<span class="float-right">
+		<a href="{{ $href }}" class="btn btn-sm btn-dark">
+			@foreach($attr as $key => $value)
+				{{ $key }}="{{ $value }}" &nbsp
+			@endforeach
+			<i class="fa fa-plus"></i>
+		</a>
+	</span>
 
 @else
-	<a href="{{ $href }}" class="btn btn-sm btn-success">
-	<i class="fa fa-plus"></i>
-	{{ trans('lang.create')}}
-	</a>
+	<span class="float-right">
+		<a href="{{ $href }}" class="btn btn-sm btn-dark"><i class="fa fa-plus"></i></a>
+	</span>
 
 @endif
+
+
 

@@ -38,7 +38,7 @@
       
 
 <div class="form-group{{ $errors->has('birthday_month') ? ' has-error' : '' }}">
-   <label for="birthday_month" class="control-label">{{ trans('lang.birthday_month') }}</label>
+   <label for="birthday_month" class="control-label">{{ __('Birthday month') }}</label>
 <div class="input-icon right">   
    @if($errors->has('birthday_month'))
    <i class="fa fa-warning tooltips" data-original-title="{{ $errors->first('birthday_month') }}"></i>

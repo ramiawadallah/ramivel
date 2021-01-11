@@ -10,11 +10,11 @@
 </div>
 
 <div class="form-group">
-    <label>{{ trans('lang.select_image') }}</label>
+    <label>{{ __(ucfirst('Select image')) }}</label>
     <div class="input-group">
         <span class="input-group-btn">
             <span class="btn btn-default btn-file">
-                {{ trans('lang.select_image') }} <input class = "form-control user_picked_files" type="file" multiple="" name="{{ $name }}[]">
+                {{ __('Select image') }} <input class = "form-control user_picked_files" type="file" multiple="" name="{{ $name }}[]">
             </span>
         </span>
         <input style="display: none;" type="text" name="{{ $name }}" class="form-control" ">

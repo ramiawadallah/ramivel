@@ -12,7 +12,7 @@
            {!! Form::textarea($name,$value,array_merge([
             'class'=>'form-control my-editor',
             'rows'=>'15',
-            'placeholder' => trans('lang.'.trim($name1[0],'[]'))
+            'placeholder' => __(ucfirst(trim($name1[0],'[]')))
             ],$attributes)) !!}
        </div>
    </div>

@@ -7,7 +7,7 @@
 
 
 <div class="form-group">
-    <label>{{ trans('lang.select_file') }}</label>
+    <label>{{ __('Select file') }}</label>
     <div class="input-group">
         <span class="input-group-btn">
             <span class="btn btn-default btn-file">

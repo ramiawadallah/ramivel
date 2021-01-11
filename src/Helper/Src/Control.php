@@ -17,7 +17,7 @@ class Control
       $view = 'admin.'.strtolower(str_plural($name)).'.index';
     }
 
-    $model = '\App\\'.ucfirst(str_singular(camel_case($name)));
+    $model = '\App\\Model\\'.ucfirst(str_singular(camel_case($name)));
     $row = $model::orderBy('id','desc')->get();
       if (is_callable($callback)) 
       {
@@ -50,7 +50,7 @@ class Control
       $view = 'admin.'.strtolower(str_plural($name)).'.show';
     }
 
-    $model = '\App\\'.ucfirst(str_singular(camel_case($name)));
+    $model = '\App\\Model\\'.ucfirst(str_singular(camel_case($name)));
     $row = $model::where('id',$id);
 
     if ($row->exists()) 
@@ -69,7 +69,7 @@ class Control
       $view = 'admin.'.strtolower(str_plural($name)).'.edit';
     }
 
-    $model = '\App\\'.ucfirst(str_singular(camel_case($name)));
+    $model = '\App\\Model\\'.ucfirst(str_singular(camel_case($name)));
     $row = $model::where('id',$id);
     if ($row->exists()) 
     {
@@ -84,7 +84,7 @@ class Control
   public static function store(Request $request ,$name,$data=[],$redirect=null,$calback=null)
    {
 
-       $model = '\App\\'.ucfirst(str_singular(camel_case($name)));
+       $model = '\App\\Model\\'.ucfirst(str_singular(camel_case($name)));
 
        if (isset($data['translate'])) 
        {
@@ -182,7 +182,7 @@ class Control
           }
        }
 
-       $model = '\App\\'.ucfirst(str_singular(camel_case($name)));
+       $model = '\App\\Model\\'.ucfirst(str_singular(camel_case($name)));
        $create = $model::find($id);
              $currentLang = \App\Lang::where('code',app()->getLocale())->first();
             if (isset($data['translate'])) 
@@ -238,7 +238,7 @@ class Control
    }
 
    public static function destroy(Request $request  ,$id = null,$name,$calback = null){
-    $model = '\App\\'.ucfirst(str_singular(camel_case($name)));
+    $model = '\App\\Model\\'.ucfirst(str_singular(camel_case($name)));
     if ($id == null && !$request->has('delete')) 
         {
             session()->flash('error',trans('lang.no_data_selected'));
@@ -283,7 +283,7 @@ class Control
 public static function order($req,$name,$parent=0)
     {
 
-      $model = '\App\\'.ucfirst(str_singular(camel_case($name)));
+      $model = '\App\\Model\\'.ucfirst(str_singular(camel_case($name)));
         foreach ($req as $key => $value) 
         {
             $row = $model::find($value['id']);
@@ -299,7 +299,7 @@ public static function order($req,$name,$parent=0)
 
   public static function orderHtml($name,$parentName,$parent = 0,$position=null)
   {
-    $model = '\App\\'.ucfirst(str_singular(camel_case($name)));
+    $model = '\App\\Model\\'.ucfirst(str_singular(camel_case($name)));
     $rows = $model::where($parentName,$parent)->orderBy('order','asc')->get();
     if (!is_null($position)) 
     {
@@ -311,7 +311,7 @@ public static function order($req,$name,$parent=0)
 
   public static function mainOrderHtml($name,$parentName,$parent = 0,$position=null)
   {
-    $model = '\App\\'.ucfirst(str_singular(camel_case($name)));
+    $model = '\App\\Model\\'.ucfirst(str_singular(camel_case($name)));
     $rows = $model::where($parentName,$parent)->orderBy('order','asc')->get();
     if (!is_null($position)) 
     {

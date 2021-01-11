@@ -7,7 +7,7 @@
 
 
 <div class="form-group{{ $errors->has($name) ? ' has-error' : '' }}">
-    <label class="control-label">{{ $name == null ? '': trans('lang.'.$name) }}</label>
+    <label class="control-label">{{ $name == null ? '': __(ucfirst($name)) }}</label>
     <div class="input-group">
         <div class="icheck-{{ $style }}">
         @foreach ($options as $key => $value)

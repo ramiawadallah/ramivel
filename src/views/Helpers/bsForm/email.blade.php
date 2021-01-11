@@ -7,14 +7,14 @@
 
 
 <div class="form-group{{ $errors->has($name) ? ' has-error' : '' }}">
-   <label for="{{ $name }}" class="control-label">{{ trans('lang.'.$name) }}</label>
+   <label for="{{ $name }}" class="control-label">{{ __(ucfirst($name)) }}</label>
 <div class="input-icon right">   
    @if($errors->has($name))
 	<i class="fa fa-warning tooltips" data-original-title="{{ $errors->first($name) }}"></i>
    @endif
    {!! Form::email($name,$value,array_merge([
    	'class'=>'form-control input-lg',
-   	'placeholder' => trans('lang.'.$name)
+   	'placeholder' => __(ucfirst($name))
    	],$attributes)) !!}
    
 </div>

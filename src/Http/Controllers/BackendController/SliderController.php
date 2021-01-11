@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Alert;
-use App\Slider;
+use App\Model\Slider;
 use Auth;
 
 class SliderController extends Controller
@@ -44,7 +43,7 @@ class SliderController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-     */
+    */
     public function store(Request $request)
     {
         $this->validate($request,[

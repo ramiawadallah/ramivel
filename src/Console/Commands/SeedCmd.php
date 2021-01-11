@@ -34,7 +34,7 @@ class SeedCmd extends Command
         $this->permissionModel      = config('multiauth.models.permission');
         $this->settingModel         = config('multiauth.models.setting');
         $this->langModel            = config('multiauth.models.lang');
-        $this->PageModel            = config('multiauth.models.page');
+        $this->pageModel            = config('multiauth.models.page');
     }
 
     /**
@@ -54,6 +54,16 @@ class SeedCmd extends Command
             return ;
         }
 
+        if ($this->LangExists()) {
+            $this->error('Language already exists!');
+            return ;
+        }
+
+        if ($this->pageExists()) {
+            $this->error('Page already exists!');
+            return ;
+        }
+
         $rolename = $this->option('role');
         if (!$rolename) {
             $this->error("please provide role as --role='roleName'");
@@ -66,7 +76,7 @@ class SeedCmd extends Command
         $admin     = $this->createMainLanguage();
         $admin     = $this->createFirstPage();
 
-        $this->info("You have created an admin name '{$admin->name}' with role of '{$admin->roles->first()->name}' ");
+        $this->info("You have created an admin name '{$admin->name}' with role of Super ");
         $this->info("Now log-in with {$admin->email} email and password as 'secret123'");
     }
 
@@ -136,7 +146,7 @@ class SeedCmd extends Command
 
     protected function createFirstPage()
     {
-        $page = $this->PageModel::create([
+        $page = $this->pageModel::create([
             'title'     => 'Home',
             'content'   => 'What is Lorem Ipsum?
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
@@ -169,5 +179,15 @@ class SeedCmd extends Command
     public function settingExists()
     {
         return $this->settingModel::where('id', 1)->exists(); 
+    }
+
+    public function langExists()
+    {
+        return $this->langModel::where('code', 'en')->exists(); 
+    }
+
+    public function pageExists()
+    {
+        return $this->pageModel::where('title', 'Home')->exists(); 
     }
 }

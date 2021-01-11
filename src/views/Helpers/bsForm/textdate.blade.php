@@ -6,7 +6,7 @@
 ?>
 
 
-<label for="{{ $name }}" class="control-label">{{ trans('lang.'.trim($name1[0],'[]')) }}</label>
+<label for="{{ $name }}" class="control-label">{{ __(ucfirst(trim($name1[0],'[]'))) }}</label>
 
 <div class="form-group">
    <div class="form-line">
@@ -14,7 +14,7 @@
        {!! Form::text($name,$value,array_merge([
         'class'=>'form-control input-lg datepicker',
         'id'   =>'date',
-        'placeholder' => trans('lang.'.trim($name1[0],'[]'))
+        'placeholder' => __(ucfirst(trim($name1[0],'[]')))
         ],$attributes)) !!}
    </div>
 </div>

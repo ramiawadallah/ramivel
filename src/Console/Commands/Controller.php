@@ -91,7 +91,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Alert;
-use App\\'.''.$model.';
+use App\Model\\'.''.$model.';
 use Auth;
 use App\Admin;
 
