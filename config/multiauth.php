@@ -75,5 +75,7 @@ return [
         'role'           => App\Model\Role::class,
         'permission'     => App\Model\Permission::class,
         'setting'        => App\Model\Setting::class,
+        'lang'           => App\Model\Lang::class,
+        'page'           => App\Model\Page::class,
     ],
 ];

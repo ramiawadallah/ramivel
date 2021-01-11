@@ -17,6 +17,7 @@ class Upload extends Controller
     }
 
     public function upload($data=[]){
+
     	if(in_array('new_name', $data)){
 	    	$new_name = $data['new_name'] === null ?time():$data['new_name'];
 	    }

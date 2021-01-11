@@ -12,12 +12,21 @@ use Ramivel\Application\Console\Commands\SeedCmd;
 use Ramivel\Application\Exception\MultiAuthHandler;
 use Ramivel\Application\Http\Middleware\AdminPermitTo;
 use Ramivel\Application\Providers\AuthServiceProvider;
+use Ramivel\Application\Providers\AppServiceProvider;
 use Ramivel\Application\Console\Commands\PermissionCommand;
 use Ramivel\Application\Http\Middleware\AdminPermitToParent;
 use Ramivel\Application\Console\Commands\MakeMultiAuthCommand;
 use Ramivel\Application\Console\Commands\RollbackMultiAuthCommand;
 use Ramivel\Application\Http\Middleware\redirectIfAuthenticatedAdmin;
 use Ramivel\Application\Http\Middleware\redirectIfNotWithRoleOfAdmin;
+use Ramivel\Application\Http\Middleware\Localization;
+use Ramivel\Application\Http\Middleware\LogAdminActivity;
+use Ramivel\Application\Http\Middleware\LogUserActivity;
+use Ramivel\Application\Http\Middleware\Maintenance;
+use Ramivel\Application\Console\Commands\Controller;
+use Ramivel\Application\Console\Commands\View;
+use Ramivel\Application\Relation\LanguagesRelation;
+use Ramivel\Application\Http\Middleware\Kernel;
 
 class MultiauthServiceProvider extends ServiceProvider
 {
@@ -43,6 +52,7 @@ class MultiauthServiceProvider extends ServiceProvider
             $this->loadMiddleware();
             $this->registerExceptionHandler();
             app()->register(AuthServiceProvider::class);
+            app()->register(AppServiceProvider::class);
         }
     }
 
@@ -106,6 +116,8 @@ class MultiauthServiceProvider extends ServiceProvider
         app('router')->aliasMiddleware('role', redirectIfNotWithRoleOfAdmin::class);
         app('router')->aliasMiddleware('permitTo', AdminPermitTo::class);
         app('router')->aliasMiddleware('permitToParent', AdminPermitToParent::class);
+        app('router')->aliasMiddleware('maintenance', Maintenance::class);
+        app('router')->aliasMiddleware('locale', Localization::class);
     }
 
     protected function registerExceptionHandler()
@@ -143,14 +155,20 @@ class MultiauthServiceProvider extends ServiceProvider
 
         $this->publishes([
                __DIR__ . '/database/migrations/'                   => database_path('migrations'),                      //  Migrations
-               __DIR__ . '/Http/Controllers'                       => app_path('Http/Controllers'),                     //  Controllers
+               __DIR__ . '/Http/BackendControllers'                => app_path("Http/Controllers/Admin"),               //  Admin Controller
+               __DIR__ . '/Http/Middleware/Kernel.php'             => app_path("Http/Kernel.php"),                      //  Kernel
+               __DIR__ . '/Http/FrontendController'                => app_path('Http/Controllers/'),                    //  Others Controllers
                __DIR__ . '/views'                                  => resource_path('views/'),                          //  Views & Layout
                __DIR__ . '/theme'                                  => base_path('public/theme'),                        //  Theme
                __DIR__ . '/../config/multiauth.php'                => config_path('multiauth.php'),                     //  Multiauth
                __DIR__ . '/../config/cms.php'                      => config_path('cms.php'),                           //  CMS
+               __DIR__ . '/../config/app.php'                      => config_path('app.php'),                           //  CMS
+               __DIR__ . '/../config/lang.php'                     => resource_path('lang/en/lang.php'),                //  Lang Configration
+               __DIR__ . '/Relation'                               => app_path('Relation/'),                            //  Relation
+               __DIR__ . '/Template'                               => app_path('Template/'),                            //  Template
                __DIR__ . '/routes/routes.php'                      => base_path("routes/{$prefix}.php"),                //  Routes
                __DIR__ . '/Model'                                  => app_path('/Model/'),                              //  Model
-               __DIR__ . '/database/factories/SettingFactory.php'  => database_path('factories/SettingFactory.php'),    //  Factories
+               __DIR__ . '/routes/web.php'                         => base_path('routes/web.php'),                      //  Web Route
            ]
         ,'ramivel:publish');
 
@@ -202,13 +220,12 @@ class MultiauthServiceProvider extends ServiceProvider
 
     protected function loadAdminCommands()
     {
-
-    // if ($this->app->runningInConsole()) {
-        $this->commands([
-            SeedCmd::class,
-            RoleCmd::class,
-        ]);
-    // }
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                SeedCmd::class,
+                RoleCmd::class,
+            ]);
+        }
     }
 
     protected function loadCommands()
@@ -218,13 +235,10 @@ class MultiauthServiceProvider extends ServiceProvider
             RollbackMultiAuthCommand::class,
             PermissionCommand::class,
             Install::class,
+            Controller::class,
+            View::class,
         ]);
     }
-
-    // protected function loadHelper()
-    // {
-        
-    // }
 
     protected function canHaveAdminBackend()
     {

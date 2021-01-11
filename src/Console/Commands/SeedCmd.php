@@ -33,6 +33,8 @@ class SeedCmd extends Command
         $this->adminModel           = config('multiauth.models.admin');
         $this->permissionModel      = config('multiauth.models.permission');
         $this->settingModel         = config('multiauth.models.setting');
+        $this->langModel            = config('multiauth.models.lang');
+        $this->PageModel            = config('multiauth.models.page');
     }
 
     /**
@@ -84,7 +86,8 @@ class SeedCmd extends Command
         return $admin;
     }
 
-    protected function createFirstSetting(){
+    protected function createFirstSetting()
+    {
         $setting = $this->settingModel::create([
             'title' => 'Ramivel',
             'subtitle' => 'Ramivel CMS',
@@ -115,6 +118,32 @@ class SeedCmd extends Command
         ]);
 
         return $setting;
+    }
+
+    protected function createMainLanguage()
+    {
+        $lang = $this->langModel::create([
+            'name'      =>  'English',
+            'code'      =>  'en',
+            'direction' =>  'ltr',
+            'default'   =>  1,
+        ]);
+
+        return $lang;
+    }
+
+    protected function createFirstPage()
+    {
+        $page = $this->PageModel::create([
+            'title'     => 'Home',
+            'content'   => 'What is Lorem Ipsum?
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+            'uri'       => '/',
+            'template'  => 'home',
+            'status'    => 'active',
+        ]);
+
+        return $page;
     }
 
     protected function createAndLinkPermissionsTo($role)

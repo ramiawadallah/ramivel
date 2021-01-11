@@ -31,9 +31,25 @@ class AuthServiceProvider extends ServiceProvider
            require_once str_replace('/Providers','',__DIR__ . '/Helper/Helpers.php');
         }
 
+        if (File::exists(str_replace('/Providers','',__DIR__ . '/Helper/function.php'))) {
+           require_once str_replace('/Providers','',__DIR__ . '/Helper/function.php');
+        }
+
+        if (File::exists(str_replace('/Providers','',__DIR__ . '/Helper/routesMethods.php'))) {
+           require_once str_replace('/Providers','',__DIR__ . '/Helper/routesMethods.php');
+        }
+
         // LOADF HELPER FILE FOR WINDOWS
         if (File::exists(str_replace('\Providers','',__DIR__ . '\Helper\Helpers.php'))) {
            require_once str_replace('\Providers','',__DIR__ . '\Helper\Helpers.php');
+        }
+
+        if (File::exists(str_replace('\Providers','',__DIR__ . '\Helper\function.php'))) {
+           require_once str_replace('\Providers','',__DIR__ . '\Helper\function.php');
+        }
+
+        if (File::exists(str_replace('\Providers','',__DIR__ . '\Helper\routesMethods.php'))) {
+           require_once str_replace('\Providers','',__DIR__ . '\Helper\routesMethods.php');
         }
 
         $this->registerPolicies();

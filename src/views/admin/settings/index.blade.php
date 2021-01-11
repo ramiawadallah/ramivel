@@ -102,7 +102,7 @@
 
                 <div class="col-md-4 col-sm-12">
                     <div class="block py-3">
-                        <div class="block-header mb-3">{{ __('Application options and image') }}   </div>
+                        <div class="block-header mb-3">{{ __('Application Logo') }}   </div>
 
                         <div class="box m-auto">
                             <div class="js--image-preview" style="background-image: url({{ Storage::url($setting->logo) }});">
@@ -116,6 +116,8 @@
                         </div>
 
                         <hr/>
+
+                        <div class="block-header mb-3">{{ __('Application Icon') }}   </div>
 
                         <div class="box m-auto">
                             <div class="js--image-preview" style="background-image: url({{ Storage::url($setting->icon) }});">
