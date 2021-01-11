@@ -156,7 +156,6 @@ class MultiauthServiceProvider extends ServiceProvider
         $this->publishes([
                __DIR__ . '/database/migrations/'                   => database_path('migrations'),                      //  Migrations
                __DIR__ . '/Http/BackendControllers'                => app_path("Http/Controllers/Admin"),               //  Admin Controller
-               __DIR__ . '/Http/Middleware/Kernel.php'             => app_path("Http/Kernel.php"),                      //  Kernel
                __DIR__ . '/Http/FrontendController'                => app_path('Http/Controllers/'),                    //  Others Controllers
                __DIR__ . '/views'                                  => resource_path('views/'),                          //  Views & Layout
                __DIR__ . '/theme'                                  => base_path('public/theme'),                        //  Theme

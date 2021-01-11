@@ -63,6 +63,8 @@ class SeedCmd extends Command
         $role      = $this->roleModel::whereName($rolename)->first();
         $admin     = $this->createSuperAdmin($role, $rolename);
         $admin     = $this->createFirstSetting();
+        $admin     = $this->createMainLanguage();
+        $admin     = $this->createFirstPage();
 
         $this->info("You have created an admin name '{$admin->name}' with role of '{$admin->roles->first()->name}' ");
         $this->info("Now log-in with {$admin->email} email and password as 'secret123'");
