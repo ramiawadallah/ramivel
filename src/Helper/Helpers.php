@@ -27,7 +27,7 @@ if (! function_exists('count_row')){
 		if($model == null){
 			return '';
 		}else{
-			return App\Model\Admin::count();
+			return App\Models\Admin::count();
 		}
 	}
 }
@@ -42,7 +42,7 @@ if (! function_exists('up')) {
 //Direct Setting Data
 if (! function_exists('setting')) {
 	function setting(){
-		return \App\Model\Setting::OrderBy('id','desc')->first();
+		return \App\Models\Setting::OrderBy('id','desc')->first();
 	}
 }
 

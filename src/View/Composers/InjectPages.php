@@ -2,8 +2,8 @@
 
 namespace Ramivel\Application\View\Composers;
 
-use App\Model\Page;
-use App\Model\Setting;
+use App\Models\Page;
+use App\Models\Setting;
 
 use Illuminate\View\View; 
 

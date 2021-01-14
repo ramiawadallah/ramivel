@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use App\Model\Admin;
+use App\Models\Admin;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class AdminController extends Controller

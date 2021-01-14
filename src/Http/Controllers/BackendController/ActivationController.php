@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Routing\Controller;
-use App\Model\Admin;
+use App\Models\Admin;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class ActivationController extends Controller

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Model\Role;
+use App\Models\Role;
 use Illuminate\Routing\Controller;
-use App\Model\Admin;
+use App\Models\Admin;
 use Illuminate\Auth\Events\Registered;
 use Ramivel\Application\Traits\RegistersUsers;
 use Ramivel\Application\Http\Requests\AdminRequest;

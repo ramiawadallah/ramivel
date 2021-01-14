@@ -39,13 +39,9 @@ class Install extends Command
     public function handle()
     {
         $this->publishAssets();
-
         $this->publishMedia();
-
         $this->runMigration();
-
         $this->seedSuperAdmin();
-
     }
 
     protected function publishAssets()

@@ -1,5 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Frontend\PagesController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,27 +20,25 @@ Route::get('locale/{locale}', function ($locale) {
     return redirect()->back();
 });
 
+
 Route::get('/', function () {
   return view('welcome');
 });
 
 
 Route::group(['middleware'=>'maintenance'], function(){
-
     /* Pages Route if Pages Table is Exists*/
     if (Schema::hasTable('pages')) {
-
-      foreach (\App\Model\Page::all() as $key => $page) {
-      
+      foreach (\App\Models\Page::all() as $key => $page) {
           Route::get($page->uri, ['as'=>$page->name, function() use ($page){
-              return App()->call('App\Http\Controllers\Frontend\PagesController@show', [
+              return App()->call('App\Http\Controllers\Frontend\FrontendController@show', [
                   'page' => $page,
                   'parameters'=> Route::current()->parameters(),
               ]);
           }]);
       }      
     } 
-
+    
 });
 
 

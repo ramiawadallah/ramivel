@@ -9,9 +9,9 @@ use Carbon\Carbon;
 use DB;
 
 
-class HomeTemplate extends AbstractTemplate{
+class AboutusTemplate extends AbstractTemplate{
 
-	protected $view = 'home';
+	protected $view = 'aboutus';
 
 	// protected $posts;
 	protected $pages;

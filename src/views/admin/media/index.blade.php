@@ -72,7 +72,6 @@
 						    </div>
 					    @endforeach
 					</div>
-					{{ $medias->render() }}
 			</div>
 			</div>
 		</div>

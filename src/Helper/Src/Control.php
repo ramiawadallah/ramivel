@@ -17,7 +17,7 @@ class Control
       $view = 'admin.'.strtolower(str_plural($name)).'.index';
     }
 
-    $model = '\App\\Model\\'.ucfirst(str_singular(camel_case($name)));
+    $model = '\App\\Models\\'.ucfirst(str_singular(camel_case($name)));
     $row = $model::orderBy('id','desc')->get();
       if (is_callable($callback)) 
       {

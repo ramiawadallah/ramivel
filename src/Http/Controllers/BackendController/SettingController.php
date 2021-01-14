@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Model\Setting;
+use App\Models\Setting;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Schema;
 use Auth;

@@ -71,11 +71,11 @@ return [
     |
     */
     'models' => [
-        'admin'          => App\Model\Admin::class,
-        'role'           => App\Model\Role::class,
-        'permission'     => App\Model\Permission::class,
-        'setting'        => App\Model\Setting::class,
-        'lang'           => App\Model\Lang::class,
-        'page'           => App\Model\Page::class,
+        'admin'          => App\Models\Admin::class,
+        'role'           => App\Models\Role::class,
+        'permission'     => App\Models\Permission::class,
+        'setting'        => App\Models\Setting::class,
+        'lang'           => App\Models\Lang::class,
+        'page'           => App\Models\Page::class,
     ],
 ];

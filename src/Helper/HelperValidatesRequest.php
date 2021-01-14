@@ -67,7 +67,7 @@ trait HelperValidatesRequests
                 {
                     if (explode('.', $k)[1] == '*') 
                     {
-                        foreach (\App\Model\Lang::all() as $lang) 
+                        foreach (\App\Models\Lang::all() as $lang) 
                         {
                             $key = explode('.', $k)[0];
                             $rules[$key.$lang->id] = $v;
@@ -75,7 +75,7 @@ trait HelperValidatesRequests
                         }
                     }else
                     {
-                        $lang = \App\Model\Lang::where('code',explode('.', $k)[1]);
+                        $lang = \App\Models\Lang::where('code',explode('.', $k)[1]);
                         if ($lang->exists()) 
                         {
                             $lang = $lang->first();
@@ -86,7 +86,7 @@ trait HelperValidatesRequests
                     }
                 }else
                 {
-                    foreach (\App\Model\Lang::all() as $lang) 
+                    foreach (\App\Models\Lang::all() as $lang) 
                     {
                         $key = $k;
                         $rules[$key.$lang->id] = $v;

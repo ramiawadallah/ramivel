@@ -51,7 +51,7 @@
         <link rel="stylesheet" id="css-theme" href="{{ theme('backend/css/themes/' . setting()->theme . '.css') }}">
         <!-- END Stylesheets -->
 
-        <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+        <script src='https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=gtiaq64fxdbsrmbnqat2i3qr309rzvra4szfaq45xjq119mw' referrerpolicy="origin"></script>
         <script>
           var editor_config = {
                 path_absolute : "/",
@@ -88,7 +88,6 @@
 
     </head>
     <body>
-        @include('message') 
 
         <div id="page-container" class="sidebar-o sidebar-light enable-page-overlay side-scroll page-header-fixed">
             <nav id="sidebar" aria-label="Main Navigation">
@@ -285,6 +284,7 @@
 
             <!-- Main Container -->
             <main id="main-container">
+                @include('partials.message')
                 @yield('content')
             </main>
             <!-- END Main Container -->

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Validator;
-use App\Model\Lang;
+use App\Models\Lang;
 use Auth;
 
 class LangController extends Controller

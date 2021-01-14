@@ -4,8 +4,8 @@ namespace Ramivel\Application\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
-use App\View\ThemeViewFinder;
-use App\View\Composers;
+use Ramivel\Application\View\ThemeViewFinder;
+use Ramivel\Application\View\Composers;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::enableForeignKeyConstraints();
         Schema::defaultStringLength(191);
         $this->app['view']->composer('layouts.frontend', Composers\InjectPages::class);
-        //$this->app['view']->setFinder($this->app['theme.finder']);
+        $this->app['view']->setFinder($this->app['theme.finder']);
     }
 
     /**

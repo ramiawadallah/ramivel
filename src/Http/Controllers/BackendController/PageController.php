@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Model\Page;
-use App\Model\Setting;
+use App\Models\Page;
+use App\Models\Setting;
 use DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;

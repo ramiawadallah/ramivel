@@ -1,5 +1,4 @@
  <?php
-
  
 function isAssoc($arr){
     return array_keys($arr) !== range(0, count($arr) - 1);
@@ -116,8 +115,7 @@ function currentLang($value=null)
  
 function updateLang($lang,$extends,$parent,$colum,$trans)
 {
-    
-    $language = App\Language::where([
+    $language = \App\Models\Language::where([
         'lang'=>$lang,
         'extends'=>$extends,
         'parent'=>$parent,
@@ -129,18 +127,16 @@ function updateLang($lang,$extends,$parent,$colum,$trans)
         $update->trans = $trans;
         $update->save();
     }else{
-
-        $add = new App\Language;
+        $add = new \App\Models\Language;
         $add->parent = $parent;
         $add->extends = $extends;
         $add->lang = $lang;
         $add->colum = $colum;
         $add->trans = $trans;
         $add->save(); 
-    }
-    
-    
+    }    
 }
+
 function deleteLang($extends,$parent)
 {
     @ App\Language::where([

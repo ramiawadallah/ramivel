@@ -2,7 +2,7 @@
 
 namespace Ramivel\Application\Providers;
 
-use App\Model\Admin;
+use App\Models\Admin;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\File;
@@ -48,8 +48,8 @@ class AuthServiceProvider extends ServiceProvider
            require_once str_replace('\Providers','',__DIR__ . '\Helper\Helpers.php');
         }
 
-        if (File::exists(str_replace('\Providers','',__DIR__ . '\Helper\function.php'))) {
-           require_once str_replace('\Providers','',__DIR__ . '\Helper\function.php');
+        if (File::exists(str_replace('\Providers','',__DIR__ . '\Helper\functions.php'))) {
+           require_once str_replace('\Providers','',__DIR__ . '\Helper\functions.php');
         }
 
         if (File::exists(str_replace('\Providers','',__DIR__ . '\Helper\routesMethods.php'))) {

@@ -29,7 +29,7 @@
     Route::delete('/{admin}', 'RegisterController@destroy')->name('admin.delete');
     Route::patch('/{admin}', 'RegisterController@update')->name('admin.update');
 
-    //Admin Lists
+    //Admin
     Route::get('/show', 'AdminController@show')->name('admin.show');
     Route::get('/me', 'AdminController@me')->name('admin.me');
 

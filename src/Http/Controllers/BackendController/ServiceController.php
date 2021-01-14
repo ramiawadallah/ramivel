@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Alert;
-use App\Model\Service;
+use App\Models\Service;
 use Auth;
 
 class ServiceController extends Controller

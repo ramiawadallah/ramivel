@@ -21,7 +21,7 @@ class CreatePagesTable extends Migration
             $table->text('photo')->nullable();
 
             $table->string('template')->nullable();
-            $table->enum('status',['active','not active'])->default('not active');
+            $table->enum('status',['active','not active'])->default('active');
 
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();

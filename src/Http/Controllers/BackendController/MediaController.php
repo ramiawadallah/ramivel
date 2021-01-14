@@ -7,7 +7,7 @@ use Illuminate\Routing\Controller;
 use Spatie\MediaLibrary\Models\Media;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-use App\Model\Admin;
+use App\Models\Admin;
 
 class MediaController extends Controller
 {

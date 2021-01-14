@@ -3,7 +3,7 @@
 namespace Ramivel\Application\Traits;
 
 use Illuminate\Support\Collection;
-use App\Model\Permission;
+use App\Models\Permission;
 
 trait hasPermissions
 {

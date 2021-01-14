@@ -155,8 +155,8 @@ class MultiauthServiceProvider extends ServiceProvider
 
         $this->publishes([
                __DIR__ . '/database/migrations/'                   => database_path('migrations'),                      //  Migrations
-               __DIR__ . '/Http/Controllers/BackendController'                => app_path("Http/Controllers/Admin"),                //  Admin Controller
-               __DIR__ . '/Http/Controllers/FrontendController'                => app_path('Http/Controllers'),                     //  Others Controllers
+               __DIR__ . '/Http/Controllers/BackendController'     => app_path("Http/Controllers/Admin"),               //  Admin Controller
+               __DIR__ . '/Http/Controllers/FrontendController'    => app_path('Http/Controllers'),                     //  Others Controllers
                __DIR__ . '/views'                                  => resource_path('views/'),                          //  Views & Layout
                __DIR__ . '/theme'                                  => base_path('public/theme'),                        //  Theme
                __DIR__ . '/../config/multiauth.php'                => config_path('multiauth.php'),                     //  Multiauth
@@ -166,7 +166,7 @@ class MultiauthServiceProvider extends ServiceProvider
                __DIR__ . '/Relation'                               => app_path('Relation/'),                            //  Relation
                __DIR__ . '/Template'                               => app_path('Template/'),                            //  Template
                __DIR__ . '/routes/routes.php'                      => base_path("routes/{$prefix}.php"),                //  Routes
-               __DIR__ . '/Model'                                  => app_path('/Model/'),                              //  Model
+               __DIR__ . '/Models'                                 => app_path('/Models/'),                             //  Model
                __DIR__ . '/routes/web.php'                         => base_path('routes/web.php'),                      //  Web Route
            ]
         ,'ramivel:publish');

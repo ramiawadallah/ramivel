@@ -91,7 +91,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Alert;
 use Response;
-use App\\'.''.$model.';
+use App\Models\\'.''.$model.';
 
 class '.$api.' extends Controller
 {

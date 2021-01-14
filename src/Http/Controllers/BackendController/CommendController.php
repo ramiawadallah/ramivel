@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Artisan;
-use App\Model\Guard;
+use App\Models\Guard;
 
 class CommendController extends Controller
 {

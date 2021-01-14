@@ -23,7 +23,7 @@ class Localization
             Carbon::setLocale(\Session::get('locale'));
         }else
         {
-            $default_locale = \App\Model\Lang::where('default',1);
+            $default_locale = \App\Models\Lang::where('default',1);
             if ($default_locale->exists()) 
             {
                  \App::setLocale($default_locale->first()->code);

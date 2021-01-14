@@ -18,8 +18,6 @@
             </div>
         </div>
     </main>
-
-    @include('message')
     
     <div class="col-md-12 mt-3">
         <div class="row row-deck">
@@ -27,7 +25,7 @@
                 <div class="block block-rounded d-flex flex-column">
                     <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                         <dl class="mb-0">
-                            <dt class="font-size-h2 font-w700">{{ \App\Model\Admin::count() }}</dt>
+                            <dt class="font-size-h2 font-w700">{{ \App\Models\Admin::count() }}</dt>
                             <dd class="text-muted mb-0">{{ __('Admin') }}</dd>
                         </dl>
                         <div class="item item-rounded bg-body">
@@ -41,7 +39,7 @@
                 <div class="block block-rounded d-flex flex-column">
                     <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                         <dl class="mb-0">
-                            <dt class="font-size-h2 font-w700">{{ \App\Model\Role::count() }}</dt>
+                            <dt class="font-size-h2 font-w700">{{ \App\Models\Role::count() }}</dt>
                             <dd class="text-muted mb-0">{{ __('Role') }}</dd>
                         </dl>
                         <div class="item item-rounded bg-body">

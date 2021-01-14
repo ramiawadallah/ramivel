@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Model\Role;
+use App\Models\Role;
 use Illuminate\Routing\Controller;
-use App\Model\Admin;
+use App\Models\Admin;
 
 class AdminRoleController extends Controller
 {

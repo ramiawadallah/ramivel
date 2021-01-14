@@ -8,7 +8,7 @@ return [
 	],
 
 	'templates' => [
-		// 'home'	=> App\Template\HomeTemplate::class,
+		'home'	=> App\Template\HomeTemplate::class,
 	],
 
 	'design' => [

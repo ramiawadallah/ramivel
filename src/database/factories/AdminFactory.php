@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Str;
-use App\Model\Admin;
+use App\Models\Admin;
 
 $factory->define(Admin::class, function (Faker\Generator $faker) {
     return [

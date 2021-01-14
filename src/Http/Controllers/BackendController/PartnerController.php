@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Alert;
-use App\Model\Partner;
+use App\Models\Partner;
 use Auth;
 
 class PartnerController extends Controller
