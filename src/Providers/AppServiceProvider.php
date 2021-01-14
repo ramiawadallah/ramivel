@@ -19,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::enableForeignKeyConstraints();
         Schema::defaultStringLength(191);
         $this->app['view']->composer('layouts.frontend', Composers\InjectPages::class);
-        $this->app['view']->setFinder($this->app['theme.finder']);
+        // $this->app['view']->setFinder($this->app['theme.finder']);
     }
 
     /**
