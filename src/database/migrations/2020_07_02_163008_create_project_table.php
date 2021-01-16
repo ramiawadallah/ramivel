@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreatePartners extends Migration
+class CreateProjectTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,24 @@ class CreatePartners extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('partners', function (Blueprint $table) {
+        Schema::create('projects', function (Blueprint $table) {
             $table->bigIncrements('id');
+
+            $table->unsignedBigInteger('partner_id');
+            $table->foreign('partner_id')
+                  ->references('id')->on('partners')
+                  ->onDelete('cascade');
+
             $table->string('title');
+            $table->text('content')->nullable();
+            $table->text('video')->nullable();
+
             $table->string('uri')->unique()->nullable();
-            $table->string('link')->nullable();
             $table->text('photo')->nullable();
+            $table->enum('status',['active','not active'])->default('not active');
 
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
-
-            $table->enum('status',['active','not active'])->default('not active');
 
             $table->timestamps();
         });
@@ -37,7 +43,6 @@ class CreatePartners extends Migration
      */
     public function down()
     {
-        //
-        Schema::drop('partners');
+        Schema::dropIfExists('projects');
     }
 }

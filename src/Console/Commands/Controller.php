@@ -87,13 +87,11 @@ class Controller extends Command
 namespace App\Http\Controllers'.$namespace.';
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Alert;
 use App\Models\\'.''.$model.';
+use App\Models\Admin;
 use Auth;
-use App\Admin;
 
 class '.$controller.' extends Controller
 {
@@ -238,8 +236,7 @@ class '.$controller.' extends Controller
         $'.$prefixs.' = '.ucfirst(str_singular($prefixs)).'::findOrFail($id);
         \Storage::delete($'.$prefixs.'->photo);
         $'.$prefixs.'->delete();
-        session()->flash(\'success\',trans(\'lang.delete\',[\'var\'=>trans(\'lang.\'.$name)]));
-        return back();
+        return back()->with(\'message\', \'Your '. $name .' is deleted successfully\');
     }
 
     public function order(Request $request)
@@ -253,7 +250,6 @@ class '.$controller.' extends Controller
       }else{
         '.ucfirst(str_singular($prefixs)).'::find(request(\'item\'))->delete();
       }
-      alert()->success(trans(\'lang.deleted\'), trans(\'lang.'.$prefix.'\'));
       return back();
     }
 

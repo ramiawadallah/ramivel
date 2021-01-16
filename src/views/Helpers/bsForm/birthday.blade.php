@@ -15,7 +15,7 @@
    $years = [];
       for ($i=1930; $i < 2016; $i++) { $years[$i] = $i; }
 ?>
-<label>{{ trans('lang.birthday') }}</label>
+<label>{{ __('Birthday') }}</label>
 <div class="row">
    <div class="col-md-4">
       

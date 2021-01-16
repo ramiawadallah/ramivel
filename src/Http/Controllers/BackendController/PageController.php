@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Models\Page;
-use App\Models\Setting;
-use DB;
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Baum\MoveNotPossibleException;
+use App\Http\Requests;
+use App\Models\Page;
+use App\Models\Setting;
+use App\Models\Lang;
 use Auth;
+use DB;
 
 class PageController extends Controller
 {
@@ -99,12 +100,12 @@ class PageController extends Controller
         ];
 
 
-         $model = '\App\\'.ucfirst(str_singular(camel_case($name)));
+         $model = '\App\Models\\'.ucfirst(str_singular(camel_case($name)));
          if (isset($data['translate'])) 
          {
             foreach ($data['translate'] as $k => $field) 
             {
-                foreach (\App\Lang::all() as $lang) 
+                foreach (Lang::all() as $lang) 
                 {
                     if (is_string($k)) 
                     {
@@ -119,7 +120,7 @@ class PageController extends Controller
          }
 
           $create = new $model;
-          $currentLang = \App\Lang::where('code',app()->getLocale())->first();
+          $currentLang = Lang::where('code',app()->getLocale())->first();
           if (isset($data['translate'])) 
             {
               foreach ($data['translate'] as $k => $trans) 
@@ -156,16 +157,13 @@ class PageController extends Controller
           }
 
         $id = $model::all()->last()->id;
-        
-        alert()->success(trans('lang.added'), trans('lang.page'));
-        session()->flash('success',trans('lang.added',['var'=>trans('lang.'.$name)]));
-        
+                
         if (is_null($redirect)) 
         {
             return back();
         }else
         {
-            return redirect($redirect);
+            return redirect($redirect)->with('message', 'Your page is created successfully');
         }
         
     }
@@ -263,7 +261,7 @@ class PageController extends Controller
         if (isset($data['translate'])){
           foreach ($data['translate'] as $k => $field) 
           {
-              foreach (\App\Lang::all() as $lang) 
+              foreach (Lang::all() as $lang) 
               {
                   if (is_string($k)) 
                   {
@@ -277,9 +275,9 @@ class PageController extends Controller
           }
         }
 
-        $model = '\App\\'.ucfirst(str_singular(camel_case($name)));
+        $model = '\App\Models\\'.ucfirst(str_singular(camel_case($name)));
         $create = $model::find($id);
-        $currentLang = \App\Lang::where('code',app()->getLocale())->first();
+        $currentLang = Lang::where('code',app()->getLocale())->first();
             
         if (isset($data['translate'])){
           foreach ($data['translate'] as $k => $trans){
@@ -306,18 +304,14 @@ class PageController extends Controller
           $lang = explode('-', $key)[1];
           updateLang($lang,$name,$create->id,$colum,$value); 
          }
-        }
-
-        alert()->success(trans('lang.updated'), trans('lang.page'));
-        session()->flash('success',trans('lang.updated',['var'=>trans('lang.'.$name)]));
-        
+        }        
 
         if (is_null($redirect)) 
         {
             return back();
         }else
         {
-            return redirect($redirect);
+            return redirect($redirect)->with('message', 'Your page is updated successfully');
         }
     }
 
@@ -338,12 +332,8 @@ class PageController extends Controller
         \Storage::delete($page->photo);
 
         $page->delete();
-        alert()->success(trans('lang.deleted',['var'=>trans('lang.'.$name)]));
         
-        session()->flash('success',trans('lang.delete',['var'=>trans('lang.'.$name)]));
-
-        return back();
-        // return \Control::destroy($request,$id,'page');
+        return back()->with('message', 'Your page is deleted successfully');
     }
 
 

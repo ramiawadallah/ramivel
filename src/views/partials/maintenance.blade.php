@@ -71,7 +71,7 @@
                 </div>
                 
                 <div class="links">
-                    @foreach( \App\Page::where('status' , 'active')->get() as $page)
+                    @foreach( \App\Models\Page::where('status' , 'active')->get() as $page)
                         <a href="{{ url($page->uri) }}"> {{ $page->trans('title') }} </a>
                     @endforeach
                 </div>

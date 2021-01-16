@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Models\Partner;
+use App\Http\Controllers\Controller;
+use App\Models\Team;
+use App\Models\Admin;
 use Auth;
 
-class PartnerController extends Controller
+class TeamController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,7 +25,7 @@ class PartnerController extends Controller
 
     public function index()
     {
-        return \Control::index('partner');
+        return \Control::index('team');
     }
 
     /**
@@ -34,7 +35,7 @@ class PartnerController extends Controller
      */
     public function create()
     {
-        return \Control::create('partner');
+        return \Control::create('team');
     }
 
     /**
@@ -47,11 +48,12 @@ class PartnerController extends Controller
     {
         $this->validate($request,[
             'translate' => [
-                'title' => 'required',
+                'name' => 'required',
+                'content' => 'required',
             ],
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'status' => 'required',
             'uri' => 'required',
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         //Request Photo Upload
@@ -59,7 +61,7 @@ class PartnerController extends Controller
            $data['photo'] = Up()->upload([
                 // 'new_name'      =>  '',
                 'file'          =>  'photo',
-                'path'          =>  'public/partners',
+                'path'          =>  'public/teams',
                 'upload_type'   =>  'single',
                 'delete_file'   =>  '',
            ]); 
@@ -67,14 +69,27 @@ class PartnerController extends Controller
           $data['photo'] = null;
         }
 
-        return \Control::store($request,'partner',[
-            'translate' => ['title'],
+        //Request Photo Upload
+        if(request()->hasFile('cover')) {
+           $data['cover'] = Up()->upload([
+                // 'new_name'      =>  '',
+                'file'          =>  'cover',
+                'path'          =>  'public/teams',
+                'upload_type'   =>  'single',
+                'delete_file'   =>  '',
+           ]); 
+        }else{
+          $data['cover'] = null;
+        }
+
+        return \Control::store($request,'team',[
+            'translate' => ['name','title','content'],
             'status' => $request->status,
             'uri' => $request->uri,
-            'link' => $request->link,
-            'created_by' => Auth::user('admin')->name,
             'photo' => $data['photo'],
-        ],aurl().'/partners');
+            'cover' => $data['cover'],
+            'created_by'    => Auth::user('admin')->name,
+        ],aurl().'/teams');
     }
 
     /**
@@ -85,7 +100,7 @@ class PartnerController extends Controller
      */
     public function show($id)
     {
-        return \Control::show('partner',$id);
+        return \Control::show('team',$id);
     }
 
     /**
@@ -96,7 +111,7 @@ class PartnerController extends Controller
      */
     public function edit($id)
     {
-        return \Control::edit('partner',$id);
+        return \Control::edit('team',$id);
     }
 
     /**
@@ -110,7 +125,8 @@ class PartnerController extends Controller
     {
         $this->validate($request,[
             'translate' => [
-                'title' => 'required',
+                'name' => 'required',
+                'content' => 'required',
             ],
             'status' => 'required',
             'uri' => 'required',
@@ -121,22 +137,35 @@ class PartnerController extends Controller
            $data['photo'] = Up()->upload([
                 // 'new_name'      =>  '',
                 'file'          =>  'photo',
-                'path'          =>  'public/partners',
+                'path'          =>  'public/teams',
                 'upload_type'   =>  'single',
-                'delete_file'   =>  Partner::find($id)->photo,
+                'delete_file'   =>  Team::find($id)->photo,
            ]); 
         }else{
-          $data['photo'] = Partner::find($id)->photo;
+          $data['photo'] = Team::find($id)->photo;
         }
 
-        return \Control::update($request,$id,'partner',[
-           'translate' => ['title'],
+        //Request Photo Upload
+        if(request()->hasFile('cover')) {
+           $data['cover'] = Up()->upload([
+                // 'new_name'      =>  '',
+                'file'          =>  'cover',
+                'path'          =>  'public/teams',
+                'upload_type'   =>  'single',
+                'delete_file'   =>  Team::find($id)->cover,
+           ]); 
+        }else{
+          $data['cover'] = Team::find($id)->cover;
+        }
+
+        return \Control::update($request,$id,'team',[
+            'translate' => ['name','title','content'],
             'status' => $request->status,
             'uri' => $request->uri,
-            'link' => $request->link,
-            'updated_by' => Auth::user('admin')->name,
             'photo' => $data['photo'],
-        ],aurl().'/partners');
+            'cover' => $data['cover'],
+            'updated_by'    => Auth::user('admin')->name,
+        ],aurl().'/teams');
     }
 
     /**
@@ -147,12 +176,25 @@ class PartnerController extends Controller
      */
     public function destroy(Request $request, $id = null)
     {
-        $partners = Partner::findOrFail($id);
-        \Storage::delete($partners->photo);
-        $partners->delete();
-        return back()->with('message', 'Your Partner is deleted successfully');;
+        $name = 'teams';
+        $teams = Team::findOrFail($id);
+        \Storage::delete($teams->photo);
+        $teams->delete();
+        return back()->with('message', 'Your one of team is deleted successfully');
+    }
 
-        //return \Control::destroy($request,$id,'partner');
+    public function order(Request $request)
+    {
+        return \Control::order($request->data,'team',0);
+    }
+
+    public function multi_delete(){
+      if(is_array(request('item'))){
+        Team::destroy(request('item'));
+      }else{
+        Team::find(request('item'))->delete();
+      }
+      return back();
     }
 
 }

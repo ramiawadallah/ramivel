@@ -152,9 +152,7 @@ class ServiceController extends Controller
         $services = Service::findOrFail($id);
         \Storage::delete($services->photo);
         $services->delete();
-        session()->flash('success',trans('lang.deleted'));
-        return back();
-
+        return back()->with('message', 'Your Service is deleted successfully');
         //return \Control::destroy($request,$id,'service');
     }
 

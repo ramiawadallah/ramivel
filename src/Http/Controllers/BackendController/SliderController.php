@@ -145,8 +145,7 @@ class SliderController extends Controller
         $sliders = Slider::findOrFail($id);
         \Storage::delete($sliders->photo);
         $sliders->delete();
-        session()->flash('success',trans('lang.deleted'));
-        return back();
+        return back()->with('message', 'Your slider is deleted successfully');
         //return \Control::destroy($request,$id,'slider');
     }
 

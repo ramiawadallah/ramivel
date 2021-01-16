@@ -31,7 +31,7 @@
         <!-- Page JS Plugins CSS -->
         <link rel="stylesheet" href="{{ theme('backend/js/plugins/magnific-popup/magnific-popup.css') }}">
         <link rel="stylesheet" href="{{ theme('backend/js/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}">
-        <link rel="stylesheet" href="{{ theme('backend/js/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}">
+        <!-- <link rel="stylesheet" href="{{ theme('backend/js/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}"> -->
         <link rel="stylesheet" href="{{ theme('backend/js/plugins/select2/css/select2.min.css') }}">
         <link rel="stylesheet" href="{{ theme('backend/js/plugins/ion-rangeslider/css/ion.rangeSlider.css') }}">
         <link rel="stylesheet" href="{{ theme('backend/js/plugins/dropzone/dist/min/dropzone.min.css') }}">
@@ -160,11 +160,29 @@
                         <li class="nav-main-heading">{{ __('App links') }}</li>
                         
                         @admin('super')
+                            <li class="nav-main-item"><a class="nav-main-link" href="{{ url('admin/pages') }}">
+                                <i class="nav-main-link-icon si si-book-open"></i><span class="nav-main-link-name">{{ __('Pages') }}</span></a>
+                            </li>
+                            <li class="nav-main-item"><a class="nav-main-link" href="{{ url('admin/partners') }}">
+                                <i class="nav-main-link-icon si si-bubbles"></i><span class="nav-main-link-name">{{ __('Partners') }}</span></a>
+                            </li>
+                            <li class="nav-main-item"><a class="nav-main-link" href="{{ url('admin/projects') }}">
+                                <i class="nav-main-link-icon si si-briefcase"></i><span class="nav-main-link-name">{{ __('Projects') }}</span></a>
+                            </li>
+                            <li class="nav-main-item"><a class="nav-main-link" href="{{ url('admin/services') }}">
+                                <i class="nav-main-link-icon si si-chemistry"></i><span class="nav-main-link-name">{{ __('Service') }}</span></a>
+                            </li>
+                            <li class="nav-main-item"><a class="nav-main-link" href="{{ url('admin/teams') }}">
+                                <i class="nav-main-link-icon si si-emoticon-smile"></i><span class="nav-main-link-name">{{ __('Teams') }}</span></a>
+                            </li>
+                            <li class="nav-main-item"><a class="nav-main-link" href="{{ url('admin/sliders') }}">
+                                <i class="nav-main-link-icon si si-directions"></i><span class="nav-main-link-name">{{ __('Sliders') }}</span></a>
+                            </li>
                             <li class="nav-main-item"><a class="nav-main-link" href="{{ route('admin.show') }}">
                                 <i class="nav-main-link-icon si si-user-follow"></i><span class="nav-main-link-name">{{ ucfirst(config('multiauth.prefix')) }}</span></a>
                             </li>
                             <li class="nav-main-item"><a class="nav-main-link" href="{{ route('admin.roles') }}">
-                                <i class="nav-main-link-icon si si-badge"></i><span class="nav-main-link-name">{{ __('Role') }}</span></a>
+                                <i class="nav-main-link-icon si si-badge"></i><span class="nav-main-link-name">{{ __('Roles') }}</span></a>
                             </li>
 
                             <li class="nav-main-item"><a class="nav-main-link" href="{{ url('admin/settings') }}">
@@ -331,6 +349,8 @@
         <script src="{{ theme('backend/js/plugins/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
 
         <script src="{{ theme('backend/js/pages/be_tables_datatables.min.js') }}"></script>
+
+        @stack('js')
         
 
         <script>
@@ -348,7 +368,7 @@
         </script>
 
         <!-- Page JS Helpers (BS Datepicker + BS Colorpicker + BS Maxlength + Select2 + Masked Inputs + Ion Range Slider plugins) -->
-        <script>jQuery(function(){ One.helpers(['magnific-popup','notify','datepicker', 'colorpicker', 'maxlength', 'select2', 'masked-inputs', 'rangeslider']); });</script>
+        <script>jQuery(function(){ One.helpers(['magnific-popup','notify','datepicker', 'maxlength', 'select2', 'masked-inputs', 'rangeslider']); });</script>
 
     </body>
 

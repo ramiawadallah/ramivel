@@ -1,26 +1,12 @@
 @if (session()->has('message') || session()->has('status'))
 
-	<div id="myToast" class="toast">
+	<div id="myToast" class="toast" style="position: absolute; top: 10px; right: 10px; z-index: 99999">
 	    <div class="toast-header bg-success text-white">
 	      <strong class="mr-auto">{{__('Success')}}</strong>
 	      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">×</button>
 	    </div>
 	    <div class="toast-body">
 	    	{{ session()->get('message') }} 
-	    </div>
-	</div>
-
-@endif
-
-@if (session()->has('error') || session()->has('status'))
-
-	<div id="myToast" class="toast">
-	    <div class="toast-header bg-danger text-white">
-	      <strong class="mr-auto">{{__('Error')}}</strong>
-	      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">×</button>
-	    </div>
-	    <div class="toast-body">
-	    	{{ session()->get('error') }} 
 	    </div>
 	</div>
 

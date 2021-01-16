@@ -12,7 +12,7 @@
         <div class="icheck-{{ $style }}">
         @foreach ($options as $key => $value)
             <label>
-                <input type="checkbox" @if(in_array($value, $values)) checked @endif name="{{ $key }}" value="{{ $value }}" class="icheck" data-checkbox="icheckbox_square-grey"> {{ trans('lang.'.$labels[$key]) }} 
+                <input type="checkbox" @if(in_array($value, $values)) checked @endif name="{{ $key }}" value="{{ $value }}" class="icheck" data-checkbox="icheckbox_square-grey"> {{ __(ucfirst(trim($labels[$key],'[]'))) }} 
             </label>
         @endforeach
             

@@ -46,4 +46,19 @@ if (! function_exists('setting')) {
 	}
 }
 
+if (! function_exists('aurl')) {
+	function aurl($url=null){
+		return url('admin/'.$url);
+	}
+}
+
+if (! function_exists('media')) {
+	function media($data){
+		$path = '';
+		return url(Storage::url($path.$data));
+	}
+}
+
+
+
 

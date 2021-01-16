@@ -50,7 +50,7 @@ class Control
       $view = 'admin.'.strtolower(str_plural($name)).'.show';
     }
 
-    $model = '\App\\Model\\'.ucfirst(str_singular(camel_case($name)));
+    $model = '\App\\Models\\'.ucfirst(str_singular(camel_case($name)));
     $row = $model::where('id',$id);
 
     if ($row->exists()) 
@@ -69,7 +69,7 @@ class Control
       $view = 'admin.'.strtolower(str_plural($name)).'.edit';
     }
 
-    $model = '\App\\Model\\'.ucfirst(str_singular(camel_case($name)));
+    $model = '\App\\Models\\'.ucfirst(str_singular(camel_case($name)));
     $row = $model::where('id',$id);
     if ($row->exists()) 
     {
@@ -84,13 +84,13 @@ class Control
   public static function store(Request $request ,$name,$data=[],$redirect=null,$calback=null)
    {
 
-       $model = '\App\\Model\\'.ucfirst(str_singular(camel_case($name)));
+       $model = '\App\\Models\\'.ucfirst(str_singular(camel_case($name)));
 
        if (isset($data['translate'])) 
        {
           foreach ($data['translate'] as $k => $field) 
           {
-              foreach (\App\Lang::all() as $lang) 
+              foreach (\App\Models\Lang::all() as $lang) 
               {
                   if (is_string($k)) 
                   {
@@ -105,7 +105,7 @@ class Control
        }
 
        $create = new $model;
-            $currentLang = \App\Lang::where('code',app()->getLocale())->first();
+            $currentLang = \App\Models\Lang::where('code',app()->getLocale())->first();
             if (isset($data['translate'])) 
             {
               foreach ($data['translate'] as $k => $trans) 
@@ -143,19 +143,16 @@ class Control
         \Files::upload($request,$name,$id,$data['files']);
         }
 
-        alert()->success(trans('lang.added',['var'=>trans('lang.'.$name)]));
-        session()->flash('success',trans('lang.added',['var'=>trans('lang.'.$name)]));
-
         if (is_callable($calback)) 
         {
            call_user_func_array($calback,[$request,$id]);
         }
         if (is_null($redirect)) 
         {
-            return back();
+            return back()->with('message', 'Your ' . $name . ' created successfully');
         }else
         {
-            return redirect($redirect);
+            return redirect($redirect)->with('message', 'Your ' . $name . ' created successfully');
         }
         
    }
@@ -168,7 +165,7 @@ class Control
        {
           foreach ($data['translate'] as $k => $field) 
           {
-              foreach (\App\Lang::all() as $lang) 
+              foreach (\App\Models\Lang::all() as $lang) 
               {
                   if (is_string($k)) 
                   {
@@ -182,9 +179,9 @@ class Control
           }
        }
 
-       $model = '\App\\Model\\'.ucfirst(str_singular(camel_case($name)));
+       $model = '\App\\Models\\'.ucfirst(str_singular(camel_case($name)));
        $create = $model::find($id);
-             $currentLang = \App\Lang::where('code',app()->getLocale())->first();
+             $currentLang = \App\Models\Lang::where('code',app()->getLocale())->first();
             if (isset($data['translate'])) 
             {
               foreach ($data['translate'] as $k => $trans) 
@@ -213,10 +210,6 @@ class Control
              }
           }
 
-        alert()->success(trans('lang.updated',['var'=>trans('lang.'.$name)]));
-
-        session()->flash('success',trans('lang.updated',['var'=>trans('lang.'.$name)]));
-
        if (is_callable($calback)) 
         {
            call_user_func_array($calback,[$request,$id]);
@@ -230,10 +223,10 @@ class Control
 
         if (is_null($redirect)) 
         {
-            return back();
+            return back()->with('message', 'Your ' . $name . ' updated successfully');;
         }else
         {
-            return redirect($redirect);
+            return redirect($redirect)->with('message', 'Your ' . $name . ' updated successfully');;
         }
    }
 
@@ -241,9 +234,6 @@ class Control
     $model = '\App\\Model\\'.ucfirst(str_singular(camel_case($name)));
     if ($id == null && !$request->has('delete')) 
         {
-            session()->flash('error',trans('lang.no_data_selected'));
-           
-            
            return back(); 
         }
         
@@ -251,33 +241,30 @@ class Control
         {
           $row = $model::find($id);
           
-          alert()->success(trans('lang.deleted',['var'=>trans('lang.'.$name)]));
-          session()->flash('success',trans('lang.deleted',['var'=>trans('lang.'.$name)]));
            if (is_callable($calback)) 
               {
                   call_user_func_array($calback,[$row,$id]);
               }
            $row->delete();
            deleteLang($name,$id);
-\Files::delete($name,$id);
+           \Files::delete($name,$id);
         }
         if ($request->has('delete')) 
         {
             foreach ($request->input('delete') as $value) 
             {
               $row = $model::find($value);
-      session()->flash('success',trans('lang.deleted',['var'=>trans('lang.'.str_plural(strtolower($name)))]));
               if (is_callable($calback)) 
               {
                   call_user_func_array($calback,[$row,$id,$name]);
               }
               deleteLang($name,$value);
                $row->delete();
-\Files::delete($name,$value);
+              \Files::delete($name,$value);
             }
         }
         
-        return back();
+        return back()->with('message', 'Your ' . $name . ' deleted successfully');;
 }
 
 public static function order($req,$name,$parent=0)

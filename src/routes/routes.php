@@ -81,6 +81,14 @@
     //Partners
     Route::resource('partners', 'PartnerController');
 
+    //Projects
+    Route::resource('projects', 'ProjectController');
+    Route::post('upload/image/{gid}', 'ProjectController@upload_file');
+    Route::post('delete/image', 'ProjectController@delete_file');
+
+    //Partners
+    Route::resource('teams', 'TeamController');
+
 
     Route::fallback(function () {
         return abort(404);

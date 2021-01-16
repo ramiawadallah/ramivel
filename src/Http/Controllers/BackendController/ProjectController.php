@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Models\Partner;
-use Auth;
+use App\Model\Project;
 
-class PartnerController extends Controller
+
+class ProjectController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,9 +22,10 @@ class PartnerController extends Controller
         $this->middleware('auth:admin');
     }
 
+
     public function index()
     {
-        return \Control::index('partner');
+        return \Control::index('project');
     }
 
     /**
@@ -34,7 +35,7 @@ class PartnerController extends Controller
      */
     public function create()
     {
-        return \Control::create('partner');
+        return \Control::create('project');
     }
 
     /**
@@ -48,10 +49,11 @@ class PartnerController extends Controller
         $this->validate($request,[
             'translate' => [
                 'title' => 'required',
+                'content' => 'required',
             ],
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'status' => 'required',
             'uri' => 'required',
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         //Request Photo Upload
@@ -59,7 +61,7 @@ class PartnerController extends Controller
            $data['photo'] = Up()->upload([
                 // 'new_name'      =>  '',
                 'file'          =>  'photo',
-                'path'          =>  'public/partners',
+                'path'          =>  'public/projects',
                 'upload_type'   =>  'single',
                 'delete_file'   =>  '',
            ]); 
@@ -67,14 +69,14 @@ class PartnerController extends Controller
           $data['photo'] = null;
         }
 
-        return \Control::store($request,'partner',[
-            'translate' => ['title'],
+        return \Control::store($request,'project',[
+            'translate' => ['title','content'],
             'status' => $request->status,
+            'partner_id' => $request->partner_id,
             'uri' => $request->uri,
-            'link' => $request->link,
-            'created_by' => Auth::user('admin')->name,
+            'video' => $request->video,
             'photo' => $data['photo'],
-        ],aurl().'/partners');
+        ],aurl().'/projects');
     }
 
     /**
@@ -85,7 +87,7 @@ class PartnerController extends Controller
      */
     public function show($id)
     {
-        return \Control::show('partner',$id);
+        return \Control::show('project',$id);
     }
 
     /**
@@ -96,7 +98,7 @@ class PartnerController extends Controller
      */
     public function edit($id)
     {
-        return \Control::edit('partner',$id);
+        return \Control::edit('project',$id);
     }
 
     /**
@@ -110,7 +112,9 @@ class PartnerController extends Controller
     {
         $this->validate($request,[
             'translate' => [
+                'category_id' => 'required',
                 'title' => 'required',
+                'content' => 'required',
             ],
             'status' => 'required',
             'uri' => 'required',
@@ -121,22 +125,22 @@ class PartnerController extends Controller
            $data['photo'] = Up()->upload([
                 // 'new_name'      =>  '',
                 'file'          =>  'photo',
-                'path'          =>  'public/partners',
+                'path'          =>  'public/projects',
                 'upload_type'   =>  'single',
-                'delete_file'   =>  Partner::find($id)->photo,
+                'delete_file'   =>  Project::find($id)->photo,
            ]); 
         }else{
-          $data['photo'] = Partner::find($id)->photo;
+          $data['photo'] = Project::find($id)->photo;
         }
 
-        return \Control::update($request,$id,'partner',[
-           'translate' => ['title'],
+        return \Control::update($request,$id,'photo',[
+            'translate' => ['title','content'],
             'status' => $request->status,
+            'partner_id' => $request->partner_id,
             'uri' => $request->uri,
-            'link' => $request->link,
-            'updated_by' => Auth::user('admin')->name,
+            'video' => $request->video,
             'photo' => $data['photo'],
-        ],aurl().'/partners');
+        ],aurl().'/projects');
     }
 
     /**
@@ -147,12 +151,33 @@ class PartnerController extends Controller
      */
     public function destroy(Request $request, $id = null)
     {
-        $partners = Partner::findOrFail($id);
-        \Storage::delete($partners->photo);
-        $partners->delete();
-        return back()->with('message', 'Your Partner is deleted successfully');;
+        $photos = Project::findOrFail($id);
+        $photos->delete();
+        return back()->with('message', 'Your project is deleted successfully');
+    }
 
-        //return \Control::destroy($request,$id,'partner');
+    public function upload_file($id){
+        //Request Photo Upload
+        if(request()->hasFile('file')) {
+            $fid = Up()->upload([
+                // 'new_name'      =>  '',
+                'file'          =>  'file',
+                'path'          =>  'public/pro-photos/'.$id,
+                'upload_type'   =>  'files',
+                'file_type'     =>  'photo',
+                'delete_file'   =>  '',
+                'relation_id'   =>  $id,
+            ]);
+            return response(['stutes'=>true, 'id' => $fid], 200);
+        }
+    }
+
+
+    public function delete_file(){
+        //Request Photo Upload
+        if(request()->has('id')) {
+            Up()->delete(request('id'));
+        }
     }
 
 }
