@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Alert;
-use App\Models\Service;
+use App\Models\Category;
+use App\Models\Admin;
 use Auth;
 
-class ServiceController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,7 +25,7 @@ class ServiceController extends Controller
 
     public function index()
     {
-        return \Control::index('service');
+        return \Control::index('category');
     }
 
     /**
@@ -36,7 +35,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        return \Control::create('service');
+        return \Control::create('category');
     }
 
     /**
@@ -50,7 +49,6 @@ class ServiceController extends Controller
         $this->validate($request,[
             'translate' => [
                 'title' => 'required',
-                'content' => 'required',
             ],
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'status' => 'required',
@@ -62,7 +60,7 @@ class ServiceController extends Controller
            $data['photo'] = Up()->upload([
                 // 'new_name'      =>  '',
                 'file'          =>  'photo',
-                'path'          =>  'public/services',
+                'path'          =>  'public/categories',
                 'upload_type'   =>  'single',
                 'delete_file'   =>  '',
            ]); 
@@ -70,14 +68,13 @@ class ServiceController extends Controller
           $data['photo'] = null;
         }
 
-        return \Control::store($request,'service',[
-            'translate' => ['title','content'],
+        return \Control::store($request,'category',[
+            'translate' => ['title'],
             'status' => $request->status,
             'uri' => $request->uri,
-            'show_more' => $request->show_more,
-            'created_by' => Auth::user('admin')->name,
             'photo' => $data['photo'],
-        ],aurl().'/services');
+            'created_by'    => Auth::user('admin')->name,
+        ],aurl().'/categories');
     }
 
     /**
@@ -88,7 +85,7 @@ class ServiceController extends Controller
      */
     public function show($id)
     {
-        return \Control::show('service',$id);
+        return \Control::show('category',$id);
     }
 
     /**
@@ -99,7 +96,7 @@ class ServiceController extends Controller
      */
     public function edit($id)
     {
-        return \Control::edit('service',$id);
+        return \Control::edit('category',$id);
     }
 
     /**
@@ -114,7 +111,6 @@ class ServiceController extends Controller
         $this->validate($request,[
             'translate' => [
                 'title' => 'required',
-                'content' => 'required',
             ],
             'status' => 'required',
             'uri' => 'required',
@@ -125,22 +121,21 @@ class ServiceController extends Controller
            $data['photo'] = Up()->upload([
                 // 'new_name'      =>  '',
                 'file'          =>  'photo',
-                'path'          =>  'public/services',
+                'path'          =>  'public/categories',
                 'upload_type'   =>  'single',
-                'delete_file'   =>  Service::find($id)->photo,
+                'delete_file'   =>  Category::find($id)->photo,
            ]); 
         }else{
-          $data['photo'] = Service::find($id)->photo;
+          $data['photo'] = Category::find($id)->photo;
         }
 
-        return \Control::update($request,$id,'service',[
-            'translate' => ['title','content'],
+        return \Control::update($request,$id,'category',[
+            'translate' => ['title'],
             'status' => $request->status,
             'uri' => $request->uri,
-            'show_more' => $request->show_more,
             'photo' => $data['photo'],
-            'updated_by' => Auth::user('admin')->name,
-        ],aurl().'/services');
+            'updated_by'    => Auth::user('admin')->name,
+        ],aurl().'/categories');
     }
 
     /**
@@ -151,11 +146,25 @@ class ServiceController extends Controller
      */
     public function destroy(Request $request, $id = null)
     {
-        $services = Service::findOrFail($id);
-        \Storage::delete($services->photo);
-        $services->delete();
-        return back()->with('message', 'Your Service is deleted successfully');
-        //return \Control::destroy($request,$id,'service');
+        $name = 'categories';
+        $categories = Category::findOrFail($id);
+        \Storage::delete($categories->photo);
+        $categories->delete();
+        return back()->with('message', 'Your Category is deleted successfully');
+    }
+
+    public function order(Request $request)
+    {
+        return \Control::order($request->data,'category',0);
+    }
+
+    public function multi_delete(){
+      if(is_array(request('item'))){
+        Category::destroy(request('item'));
+      }else{
+        Category::find(request('item'))->delete();
+      }
+      return back();
     }
 
 }

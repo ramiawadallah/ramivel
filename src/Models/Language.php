@@ -14,6 +14,6 @@ class Language extends Model
 
     public function lang()
     {
-    	return $this->belongsTo('App\Lang','lang');
+    	return $this->belongsTo('App\Models\Lang','lang');
     }
 }

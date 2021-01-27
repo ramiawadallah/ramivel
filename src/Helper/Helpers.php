@@ -59,6 +59,15 @@ if (! function_exists('media')) {
 	}
 }
 
+if( ! function_exists('readMore')){
+
+    function readMore($text, $limit, $url, $readMoreText = 'Read More') {
+        $end = "<br><br><a href=\"$url\">$readMoreText</a>";
+        return str_limit($text, $limit, $end);
+    }
+
+}
+
 
 
 

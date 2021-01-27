@@ -15,4 +15,8 @@ class Project extends Model
     public function files(){
     	return $this->hasMany('App\Models\File','relation_id','id')->where('file_type','photo');
     }
+
+    public function partner(){
+    	return $this->belongsTo(Partner::class);
+    }
 }

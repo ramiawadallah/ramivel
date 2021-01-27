@@ -51,11 +51,6 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="mainvideo">{{ __('Main video') }}</label>
-                                <input type="text" value="{{ $setting->mainvideo }}" name="mainvideo" class="form-control" id="mainvideo">
-                            </div>
-
-                            <div class="form-group">
                                 <label for="keywords">{{ __('Keywords') }}</label>
                                 <input type="text" value="{{ $setting->keywords }}" name="keywords" class="form-control" id="keywords">
                             </div>
@@ -131,6 +126,10 @@
                             </div>
                         </div>
 
+                        <hr/>
+                            <div class="col-md-12"> 
+                                {!! bsForm::file('mainvideo', $setting->mainvideo) !!}
+                            </div>
                         <hr/>
 
                         <div class="form-group col-md-12 ml-2 mt-3">

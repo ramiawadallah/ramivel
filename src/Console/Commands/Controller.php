@@ -71,7 +71,7 @@ class Controller extends Command
         fclose($myfile);
 
         $content = file_get_contents($controller_path);
-        $namespace = $this->argument('path') == 'null' ? null : '/'.$this->argument('path');
+        $namespace = $this->argument('path') == 'null' ? null : '\\'.$this->argument('path');
 
         
         $prefix = strtolower(str_singular(snake_case($data['model'])));

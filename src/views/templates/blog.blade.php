@@ -2,7 +2,7 @@
 
 @section('content')
 	@foreach(\App\Models\Page::where('uri', Request::path())->get() as $page)
-		@if($page->type == 'video')
+	    @if($page->type == 'video')
 			<header class="page-header">
 				<div class="video-bg">
 				<video src="{{ Storage::url($page->video) }}" autoplay muted playsinline loop></video>
@@ -68,44 +68,51 @@
 		    <!-- end page-header -->
 	    @endif
 
-		<!-- <section class="content-section bg-image-fixed" data-background="{{ Storage::url($page->photo) }}">
-		  <div class="container">
-		    <div class="row justify-content-center">
-		      {{ setting()->trans('content') }}
-		    </div>
-		  </div>
-		</section> -->
 
-		<section class="content-section">
-		  <div class="container">
-		    <div class="row no-gutters justify-content-center">
-		      <div class="col-12">
-		        <div class="section-title">
-		          <h6>Amazing collabration with amazing brands</h6>
-		          <h2>Digital Partners</h2>
-		        </div>
-		        <!-- end section-title --> 
-		      </div>
+	     <!-- end page-header -->
+    <section class="content-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
 
-		      @foreach(\App\Models\Partner::all() as $partner)
-			      <!-- end col-12 -->
-			      <div class="col-lg-3 col-md-4 col-6">
-			        <figure class="clients"><img src="{{ Storage::url($partner->photo) }}" alt="Image">
-			          <figcaption >
-			          	<!-- <span>{{ $partner->title }}</span><br> -->
-			          	<a href="{{ url('partner/'.$partner->uri) }}">{{ $partner->link }}</a>
-			          </figcaption>
-			        </figure>
-			      </div>
-		      @endforeach
-		      
-		    </div>
-		    <!-- end row --> 
-		  </div>
-		  <!-- end container --> 
-		</section>
-		<!-- end content-section -->
+          	@foreach($posts as $post)
+            <div class="blog-post">
+              <figure class="post-image">
+              	<img height="400" src="{{ Storage::url($post->photo) }}" alt="Image">
+              </figure>
+              <!-- end post-image -->
+              <div class="post-content">
+                <div class="post-inner"> <small class="post-date">{{ $post->created_at->toDateTimeString() }}</small>
+                  <h3 class="post-title">
+                  {{ $post->trans('title') }}
+              	  </h3>
+                  <div class="post-author"><!-- <img  src="images/author01.jpg" alt="Image"> --> <b>by <a href="#">{{ \App\Models\Admin::where('id',$post->created_by)->first()->name }}</a></b> </div>
+                  <!-- end post-author -->
+                  <div class="post-link"> <a href="{{ url('blog/'.$post->uri) }}" data-text="READ MORE">READ MORE</a> </div>
+                  <!-- end post-link --> 
+                </div>
+                <!-- end post-inner --> 
+              </div>
+              <!-- end post-content --> 
+            </div>
+            <!-- end blog-post -->
+ 			@endforeach
+
+
+            <ul class="pagination">
+              {{ $posts->links('partials.pg') }}
+            </ul>
+            <!-- end pagination --> 
+          </div>
+          <!-- end col-12 --> 
+        </div>
+        <!-- end row --> 
+      </div>
+      <!-- end container --> 
+    </section>
+
+
+   @include('partials.smallfoot')
 		
-		@include('partials.bigfoot')
 	@endforeach()
 @endsection

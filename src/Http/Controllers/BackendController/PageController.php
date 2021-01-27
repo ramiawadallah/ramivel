@@ -88,14 +88,29 @@ class PageController extends Controller
           $data['photo'] = null;
         }
 
+
+        if(request()->hasFile('video')) {
+           $data['video'] = Up()->upload([
+                // 'new_name'      =>  '',
+                'file'          =>  'video',
+                'path'          =>  'public/pages',
+                'upload_type'   =>  'single',
+                'delete_file'   =>  '',
+           ]); 
+        }else{
+          $data['video'] = null;
+        }
+
         // get data from form
         $data = [
-            'translate'     => ['title','content'],
+            'translate'     => ['title','subtitle','content'],
             'uri'           => $request['uri'],
             'name'          => $request['name'],
             'template'      => $request['template'],
             'status'        => $request['status'],
             'photo'         => $data['photo'],
+            'video'         => $data['video'],
+            'type'         => $request['type'],
             'created_by'    => Auth::user('admin')->name,
         ];
 
@@ -246,14 +261,29 @@ class PageController extends Controller
             $data['photo'] = Page::find($id)->photo;
         }
 
+
+        if(request()->hasFile('video')) {
+           $data['video'] = Up()->upload([
+                // 'new_name'      =>  '',
+                'file'          =>  'video',
+                'path'          =>  'public/pages',
+                'upload_type'   =>  'single',
+                'delete_file'   =>  Page::find($id)->video,
+           ]); 
+        }else{
+            $data['video'] = Page::find($id)->video;
+        }
+
         // get data from form
         $data = [
-            'translate'     => ['title','content'],
+            'translate'     => ['title','subtitle','content'],
             'uri'           => $request['uri'],
             'name'          => $request['name'],
             'template'      => $request['template'],
             'status'        => $request['status'],
             'photo'         => $data['photo'],
+            'video'         => $data['video'],
+            'type'        => $request['type'],
             'updated_by'    => Auth::user('admin')->name,
         ];
 

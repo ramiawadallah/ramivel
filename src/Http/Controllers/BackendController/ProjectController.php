@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Model\Project;
+use App\Models\Project;
+use Auth;
 
 
 class ProjectController extends Controller
@@ -53,6 +54,7 @@ class ProjectController extends Controller
             ],
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'status' => 'required',
+            'video' => 'required',
             'uri' => 'required',
         ]);
 
@@ -75,6 +77,7 @@ class ProjectController extends Controller
             'partner_id' => $request->partner_id,
             'uri' => $request->uri,
             'video' => $request->video,
+            'created_by' => Auth::user('admin')->name,
             'photo' => $data['photo'],
         ],aurl().'/projects');
     }
@@ -112,10 +115,10 @@ class ProjectController extends Controller
     {
         $this->validate($request,[
             'translate' => [
-                'category_id' => 'required',
                 'title' => 'required',
                 'content' => 'required',
             ],
+            'partner_id' => 'required',
             'status' => 'required',
             'uri' => 'required',
         ]);
@@ -133,12 +136,13 @@ class ProjectController extends Controller
           $data['photo'] = Project::find($id)->photo;
         }
 
-        return \Control::update($request,$id,'photo',[
+        return \Control::update($request,$id,'project',[
             'translate' => ['title','content'],
             'status' => $request->status,
             'partner_id' => $request->partner_id,
             'uri' => $request->uri,
             'video' => $request->video,
+            'updated_by' => Auth::user('admin')->name,
             'photo' => $data['photo'],
         ],aurl().'/projects');
     }

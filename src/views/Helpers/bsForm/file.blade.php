@@ -7,13 +7,9 @@
 
 
 <div class="form-group">
-    <label>{{ __('Select file') }}</label>
-    <div class="input-group">
-        <span class="input-group-btn">
-            <span class="btn btn-default btn-file">
-                Uploade File <input type="file" multiple="" id="file" name="{{ $name }}" value="{{ $url }}">
-            </span>
-        </span>
+    <label>{{ ucfirst($name) }}</label>
+    <div>
+        <input type="file" multiple="" id="file" name="{{ $name }}" value="{{ $url }}">
         <input type="text" name="{{ $name }}" class="form-control"  readonly value="{{ $url }}">
     </div>
 </div>

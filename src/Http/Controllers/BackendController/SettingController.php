@@ -105,6 +105,18 @@ class SettingController extends Controller
             $data['icon'] = setting()->icon;
         }
 
+        if(request()->hasFile('mainvideo')) {
+           $data['mainvideo'] = Up()->upload([
+                // 'new_name'      =>  '',
+                'file'          =>  'mainvideo',
+                'path'          =>  'public/pages',
+                'upload_type'   =>  'single',
+                'delete_file'   =>  '',
+           ]); 
+        }else{
+          $data['mainvideo'] = null;
+        }
+
         $data = [
             'title' => $request->title,
             'subtitle'  => $request->subtitle,
@@ -112,7 +124,7 @@ class SettingController extends Controller
             'address'  => $request->address,
             'copyright'  => $request->copyright,
 
-            'mainvideo' => $request->mainvideo,
+            'mainvideo' => $data['mainvideo'],
             'maintenance' => $request->maintenance,
             
             'email' => $request->email,

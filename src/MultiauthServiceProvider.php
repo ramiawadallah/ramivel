@@ -25,6 +25,7 @@ use Ramivel\Application\Http\Middleware\LogUserActivity;
 use Ramivel\Application\Http\Middleware\Maintenance;
 use Ramivel\Application\Console\Commands\Controller;
 use Ramivel\Application\Console\Commands\View;
+use Ramivel\Application\Console\Commands\Api;
 use Ramivel\Application\Relation\LanguagesRelation;
 use Ramivel\Application\Http\Middleware\Kernel;
 
@@ -235,6 +236,7 @@ class MultiauthServiceProvider extends ServiceProvider
             PermissionCommand::class,
             Install::class,
             Controller::class,
+            Api::class,
             View::class,
         ]);
     }

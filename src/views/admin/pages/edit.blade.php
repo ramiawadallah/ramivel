@@ -12,6 +12,7 @@
                     <div class="block-content">
                         {!! bsForm::translate(function($form,$lang) use($page){
                             $form->text('title',$page->trans('title',$lang));
+                            $form->text('subtitle',$page->trans('subtitle',$lang));
                             $form->textarea('content',$page->trans('content',$lang),['class'=>'form-control']);
                         }) !!}
                         {!! bsForm::uri('uri',$page->uri) !!}
@@ -24,6 +25,14 @@
                     <div class="block-header">{{ __('Options') }}</div>
                     <div class="block-content">
                         {!! bsForm::image('photo',$page->photo) !!}
+                        <hr>
+                        {!! bsForm::file('video',$page->video) !!}
+                        <hr>
+                        {!! bsForm::radio('type',[
+                                'photo'=> __('Photo'),
+                                'video'=> __('Video'),
+                            ],$page->type) 
+                        !!}
                         <hr>
                         {!! bsForm::select('template',$templates, $page->template)!!}
                         <hr>

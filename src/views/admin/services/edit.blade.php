@@ -27,9 +27,15 @@
                         {!! bsForm::image('photo',$service->photo) !!}
                         <hr>
                         {!! bsForm::radio('status',[
-                                'active'=> trans('lang.active'),
-                                'not active'=> trans('lang.not-active'),
+                                'active'=> __('Active'),
+                                'not active'=> __('Not active'),
                             ],$service->status) 
+                        !!}
+                        <hr>
+                        {!! bsForm::radio('show_more',[
+                                'yes'=> __('Yes'),
+                                'no'=> __('No'),
+                            ],$service->show_more) 
                         !!}
                     </div>
                 </div>

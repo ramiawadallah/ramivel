@@ -15,10 +15,13 @@ class CreatePagesTable extends Migration
         Schema::create('pages', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
+            $table->string('subtitle')->nullable();
             $table->string('uri')->unique();
             $table->string('name')->nullable();
             $table->longText('content')->nullable();
             $table->text('photo')->nullable();
+            $table->text('video')->nullable();
+            $table->text('type')->nullable();
 
             $table->string('template')->nullable();
             $table->enum('status',['active','not active'])->default('active');

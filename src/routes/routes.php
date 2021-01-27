@@ -81,12 +81,18 @@
     //Partners
     Route::resource('partners', 'PartnerController');
 
+    //Categories
+    Route::resource('categories', 'CategoryController');
+
+    //Posts
+    Route::resource('posts', 'PostController');
+
     //Projects
     Route::resource('projects', 'ProjectController');
     Route::post('upload/image/{gid}', 'ProjectController@upload_file');
     Route::post('delete/image', 'ProjectController@delete_file');
 
-    //Partners
+    //Teams
     Route::resource('teams', 'TeamController');
 
 

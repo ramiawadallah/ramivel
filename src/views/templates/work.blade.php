@@ -2,7 +2,7 @@
 
 @section('content')
 	@foreach(\App\Models\Page::where('uri', Request::path())->get() as $page)
-		@if($page->type == 'video')
+	    @if($page->type == 'video')
 			<header class="page-header">
 				<div class="video-bg">
 				<video src="{{ Storage::url($page->video) }}" autoplay muted playsinline loop></video>
@@ -68,44 +68,25 @@
 		    <!-- end page-header -->
 	    @endif
 
-		<!-- <section class="content-section bg-image-fixed" data-background="{{ Storage::url($page->photo) }}">
-		  <div class="container">
-		    <div class="row justify-content-center">
-		      {{ setting()->trans('content') }}
-		    </div>
-		  </div>
-		</section> -->
 
-		<section class="content-section">
-		  <div class="container">
-		    <div class="row no-gutters justify-content-center">
-		      <div class="col-12">
-		        <div class="section-title">
-		          <h6>Amazing collabration with amazing brands</h6>
-		          <h2>Digital Partners</h2>
-		        </div>
-		        <!-- end section-title --> 
-		      </div>
-
-		      @foreach(\App\Models\Partner::all() as $partner)
-			      <!-- end col-12 -->
-			      <div class="col-lg-3 col-md-4 col-6">
-			        <figure class="clients"><img src="{{ Storage::url($partner->photo) }}" alt="Image">
-			          <figcaption >
-			          	<!-- <span>{{ $partner->title }}</span><br> -->
-			          	<a href="{{ url('partner/'.$partner->uri) }}">{{ $partner->link }}</a>
-			          </figcaption>
-			        </figure>
-			      </div>
-		      @endforeach
-		      
-		    </div>
-		    <!-- end row --> 
-		  </div>
-		  <!-- end container --> 
+		<section  style="margin-bottom: 0px !important; margin-top: 0px !important">
+		    <div class="row working justify-content-center">
+		    	@foreach(\App\Models\Project::where('status','active')->get() as $project)
+	                <div class="col-md-4 col-xs-12">
+	                    <div class="box9">
+	                        <img src="{{ Storage::url($project->photo) }}">
+	                        <div class="box-content">
+	                        	@foreach(\App\Models\Partner::where('id', $project->partner_id)->get() as $partner)
+	                            	<a href="{{ url($page->uri.'/'.$project->uri) }}"><img src="{{ Storage::url($partner->photo) }}"></a>
+	                            @endforeach
+	                        </div>
+	                    </div>
+	                </div>
+                @endforeach
+		  	</div>
 		</section>
-		<!-- end content-section -->
-		
-		@include('partials.bigfoot')
+
+		@include('partials.smallfoot')
+
 	@endforeach()
 @endsection

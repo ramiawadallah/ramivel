@@ -458,6 +458,10 @@ i.material-icons {
 }
 
 
+.dropzone .dz-preview .dz-image img{
+  width: 100%;
+  height: 100%;
+}
 
 
 

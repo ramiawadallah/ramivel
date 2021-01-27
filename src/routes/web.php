@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Frontend\PagesController;
+use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Frontend\SendEmailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,3 +50,16 @@ Route::get('maintenance',function(){
   }
   return view('partials.maintenance');
 });
+
+
+// Get project by url
+Route::get('work/{uri}',[FrontendController::class,'work']);
+
+// Get Partner by url
+Route::get('partner/{uri}',[FrontendController::class,'partner']);
+
+// Get Post by url
+Route::get('/blog/{uri}',[FrontendController::class,'post']);
+
+/* Send Email */
+Route::post('send_email',[SendEmailController::class,'sendEmail'])->name('send_email');

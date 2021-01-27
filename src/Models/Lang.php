@@ -10,6 +10,6 @@ class Lang extends Model
     //
     public function languages()
     {
-    	return $this->hasMany('App\Language','lang');
+    	return $this->hasMany('App\Models\Language','lang');
     }
 }
