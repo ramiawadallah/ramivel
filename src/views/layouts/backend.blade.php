@@ -178,6 +178,12 @@
                             <li class="nav-main-item"><a class="nav-main-link" href="{{ url('admin/sliders') }}">
                                 <i class="nav-main-link-icon si si-directions"></i><span class="nav-main-link-name">{{ __('Sliders') }}</span></a>
                             </li>
+                            <li class="nav-main-item"><a class="nav-main-link" href="{{ url('admin/categories') }}">
+                                <i class="nav-main-link-icon si si-grid"></i><span class="nav-main-link-name">{{ __('Categories') }}</span></a>
+                            </li>
+                            <li class="nav-main-item"><a class="nav-main-link" href="{{ url('admin/posts') }}">
+                                <i class="nav-main-link-icon si si-note"></i><span class="nav-main-link-name">{{ __('Posts') }}</span></a>
+                            </li>
                             <li class="nav-main-item"><a class="nav-main-link" href="{{ route('admin.show') }}">
                                 <i class="nav-main-link-icon si si-user-follow"></i><span class="nav-main-link-name">{{ ucfirst(config('multiauth.prefix')) }}</span></a>
                             </li>
