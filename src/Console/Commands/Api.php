@@ -87,11 +87,10 @@ namespace App\Http\Controllers\Api'.$namespace.';
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use Alert;
 use Response;
+use App\Http\Requests;
 use App\Models\\'.''.$model.';
+use App\Http\Controllers\Controller;
 
 class '.$api.' extends Controller
 {

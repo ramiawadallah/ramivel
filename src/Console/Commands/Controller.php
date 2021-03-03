@@ -86,12 +86,12 @@ class Controller extends Command
 
 namespace App\Http\Controllers'.$namespace.';
 
-use Illuminate\Http\Request;
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use App\Models\\'.''.$model.';
-use App\Models\Admin;
 use Auth;
+use App\Http\Requests;
+use App\Models\Admin;
+use Illuminate\Http\Request;
+use App\Models\\'.''.$model.';
+use App\Http\Controllers\Controller;
 
 class '.$controller.' extends Controller
 {
