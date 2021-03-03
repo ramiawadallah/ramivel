@@ -47,7 +47,7 @@ class Install extends Command
     protected function publishAssets()
     {
         $this->warn('1. Publishing Configurations');
-        Artisan::call('vendor:publish --tag=ramivel:publish');
+        Artisan::call('vendor:publish --tag=ramivel:publish --force');
         $this->info(Artisan::output());
     }
 
