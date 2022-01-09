@@ -21,7 +21,7 @@
   ],
   "minimum-stability": "dev",
   "require": {
-      "laravelcollective/html":"8.*",
+      "laravelcollective/html":"6.*",
       "baum/baum":"v2.*",
       "ramiawadallah/presenter": "1.8.1.x-dev",
       "unisharp/laravel-filemanager": "~1.8",
