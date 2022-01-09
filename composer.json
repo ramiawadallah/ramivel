@@ -23,7 +23,7 @@
   "require": {
       "laravelcollective/html":"8.*",
       "baum/baum":"v2.*",
-      "ramiawadallah/presenter": "1.8.x-dev",
+      "ramiawadallah/presenter": "1.8.1.x-dev",
       "unisharp/laravel-filemanager": "~1.8",
       "laravel/helpers": "^1.1",
       "laravel/legacy-factories": "^1.1",
