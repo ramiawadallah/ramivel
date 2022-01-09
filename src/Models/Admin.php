@@ -8,13 +8,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Ramivel\Application\Notifications\AdminResetPasswordNotification;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\Models\Media;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Admin extends Authenticatable implements HasMedia
 {
 
-    use Notifiable, hasPermissions, HasMediaTrait;
+    use Notifiable, hasPermissions, InteractsWithMedia;
 
     protected $casts = ['active' => 'boolean'];
 
@@ -51,7 +51,7 @@ class Admin extends Authenticatable implements HasMedia
         'password', 'remember_token',
     ];
 
-    public function registerMediaCollections()
+    public function registerMediaCollections(): void
     {
         $this
         ->addMediaCollection('media')

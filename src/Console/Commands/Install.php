@@ -54,7 +54,8 @@ class Install extends Command
     protected function publishMedia()
     {
         $this->warn('2. Publishing Media Configurations');
-        Artisan::call('vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag="config"');
+        Artisan::call('vendor:publish --provider="Spatie\MediaLibraryPro\MediaLibraryProServiceProvider" --tag="media-library-pro-migrations"
+        ');
         $this->info(Artisan::output());
     }
 

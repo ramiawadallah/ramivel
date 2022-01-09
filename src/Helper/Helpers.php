@@ -1,11 +1,10 @@
 <?php 
-
 // This Function alow you to access the backend and front end layouts
 if (! function_exists('theme')) {
     function theme($path)
     {
         $config = app('config')->get('cms.theme');
-        //return url('/themes/default/assets/cms/'.$path);
+        // return url('/themes/default/assets/cms/'.$path);
         return url($config['folder'].'/'.$config['active'].'/assets/'.$path);
     }
 }
