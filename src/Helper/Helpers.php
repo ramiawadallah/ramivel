@@ -1,5 +1,6 @@
 <?php 
 // This Function alow you to access the backend and front end layouts
+// This Function can help you as shourtcuts for your app 
 if (! function_exists('theme')) {
     function theme($path)
     {
