@@ -51,21 +51,21 @@ class Admin extends Authenticatable implements HasMedia
         'password', 'remember_token',
     ];
 
-    public function registerMediaCollections(): void
-    {
-        $this
-        ->addMediaCollection('media')
-        ->registerMediaConversions(function (Media $media) {
-            $this
-                ->addMediaConversion('thumb')
-                ->width(250)
-                ->height(250);
-            $this
-                ->addMediaConversion('avatar')
-                ->width(100)
-                ->height(100);
-        });
-    }
+    // public function registerMediaCollections(): void
+    // {
+    //     $this
+    //     ->addMediaCollection('media')
+    //     ->registerMediaConversions(function (Media $media) {
+    //         $this
+    //             ->addMediaConversion('thumb')
+    //             ->width(250)
+    //             ->height(250);
+    //         $this
+    //             ->addMediaConversion('avatar')
+    //             ->width(100)
+    //             ->height(100);
+    //     });
+    // }
 
     public function avatar(){
         return $this->hasOne(Media::class,'id','avatar_id');

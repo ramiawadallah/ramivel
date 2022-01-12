@@ -22,7 +22,7 @@ class MediaController extends Controller
     public function index()
     {
         $medias = Media::paginate(12);
-        return view('admin.media.index',compact('medias',$medias));
+        return view('admin.media.index',compact('medias'));
     }
 
     public function store(Request $request)
