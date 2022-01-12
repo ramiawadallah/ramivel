@@ -1,6 +1,6 @@
 <?php
 
-namespace Ramivel\Multiauth\Http\Middleware;
+namespace Ramivel\Application\Http\Middleware;
 
 use Auth;
 use Closure;
@@ -18,12 +18,21 @@ class redirectIfNotWithRoleOfAdmin
      */
     public function handle($request, Closure $next, $role = 'super')
     {
-        $roles = auth('admin')->user()->/* @scrutinizer ignore-call */roles()->pluck('name');
+        // If not logged in, redirect to the login page.
+        if (!auth('admin')->user()) {
+            return redirect(route('admin.login'));
+        }
+
+        $roles = auth('admin')->user()->roles()->pluck('name');
         if (in_array('super', $roles->toArray())) {
             return $next($request);
         }
 
-        if (!in_array(strtolower($role), $roles->toArray())) {
+        $given_role = explode(';', $role);
+
+        $match = count(array_intersect($given_role, $roles->toArray()));
+
+        if (!$match) {
             return redirect(route('admin.home'));
         }
 

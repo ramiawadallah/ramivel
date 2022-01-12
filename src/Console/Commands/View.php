@@ -1,6 +1,6 @@
 <?php
 
-namespace Ramivel\Multiauth\Console\Commands;
+namespace Ramivel\Application\Console\Commands;
 
 use Illuminate\Console\Command;
 
@@ -81,14 +81,14 @@ class View extends Command{
         }
 
         $data = '@extends(\'layouts.backend\')
-@section(\'title\') {{ trans(\'lang.'.str_plural(snake_case($this->argument('name'))).'\') }}  @endsection
+@section(\'title\') {{ __(\''.ucfirst($this->argument('name')). ' list' . '\' ) }}  @endsection
 @section(\'content\')
 
 <div class="content">
     <div class="block py-2">
         <div class="block-header">
             <h3 class="block-title">
-                {{ trans(\'lang.'.str_plural(snake_case($this->argument('name'))).'\') }} 
+                {{ __(\''.ucfirst($this->argument('name')). '\') }} 
                 <span class="float-right">
                     {!! Btn::create() !!}
                 </span>
@@ -96,16 +96,15 @@ class View extends Command{
         </div>
 
         <div class="block-content">
-            @include(\'partials.message\')
             <div class="table-responsive">
                 <table id="datata" class="table table-bordered table-striped table-vcenter js-dataTable-buttons table-vcenter">
                     <thead>
                         <tr>
-                            <th>{{ trans(\'lang.title\') }}</th>
-                            <th>{{ trans(\'lang.photo\') }}</th>
-                            <th>{{ trans(\'lang.status\') }}</th>
-                            <th>{{ trans(\'lang.create-at\') }}</th>
-                            <th>{{ trans(\'lang.action\') }}</th>
+                            <th>{{ __(\'Title\') }}</th>
+                            <th>{{ __(\'Photo\') }}</th>
+                            <th>{{ __(\'Status\') }}</th>
+                            <th>{{ __(\'Create-at\') }}</th>
+                            <th>{{ __(\'Action\') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -157,17 +156,16 @@ class View extends Command{
         }
 
         $data = '@extends(\'layouts.backend\')
-@section(\'title\') {{ trans(\'lang.'.str_plural(snake_case($this->argument('name'))).'\') }}  @endsection
+@section(\'title\') {{ __(\''.ucfirst($this->argument('name')). ' create' . '\' ) }}  @endsection
 @section(\'content\')
 
 <div class="content">
-    @include(\'partials.message\')
     {!! bsForm::start([\'route\'=>\''.str_plural(snake_case($this->argument('name'))).'.store\',\'enctype\'=>\'multipart/form-data\']) !!}
         @csrf
         <div class="row">
             <div class="col-md-8 col-sm-12">
                 <div class="block py-3">
-                    <div class="block-header">{{ trans(\'lang.create-new-'.str_plural(snake_case($this->argument('name'))).'\') }}</div>
+                    <div class="block-header">{{ __(\''.ucfirst($this->argument('name')). ' create' . '\' ) }}</div>
                     <div class="block-content">
                         {!! bsForm::translate(function($form){
                             $form->text(\'title\');
@@ -180,13 +178,13 @@ class View extends Command{
 
             <div class="col-md-4 col-sm-12">
                 <div class="block py-3">
-                    <div class="block-header">{{ trans(\'lang.options\') }}</div>
+                    <div class="block-header">{{ __(\'Options\') }}</div>
                     <div class="block-content">
                         {!! bsForm::image(\'photo\') !!}
                         <hr>
                         {!! bsForm::radio(\'status\',[
-                            \'active\'=> trans(\'lang.active\'),
-                            \'not active\'=> trans(\'lang.not-active\'),
+                            \'active\'=> __(\'Active\'),
+                            \'not active\'=> __(\'Not-active\'),
                         ]) !!}
                     </div>
                 </div>
@@ -219,17 +217,16 @@ class View extends Command{
         }
         
         $data = '@extends(\'layouts.backend\')
-@section(\'title\') {{ trans(\'lang.'.str_plural(snake_case($this->argument('name'))).'\') }}  @endsection
+@section(\'title\') {{ __(\''.ucfirst($this->argument('name')). ' edit' . '\' ) }}  @endsection
 @section(\'content\')
 
 <div class="content">
-    @include(\'partials.message\')
     {!! bsForm::start([\'route\'=>[\''.str_plural(snake_case($this->argument('name'))).'.update\',$'.str_singular(snake_case($this->argument('name'))).'->id],\'files\'=>true,\'method\'=>\'put\']) !!}
         @csrf
         <div class="row">
             <div class="col-md-8 col-sm-12">
                 <div class="block py-3">
-                    <div class="block-header">{{ trans(\'lang.edit-'.str_plural(snake_case($this->argument('name'))).'\') }}</div>
+                    <div class="block-header">{{ __(\''.ucfirst($this->argument('name')). ' edit' . '\' ) }}</div>
                     <div class="block-content">
                         {!! bsForm::translate(function($form,$lang) use($'.str_singular(snake_case($this->argument('name'))).'){
                             $form->text(\'title\',$'.str_singular(snake_case($this->argument('name'))).'->trans(\'title\',$lang));
@@ -242,13 +239,13 @@ class View extends Command{
 
             <div class="col-md-4 col-sm-12">
                 <div class="block py-3">
-                    <div class="block-header">{{ trans(\'lang.options\') }}</div>
+                    <div class="block-header">{{ __(\'Options\') }}</div>
                     <div class="block-content">
                         {!! bsForm::image(\'photo\',$'.str_singular(snake_case($this->argument('name'))).'->photo) !!}
                         <hr>
                         {!! bsForm::radio(\'status\',[
-                                \'active\'=> trans(\'lang.active\'),
-                                \'not active\'=> trans(\'lang.not-active\'),
+                                \'active\'=> __(\'Active\'),
+                                \'not active\'=> __(\'Not-active\'),
                             ],$'.str_singular(snake_case($this->argument('name'))).'->status) 
                         !!}
                     </div>
@@ -283,7 +280,7 @@ class View extends Command{
         }
 
         $data = '@extends(\'layouts.backend\')
-@section(\'title\') {{ trans(\'lang.'.str_plural(snake_case($this->argument('name'))).'\') }}  @endsection
+@section(\'title\') {{ __(\''.ucfirst($this->argument('name')). ' view' . '\' ) }}  @endsection
 @section(\'content\')
     <div class="content">
         <div class="block py-3">

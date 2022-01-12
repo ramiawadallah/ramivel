@@ -1,7 +1,8 @@
 <?php
 
-namespace Ramivel\Multiauth\Console\Commands;
+namespace Ramivel\Application\Console\Commands;
 
+use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Illuminate\Container\Container;
 
@@ -15,7 +16,7 @@ class RollbackMultiAuthCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'multiauth:rollback 
+    protected $signature = 'ramivel:rollback 
                                 {name=student : Give a name for guard}';
 
     /**
@@ -55,16 +56,16 @@ class RollbackMultiAuthCommand extends Command
             return;
         }
         $this->unPublishGuard()
-             ->rollbackControllers()
-             ->rollbackRoutes()
-             ->unRegisterRoutes()
-             ->rollbackViews()
-             ->removeFactory()
-             ->removeMigration()
-             ->removeModel()
-             ->removeMiddleware()
-             ->unRegisterMiddleware()
-             ->removeNotification();
+            ->rollbackControllers()
+            ->rollbackRoutes()
+            ->unRegisterRoutes()
+            ->rollbackViews()
+            ->removeFactory()
+            ->removeMigration()
+            ->removeModel()
+            ->removeMiddleware()
+            ->unRegisterMiddleware()
+            ->removeNotification();
     }
 
     protected function unPublishGuard()
@@ -166,7 +167,7 @@ class RollbackMultiAuthCommand extends Command
         $migration_path = database_path('migrations');
         $files          = glob("{$migration_path}/*.php");
         foreach ($files as $file) {
-            if (str_contains($file, "create_{$guard}_table")) {
+            if (Str::contains($file, "create_{$guard}_table")) {
                 unlink($file);
             }
         }
@@ -190,6 +191,7 @@ class RollbackMultiAuthCommand extends Command
         $path  = app_path('Http/Middleware');
         unlink("{$path}/RedirectIf{$guard}.php");
         unlink("{$path}/RedirectIfNot{$guard}.php");
+        unlink("{$path}/EnsureEmailIsVerifiedOf{$guard}.php");
         $this->error("Step 9. Middlewares related to {$this->name} is removed from App\Http\Middleware directory \n");
 
         return $this;
@@ -244,14 +246,14 @@ class RollbackMultiAuthCommand extends Command
         }
 
         return [
-            '{{pluralCamel}}'   => str_plural(camel_case($name)),
-            '{{pluralSlug}}'    => str_plural(str_slug($name)),
-            '{{pluralSnake}}'   => str_plural(snake_case($name)),
-            '{{pluralClass}}'   => str_plural(studly_case($name)),
-            '{{singularCamel}}' => str_singular(camel_case($name)),
-            '{{singularSlug}}'  => str_singular(str_slug($name)),
-            '{{singularSnake}}' => str_singular(snake_case($name)),
-            '{{singularClass}}' => str_singular(studly_case($name)),
+            '{{pluralCamel}}'   => Str::plural(Str::camel($name)),
+            '{{pluralSlug}}'    => Str::plural(Str::slug($name)),
+            '{{pluralSnake}}'   => Str::plural(Str::snake($name)),
+            '{{pluralClass}}'   => Str::plural(Str::studly($name)),
+            '{{singularCamel}}' => Str::singular(Str::camel($name)),
+            '{{singularSlug}}'  => Str::singular(Str::slug($name)),
+            '{{singularSnake}}' => Str::singular(Str::snake($name)),
+            '{{singularClass}}' => Str::singular(Str::studly($name)),
             '{{namespace}}'     => $this->getNamespace(),
         ];
     }

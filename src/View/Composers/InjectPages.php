@@ -1,9 +1,9 @@
 <?php
 
-namespace Ramivel\Multiauth\View\Composers;
+namespace Ramivel\Application\View\Composers;
 
-use App\Page;
-use App\Setting;
+use App\Models\Page;
+use App\Models\Setting;
 
 use Illuminate\View\View; 
 

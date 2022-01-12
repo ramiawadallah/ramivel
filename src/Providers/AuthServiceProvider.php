@@ -1,10 +1,12 @@
 <?php
 
-namespace Ramivel\Multiauth\Providers;
+namespace Ramivel\Application\Providers;
 
-use App\Admin;
-use Ramivel\Multiauth\Policies\AdminPolicy;
+use App\Models\Admin;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\File;
+
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -14,7 +16,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        Admin::class => AdminPolicy::class,
+        //
     ];
 
     /**
@@ -24,8 +26,56 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->registerPolicies();
+        // LOADF HELPER FILE FOR MAC AND LINUX
+        if (File::exists(str_replace('/Providers','',__DIR__ . '/Helper/Helpers.php'))) {
+           require_once str_replace('/Providers','',__DIR__ . '/Helper/Helpers.php');
+        }
 
-        //
+        if (File::exists(str_replace('/Providers','',__DIR__ . '/Helper/functions.php'))) {
+           require_once str_replace('/Providers','',__DIR__ . '/Helper/functions.php');
+        }
+
+        if (File::exists(str_replace('/Providers','',__DIR__ . '/Helper/routesMethods.php'))) {
+           require_once str_replace('/Providers','',__DIR__ . '/Helper/routesMethods.php');
+        }
+
+        if (File::exists(str_replace('/Providers','',__DIR__ . '/Helper/HelperValidatesRequest.php'))) {
+           require_once str_replace('/Providers','',__DIR__ . '/Helper/HelperValidatesRequest.php');
+        }
+
+        // LOADF HELPER FILE FOR WINDOWS
+        if (File::exists(str_replace('\Providers','',__DIR__ . '\Helper\Helpers.php'))) {
+           require_once str_replace('\Providers','',__DIR__ . '\Helper\Helpers.php');
+        }
+
+        if (File::exists(str_replace('\Providers','',__DIR__ . '\Helper\functions.php'))) {
+           require_once str_replace('\Providers','',__DIR__ . '\Helper\functions.php');
+        }
+
+        if (File::exists(str_replace('\Providers','',__DIR__ . '\Helper\routesMethods.php'))) {
+           require_once str_replace('\Providers','',__DIR__ . '\Helper\routesMethods.php');
+        }
+
+
+        if (File::exists(str_replace('\Providers','',__DIR__ . '\Helper\HelperValidatesRequest.php'))) {
+           require_once str_replace('\Providers','',__DIR__ . '\Helper\HelperValidatesRequest.php');
+        }
+
+        $this->registerPolicies();
+        Gate::before(function ($admin, $ability) {
+            if ($admin instanceof Admin) {
+                if ($this->isSuperAdmin($admin)) {
+                    return true;
+                }
+                return $admin->hasPermission($ability);
+            }
+        });
+        
+    }
+
+    protected function isSuperAdmin($admin)
+    {
+        return in_array('super', $admin->roles->pluck('name')->toArray());
+
     }
 }

@@ -7,14 +7,14 @@ trait LanguagesRelation{
     {
         if (is_null($language)) 
         {
-            $lang_id = \App\Lang::where('code',app()->getLocale())->first()->id;
+            $lang_id = \App\Models\Lang::where('code',app()->getLocale())->first()->id;
         }
         else{
-            $lang_id = \App\Lang::where('code',$language)->first()->id;
+            $lang_id = \App\Models\Lang::where('code',$language)->first()->id;
         }
         $table = str_singular($this->getTable());
         
-        $trans = @$this->hasMany('App\Language','parent')->where('lang',$lang_id)->where('extends',$table)->where('colum',$colum)->first()->trans;
+        $trans = @$this->hasMany('App\Models\Language','parent')->where('lang',$lang_id)->where('extends',$table)->where('colum',$colum)->first()->trans;
 
             if (is_null($trans)) 
             {

@@ -1,5 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Frontend\SendEmailController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,27 +21,25 @@ Route::get('locale/{locale}', function ($locale) {
     return redirect()->back();
 });
 
+
 Route::get('/', function () {
   return view('welcome');
 });
 
 
 Route::group(['middleware'=>'maintenance'], function(){
-
     /* Pages Route if Pages Table is Exists*/
     if (Schema::hasTable('pages')) {
-
-      foreach (\App\Page::all() as $key => $page) {
-      
+      foreach (\App\Models\Page::all() as $key => $page) {
           Route::get($page->uri, ['as'=>$page->name, function() use ($page){
-              return App()->call('App\Http\Controllers\Frontend\PagesController@show', [
+              return App()->call('App\Http\Controllers\Frontend\FrontendController@show', [
                   'page' => $page,
                   'parameters'=> Route::current()->parameters(),
               ]);
           }]);
       }      
     } 
-
+    
 });
 
 
@@ -47,3 +50,16 @@ Route::get('maintenance',function(){
   }
   return view('partials.maintenance');
 });
+
+
+// Get project by url
+Route::get('work/{uri}',[FrontendController::class,'work']);
+
+// Get Partner by url
+Route::get('partner/{uri}',[FrontendController::class,'partner']);
+
+// Get Post by url
+Route::get('/blog/{uri}',[FrontendController::class,'post']);
+
+/* Send Email */
+Route::post('send_email',[SendEmailController::class,'sendEmail'])->name('send_email');

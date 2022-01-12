@@ -1,6 +1,6 @@
 <?php
 
-namespace Ramivel\Multiauth\Console\Commands;
+namespace Ramivel\Application\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Container\Container;
@@ -71,7 +71,7 @@ class Controller extends Command
         fclose($myfile);
 
         $content = file_get_contents($controller_path);
-        $namespace = $this->argument('path') == 'null' ? null : '/'.$this->argument('path');
+        $namespace = $this->argument('path') == 'null' ? null : '\\'.$this->argument('path');
 
         
         $prefix = strtolower(str_singular(snake_case($data['model'])));
@@ -86,12 +86,12 @@ class Controller extends Command
 
 namespace App\Http\Controllers'.$namespace.';
 
-use Illuminate\Http\Request;
-
+use Auth;
 use App\Http\Requests;
+use App\Models\Admin;
+use Illuminate\Http\Request;
+use App\Models\\'.''.$model.';
 use App\Http\Controllers\Controller;
-use Alert;
-use App\\'.''.$model.';
 
 class '.$controller.' extends Controller
 {
@@ -158,6 +158,7 @@ class '.$controller.' extends Controller
             \'status\' => $request->status,
             \'uri\' => $request->uri,
             \'photo\' => $data[\'photo\'],
+            \'created_by\'    => Auth::user(\'admin\')->name,
         ],aurl().\'/'.$prefixs.'\');
     }
 
@@ -219,6 +220,7 @@ class '.$controller.' extends Controller
             \'status\' => $request->status,
             \'uri\' => $request->uri,
             \'photo\' => $data[\'photo\'],
+            \'updated_by\'    => Auth::user(\'admin\')->name,
         ],aurl().\'/'.$prefixs.'\');
     }
 
@@ -230,12 +232,11 @@ class '.$controller.' extends Controller
      */
     public function destroy(Request $request, $id = null)
     {
+        $name = \''.$prefixs.'\';
         $'.$prefixs.' = '.ucfirst(str_singular($prefixs)).'::findOrFail($id);
+        \Storage::delete($'.$prefixs.'->photo);
         $'.$prefixs.'->delete();
-        alert()->success(trans(\'lang.deleted\'), trans(\'lang.'.$prefix.'\'));
-        return back();
-
-        //return \Control::destroy($request,$id,\''.$prefix.'\');
+        return back()->with(\'message\', \'Your '. $name .' is deleted successfully\');
     }
 
     public function order(Request $request)
@@ -249,7 +250,6 @@ class '.$controller.' extends Controller
       }else{
         '.ucfirst(str_singular($prefixs)).'::find(request(\'item\'))->delete();
       }
-      alert()->success(trans(\'lang.deleted\'), trans(\'lang.'.$prefix.'\'));
       return back();
     }
 

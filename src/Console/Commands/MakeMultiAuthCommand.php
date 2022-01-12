@@ -1,7 +1,8 @@
 <?php
 
-namespace Ramivel\Multiauth\Console\Commands;
+namespace Ramivel\Application\Console\Commands;
 
+use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Illuminate\Container\Container;
 
@@ -15,8 +16,8 @@ class MakeMultiAuthCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'multiauth:make
-                                {name=student : Give a name for guard}';
+    protected $signature = 'ramivel:make
+                            {name=student : Give a name for guard}';
 
     /**
      * The console command description.
@@ -50,16 +51,16 @@ class MakeMultiAuthCommand extends Command
             return;
         }
         $this->addGuard()
-             ->publishControllers()
-             ->publishRoutes()
-             ->registerRoutes()
-             ->loadViews()
-             ->publishFactory()
-             ->publishMigration()
-             ->publishModel()
-             ->publishMiddleware()
-             ->registerMiddleware()
-             ->publishNotification();
+            ->publishControllers()
+            ->publishRoutes()
+            ->registerRoutes()
+            ->loadViews()
+            ->publishFactory()
+            ->publishMigration()
+            ->publishModel()
+            ->publishMiddleware()
+            ->registerMiddleware()
+            ->publishNotification();
     }
 
     protected function addGuard()
@@ -96,7 +97,7 @@ class MakeMultiAuthCommand extends Command
     protected function checkGuard()
     {
         $providers = array_keys(config('auth.providers'));
-        $name      = str_plural($this->name);
+        $name      = Str::plural($this->name);
 
         return in_array($name, $providers);
     }
@@ -209,6 +210,7 @@ class MakeMultiAuthCommand extends Command
             'layouts/app.blade',
             'auth/login.blade',
             'auth/register.blade',
+            'auth/verify.blade',
             'auth/passwords/email.blade',
             'auth/passwords/reset.blade',
         ];
@@ -284,6 +286,15 @@ class MakeMultiAuthCommand extends Command
         $middleware = strtr($stub, $this->parseName());
 
         file_put_contents($middleware_path . '/RedirectIfNot' . $this->parseName()['{{singularClass}}'] . '.php', $middleware);
+
+        // ...
+
+        $stub = file_get_contents($this->stub_path . '/Middleware/EnsureEmailIsVerified.stub');
+
+        $middleware = strtr($stub, $this->parseName());
+
+        file_put_contents($middleware_path . '/EnsureEmailIsVerifiedOf' . $this->parseName()['{{singularClass}}'] . '.php', $middleware);
+
         $this->info("Step 9. Middlewares related to {$this->name} is added App\Http\Middleware directory \n");
 
         return $this;
@@ -350,14 +361,14 @@ class MakeMultiAuthCommand extends Command
         }
 
         return [
-            '{{pluralCamel}}'   => str_plural(camel_case($name)),
-            '{{pluralSlug}}'    => str_plural(str_slug($name)),
-            '{{pluralSnake}}'   => str_plural(snake_case($name)),
-            '{{pluralClass}}'   => str_plural(studly_case($name)),
-            '{{singularCamel}}' => str_singular(camel_case($name)),
-            '{{singularSlug}}'  => str_singular(str_slug($name)),
-            '{{singularSnake}}' => str_singular(snake_case($name)),
-            '{{singularClass}}' => str_singular(studly_case($name)),
+            '{{pluralCamel}}'   => Str::plural(Str::camel($name)),
+            '{{pluralSlug}}'    => Str::plural(Str::slug($name)),
+            '{{pluralSnake}}'   => Str::plural(Str::snake($name)),
+            '{{pluralClass}}'   => Str::plural(Str::studly($name)),
+            '{{singularCamel}}' => Str::singular(Str::camel($name)),
+            '{{singularSlug}}'  => Str::singular(Str::slug($name)),
+            '{{singularSnake}}' => Str::singular(Str::snake($name)),
+            '{{singularClass}}' => Str::singular(Str::studly($name)),
             '{{namespace}}'     => $this->getNamespace(),
         ];
     }

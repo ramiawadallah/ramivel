@@ -1,6 +1,6 @@
 <?php
 
-namespace Ramivel\Multiauth\Http\Middleware;
+namespace Ramivel\Application\Http\Middleware;
 
 use Closure;
 use Carbon\Carbon;
@@ -16,7 +16,6 @@ class Localization
      */
     public function handle($request, Closure $next)
     {   
-
         if ( \Session::has('locale')) {
             \App::setLocale(\Session::get('locale'));
  
@@ -24,7 +23,7 @@ class Localization
             Carbon::setLocale(\Session::get('locale'));
         }else
         {
-            $default_locale = \App\Lang::where('default',1);
+            $default_locale = \App\Models\Lang::where('default',1);
             if ($default_locale->exists()) 
             {
                  \App::setLocale($default_locale->first()->code);

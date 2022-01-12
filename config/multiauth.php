@@ -48,7 +48,7 @@ return [
     | It will not going to send any email to the admin
     | Default : false
     */
-    'registration_notification_email' => false,
+    'registration_notification_email' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -61,4 +61,21 @@ return [
     | Default : /admin/home
     */
     'redirect_after_login' => '/admin/home',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Models
+    |--------------------------------------------------------------------------
+    |
+    | Add the model you want to use.
+    |
+    */
+    'models' => [
+        'admin'          => App\Models\Admin::class,
+        'role'           => App\Models\Role::class,
+        'permission'     => App\Models\Permission::class,
+        'setting'        => App\Models\Setting::class,
+        'lang'           => App\Models\Lang::class,
+        'page'           => App\Models\Page::class,
+    ],
 ];

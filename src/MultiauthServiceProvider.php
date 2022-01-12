@@ -1,37 +1,40 @@
 <?php
 
-namespace Ramivel\Multiauth;
+namespace Ramivel\Application;
 
-use Ramivel\Multiauth\Console\Commands\MakeMultiAuthCommand;
-use Ramivel\Multiauth\Console\Commands\RoleCmd;
-use Ramivel\Multiauth\Console\Commands\RollbackMultiAuthCommand;
-use Ramivel\Multiauth\Console\Commands\SeedCmd;
-use Ramivel\Multiauth\Console\Commands\Controller;
-use Ramivel\Multiauth\Console\Commands\View;
-use Ramivel\Multiauth\Exception\MultiAuthHandler;
-use Ramivel\Multiauth\Http\Middleware\redirectIfAuthenticatedAdmin;
-use Ramivel\Multiauth\Http\Middleware\redirectIfNotWithRoleOfAdmin;
-use Ramivel\Multiauth\Http\Middleware\Localization;
-use Ramivel\Multiauth\Http\Middleware\LogAdminActivity;
-use Ramivel\Multiauth\Http\Middleware\LogUserActivity;
-use Ramivel\Multiauth\Http\Middleware\Maintenance;
-use Ramivel\Multiauth\Providers\AuthServiceProvider;
-use Ramivel\Multiauth\Providers\AppServiceProvider;
-use Ramivel\Multiauth\Relation\LanguagesRelation;
-use Ramivel\Multiauth\Relation\RelationMethods;
-use Ramivel\Multiauth\Eloquent;
-use Illuminate\Database\Eloquent\Factory;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Eloquent\Factory;
+use Ramivel\Application\Console\Commands\Install;
+use Ramivel\Application\Console\Commands\RoleCmd;
+use Ramivel\Application\Console\Commands\SeedCmd;
+use Ramivel\Application\Exception\MultiAuthHandler;
+use Ramivel\Application\Http\Middleware\AdminPermitTo;
+use Ramivel\Application\Providers\AuthServiceProvider;
+use Ramivel\Application\Providers\AppServiceProvider;
+use Ramivel\Application\Console\Commands\PermissionCommand;
+use Ramivel\Application\Http\Middleware\AdminPermitToParent;
+use Ramivel\Application\Console\Commands\MakeMultiAuthCommand;
+use Ramivel\Application\Console\Commands\RollbackMultiAuthCommand;
+use Ramivel\Application\Http\Middleware\redirectIfAuthenticatedAdmin;
+use Ramivel\Application\Http\Middleware\redirectIfNotWithRoleOfAdmin;
+use Ramivel\Application\Http\Middleware\Localization;
+use Ramivel\Application\Http\Middleware\LogAdminActivity;
+use Ramivel\Application\Http\Middleware\LogUserActivity;
+use Ramivel\Application\Http\Middleware\Maintenance;
+use Ramivel\Application\Console\Commands\Controller;
+use Ramivel\Application\Console\Commands\View;
+use Ramivel\Application\Console\Commands\Api;
+use Ramivel\Application\Relation\LanguagesRelation;
+use Ramivel\Application\Http\Middleware\Kernel;
 
 class MultiauthServiceProvider extends ServiceProvider
 {
     public function boot()
     {
         if ($this->canHaveAdminBackend()) {
-            $this->loadViewsFrom(__DIR__ . '/views', 'multiauth');
-            $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+            $this->loadViewsFrom(__DIR__ . '/views', 'application');
             $this->registerRoutes();
             $this->publisheThings();
             $this->mergeAuthFileFrom(__DIR__ . '/../config/auth.php', 'auth');
@@ -44,6 +47,7 @@ class MultiauthServiceProvider extends ServiceProvider
 
     public function register()
     {
+
         if ($this->canHaveAdminBackend()) {
             $this->loadFactories();
             $this->loadMiddleware();
@@ -73,6 +77,7 @@ class MultiauthServiceProvider extends ServiceProvider
         });
     }
 
+
     /**
      * Get the Blogg route group configuration array.
      *
@@ -94,7 +99,7 @@ class MultiauthServiceProvider extends ServiceProvider
         if (file_exists($routeDir)) {
             $appRouteDir = scandir($routeDir);
             if (!$this->app->routesAreCached()) {
-                require in_array("{$prefix}.php", $appRouteDir) ? base_path("routes/{$prefix}.php") : $path;
+                $path = in_array("{$prefix}.php", $appRouteDir) ? base_path("routes/{$prefix}.php") : $path;
             }
         }
 
@@ -110,7 +115,10 @@ class MultiauthServiceProvider extends ServiceProvider
     {
         app('router')->aliasMiddleware('admin', redirectIfAuthenticatedAdmin::class);
         app('router')->aliasMiddleware('role', redirectIfNotWithRoleOfAdmin::class);
+        app('router')->aliasMiddleware('permitTo', AdminPermitTo::class);
+        app('router')->aliasMiddleware('permitToParent', AdminPermitToParent::class);
         app('router')->aliasMiddleware('maintenance', Maintenance::class);
+        app('router')->aliasMiddleware('locale', Localization::class);
     }
 
     protected function registerExceptionHandler()
@@ -142,28 +150,29 @@ class MultiauthServiceProvider extends ServiceProvider
     }
 
     protected function publisheThings()
-    {
-        $prefix = config('multiauth.prefix', 'admin');
+    {   
+
+        $prefix = config('application.prefix', 'admin');
 
         $this->publishes([
-               __DIR__ . '/database/migrations/' => database_path('migrations'),        //  Migrations
-               __DIR__ . '/database/seeds/' => database_path('seeds'),                  //  Seeds
-               __DIR__ . '/Http/Controllers' => app_path('Http/Controllers/admin/'),    //  Controllers
-               __DIR__ . '/Relation' => app_path('Relation/'),                          //  Relation
-               __DIR__ . '/Template' => app_path('Template/'),                          //  Template
-               __DIR__ . '/Http/Helper Controller' => app_path('Http/Controllers/'),    //  Others Controllers
-               __DIR__ . '/Resources' => resource_path('views/'),                       //  Views & Layout
-               __DIR__ . '/factories' => database_path('factories'),                    //  Factories
-               __DIR__ . '/../config/multiauth.php' => config_path('multiauth.php'),    //  Multiauth
-               __DIR__ . '/routes/routes.php' => base_path("routes/{$prefix}.php"),     //  Routes
-               __DIR__ . '/Model' => app_path(),                                        //  Model
-               __DIR__ . '/Themes' => public_path('/themes/'),                          //  Public file JS & CSS
-               __DIR__ . '/Support' => app_path('Helpers/'),                            //  Helper methods and Function
-               __DIR__ . '/Config/cms.php' => config_path('cms.php'),                   //  CMS
-               __DIR__ . '/Config/lang.php' => resource_path('lang/en/lang.php'),       //  Lang trans
-               __DIR__ . '/routes/web.php' => base_path('routes/web.php'),              //  Web Route
+               __DIR__ . '/database/factories/'                    => database_path('factories'),                      //  Migrations
+               __DIR__ . '/database/migrations/'                   => database_path('migrations'),                      //  Migrations
+               __DIR__ . '/Http/Controllers/BackendController'     => app_path("Http/Controllers/Admin"),               //  Admin Controller
+               __DIR__ . '/Http/Controllers/FrontendController'    => app_path('Http/Controllers'),                     //  Others Controllers
+               __DIR__ . '/views'                                  => resource_path('views/'),                          //  Views & Layout
+               __DIR__ . '/theme'                                  => base_path('public/theme'),                        //  Theme
+               __DIR__ . '/../config/multiauth.php'                => config_path('multiauth.php'),                     //  Multiauth
+               __DIR__ . '/../config/cms.php'                      => config_path('cms.php'),                           //  CMS
+               __DIR__ . '/../config/app.php'                      => config_path('app.php'),                           //  CMS
+               __DIR__ . '/../config/lang.php'                     => resource_path('lang/en/lang.php'),                //  Lang Configration
+               __DIR__ . '/Relation'                               => app_path('Relation/'),                            //  Relation
+               __DIR__ . '/Template'                               => app_path('Template/'),                            //  Template
+               __DIR__ . '/routes/routes.php'                      => base_path("routes/{$prefix}.php"),                //  Routes
+               __DIR__ . '/Models'                                 => app_path('/Models/'),                             //  Model
+               __DIR__ . '/routes/web.php'                         => base_path('routes/web.php'),                      //  Web Route
            ]
-            ,'ramivel:publish');
+        ,'ramivel:publish');
+
     }
 
     protected function loadBladeSyntax()
@@ -174,8 +183,37 @@ class MultiauthServiceProvider extends ServiceProvider
             }
             $role = explode(',', $role);
             $role[] = 'super';
-            $roles = auth('admin')->user()->/* @scrutinizer ignore-call */ roles()->pluck('name');
+            $roles = auth('admin')->user()->roles()->pluck('name');
             $match = count(array_intersect($role, $roles->toArray()));
+
+            return (bool) $match;
+        });
+
+        Blade::if('permitTo', function ($permission) {
+            if (!auth('admin')->check()) {
+                return  false;
+            }
+            $permission = explode(',', $permission);
+            $permissions = auth('admin')->user()->allPermissions();
+            $permissions = array_map(function ($permission) {
+                return $permission['name'];
+            }, $permissions);
+            $match = count(array_intersect($permission, $permissions));
+
+            return !!$match;
+        });
+
+        Blade::if('permitToParent', function ($permission) {
+            if (!auth('admin')->check()) {
+                return  false;
+            }
+            $permission = explode(',', $permission);
+            $permissions = auth('admin')->user()->allPermissions();
+            $parent = array_map(function ($permission) {
+                return $permission['parent'];
+            }, $permissions);
+
+            $match = count(array_intersect($permission, $parent));
 
             return (bool) $match;
         });
@@ -193,14 +231,15 @@ class MultiauthServiceProvider extends ServiceProvider
 
     protected function loadCommands()
     {
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                MakeMultiAuthCommand::class,
-                RollbackMultiAuthCommand::class,
-                Controller::class,
-                View::class,
-            ]);
-        }
+        $this->commands([
+            MakeMultiAuthCommand::class,
+            RollbackMultiAuthCommand::class,
+            PermissionCommand::class,
+            Install::class,
+            Controller::class,
+            Api::class,
+            View::class,
+        ]);
     }
 
     protected function canHaveAdminBackend()

@@ -1,8 +1,7 @@
 <?php
 
-namespace Ramivel\Multiauth\Console\Commands;
+namespace Ramivel\Application\Console\Commands;
 
-use Ramivel\Multiauth\Model\Role;
 use Illuminate\Console\Command;
 use Illuminate\Database\QueryException;
 
@@ -13,7 +12,7 @@ class RoleCmd extends Command
      *
      * @var string
      */
-    protected $signature = 'multiauth:role {name}';
+    protected $signature = 'ramivel:role {name}';
 
     /**
      * The console command description.
@@ -40,10 +39,12 @@ class RoleCmd extends Command
      */
     public function handle()
     {
-        $role = $this->argument('name');
+        $role      = $this->argument('name');
+        $roleModel = config('multiauth.models.role');
 
         try {
-            factory(Role::class)->create(['name' => $role]);
+            factory($roleModel)->create(['name' => $role]);
+            $this->info("Role with the name of $role is created");
         } catch (QueryException $e) {
             $this->error("Role name '{$role}' is already exist, choose another name");
         }
