@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use App\Models\Admin;
 
@@ -22,7 +22,7 @@ class MediaController extends Controller
     public function index()
     {
         $medias = Media::paginate(12);
-        return view('admin.media.index',compact('medias'));
+        return view('admin.media.index',compact('medias',$medias));
     }
 
     public function store(Request $request)

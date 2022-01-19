@@ -51,7 +51,7 @@ class Admin extends Authenticatable implements HasMedia
         'password', 'remember_token',
     ];
 
-    // public function registerMediaCollections(): void
+    // public function registerMediaCollections()
     // {
     //     $this
     //     ->addMediaCollection('media')

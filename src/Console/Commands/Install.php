@@ -42,6 +42,7 @@ class Install extends Command
         $this->publishMedia();
         $this->runMigration();
         $this->seedSuperAdmin();
+        $this->storageLink();
     }
 
     protected function publishAssets()
@@ -54,8 +55,7 @@ class Install extends Command
     protected function publishMedia()
     {
         $this->warn('2. Publishing Media Configurations');
-        Artisan::call('vendor:publish --provider="Spatie\MediaLibraryPro\MediaLibraryProServiceProvider" --tag="media-library-pro-migrations"
-        ');
+        Artisan::call('vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag="config"');
         $this->info(Artisan::output());
     }
 
@@ -71,6 +71,13 @@ class Install extends Command
         $this->warn('4. Seeding New Super Admin');
         Artisan::call('ramivel:seed --role=super');
         $this->info(Artisan::output().'Your Application is ready to use');
+    }
+
+    protected function storageLink()
+    {
+        $this->warn('5. Storage Link');
+        Artisan::call('storage:link');
+        $this->info(Artisan::output());
     }
 
 
