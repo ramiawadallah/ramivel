@@ -166,9 +166,9 @@
                             <li class="nav-main-item"><a class="nav-main-link" href="{{ url('admin/partners') }}">
                                 <i class="nav-main-link-icon si si-bubbles"></i><span class="nav-main-link-name">{{ __('Partners') }}</span></a>
                             </li>
-                            <li class="nav-main-item"><a class="nav-main-link" href="{{ url('admin/projects') }}">
+                            {{-- <li class="nav-main-item"><a class="nav-main-link" href="{{ url('admin/projects') }}">
                                 <i class="nav-main-link-icon si si-briefcase"></i><span class="nav-main-link-name">{{ __('Projects') }}</span></a>
-                            </li>
+                            </li> --}}
                             <li class="nav-main-item"><a class="nav-main-link" href="{{ url('admin/services') }}">
                                 <i class="nav-main-link-icon si si-chemistry"></i><span class="nav-main-link-name">{{ __('Service') }}</span></a>
                             </li>
@@ -178,12 +178,12 @@
                             <li class="nav-main-item"><a class="nav-main-link" href="{{ url('admin/sliders') }}">
                                 <i class="nav-main-link-icon si si-directions"></i><span class="nav-main-link-name">{{ __('Sliders') }}</span></a>
                             </li>
-                            <li class="nav-main-item"><a class="nav-main-link" href="{{ url('admin/categories') }}">
+                            {{-- <li class="nav-main-item"><a class="nav-main-link" href="{{ url('admin/categories') }}">
                                 <i class="nav-main-link-icon si si-grid"></i><span class="nav-main-link-name">{{ __('Categories') }}</span></a>
                             </li>
                             <li class="nav-main-item"><a class="nav-main-link" href="{{ url('admin/posts') }}">
                                 <i class="nav-main-link-icon si si-note"></i><span class="nav-main-link-name">{{ __('Posts') }}</span></a>
-                            </li>
+                            </li> --}}
                             <li class="nav-main-item"><a class="nav-main-link" href="{{ route('admin.show') }}">
                                 <i class="nav-main-link-icon si si-user-follow"></i><span class="nav-main-link-name">{{ ucfirst(config('multiauth.prefix')) }}</span></a>
                             </li>
@@ -195,9 +195,9 @@
                                 <i class="nav-main-link-icon si si-settings"></i><span class="nav-main-link-name">{{ __('Settings') }}</span></a>
                             </li>
 
-                            <li class="nav-main-item"><a class="nav-main-link" href="{{ url('admin/guards') }}">
+                            {{-- <li class="nav-main-item"><a class="nav-main-link" href="{{ url('admin/guards') }}">
                                 <i class="nav-main-link-icon si si-anchor"></i><span class="nav-main-link-name">{{ __('Guards') }}</span></a>
-                            </li>
+                            </li> --}}
                         @endadmin
                     </ul>
                 </div>

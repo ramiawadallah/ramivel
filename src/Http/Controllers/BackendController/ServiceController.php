@@ -74,7 +74,6 @@ class ServiceController extends Controller
             'translate' => ['title','content'],
             'status' => $request->status,
             'uri' => $request->uri,
-            'show_more' => $request->show_more,
             'created_by' => Auth::user('admin')->name,
             'photo' => $data['photo'],
         ],aurl().'/services');
@@ -137,7 +136,6 @@ class ServiceController extends Controller
             'translate' => ['title','content'],
             'status' => $request->status,
             'uri' => $request->uri,
-            'show_more' => $request->show_more,
             'photo' => $data['photo'],
             'updated_by' => Auth::user('admin')->name,
         ],aurl().'/services');

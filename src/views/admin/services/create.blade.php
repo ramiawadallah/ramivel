@@ -30,12 +30,8 @@
                             'active'=> __('Active'),
                             'not active'=> __('Not active'),
                         ]) !!}
-
                         <hr>
-                        {!! bsForm::radio('show_more',[
-                            'yes'=> __('Yes'),
-                            'no'=> __('No'),
-                        ]) !!}
+                        {!! bsForm::select('type',['' => 'None'] + App\Models\Section::all()->pluck('title', 'id')->toArray(), null)!!}
                     </div>
                 </div>
             </div>

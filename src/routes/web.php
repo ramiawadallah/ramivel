@@ -26,20 +26,33 @@ Route::get('/', function () {
   return view('welcome');
 });
 
+Route::middleware(['locale'])->group(function () {
+  Route::group(['middleware'=>'maintenance'], function(){
+      /* Pages Route if Pages Table is Exists*/
+      if (Schema::hasTable('pages')) {
+        foreach (\App\Models\Page::all() as $key => $page) {
+            Route::get($page->uri, ['as'=>$page->name, function() use ($page){
+                return App()->call('App\Http\Controllers\Frontend\FrontendController@show', [
+                    'page' => $page,
+                    'parameters'=> Route::current()->parameters(),
+                ]);
+            }]);
+        }      
+      } 
 
-Route::group(['middleware'=>'maintenance'], function(){
-    /* Pages Route if Pages Table is Exists*/
-    if (Schema::hasTable('pages')) {
-      foreach (\App\Models\Page::all() as $key => $page) {
-          Route::get($page->uri, ['as'=>$page->name, function() use ($page){
-              return App()->call('App\Http\Controllers\Frontend\FrontendController@show', [
-                  'page' => $page,
-                  'parameters'=> Route::current()->parameters(),
-              ]);
-          }]);
-      }      
-    } 
-    
+      // Get project by url
+      Route::get('work/{uri}',[FrontendController::class,'work']);
+
+      // Get Partner by url
+      Route::get('partner/{uri}',[FrontendController::class,'partner']);
+
+      // Get Post by url
+      Route::get('/blog/{uri}',[FrontendController::class,'post']);
+
+      /* Send Email */
+      Route::post('send_email',[SendEmailController::class,'sendEmail'])->name('send_email');
+      
+  });
 });
 
 
@@ -52,14 +65,3 @@ Route::get('maintenance',function(){
 });
 
 
-// Get project by url
-Route::get('work/{uri}',[FrontendController::class,'work']);
-
-// Get Partner by url
-Route::get('partner/{uri}',[FrontendController::class,'partner']);
-
-// Get Post by url
-Route::get('/blog/{uri}',[FrontendController::class,'post']);
-
-/* Send Email */
-Route::post('send_email',[SendEmailController::class,'sendEmail'])->name('send_email');

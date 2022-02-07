@@ -10,6 +10,7 @@ return [
 	'templates' => [
 		'home'		=> App\Template\HomeTemplate::class,
 		'about us'	=> App\Template\AboutusTemplate::class,
+		'contact us'	=> App\Template\ContactusTemplate::class,
 	],
 
 	'design' => [

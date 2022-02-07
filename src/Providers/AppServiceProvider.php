@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Ramivel\Application\View\ThemeViewFinder;
 use Ramivel\Application\View\Composers;
+use Illuminate\Support\Facades\View; 
 
 class AppServiceProvider extends ServiceProvider
 {

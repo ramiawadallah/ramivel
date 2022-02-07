@@ -76,7 +76,7 @@ class SeedCmd extends Command
         $admin     = $this->createMainLanguage();
         $admin     = $this->createFirstPage();
 
-        $this->info("You have created an admin name '{$admin->name}' with role of Super ");
+        $this->info("You have created an admin name admin with role of Super ");
         $this->info("Now log-in with {$admin->email} email and password as 'secret123'");
     }
 

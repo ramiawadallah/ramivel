@@ -2,183 +2,120 @@
 
 @section('content')
 	@foreach(\App\Models\Page::where('uri', Request::path())->get() as $page)
-		@if($page->type == 'video')
-			<header class="page-header">
-				<div class="video-bg">
-				<video src="{{ Storage::url($page->video) }}" autoplay muted playsinline loop></video>
+	<section 
+			class="page-title-section" 
+			style="background-image: url({{ media($page->photo) }}); background-size: cover;"
+			>
+			<div 
+				class="container"
+				>
+				<div class="row">
+					<div class="col-xl-12 text-center">
+						<div class="page-title-content "
+								{{-- @if(App::currentLocale() == 'ar') float-right @endif"
+								@if(App::currentLocale() == 'ar') dir="ltr" @endif --}}
+							>
+							<h3 class="title text-white">{{ $page->trans('title') }}</h3>
+							<nav aria-label="breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="{{url('/')}}">{{ __('lang.Home') }}</a></li>
+									<li class="breadcrumb-item active" aria-current="page">{{ $page->trans('title') }}</li>
+								</ol>
+							</nav>
+						</div>
+					</div>
 				</div>
-				<!-- end video-bg -->
-		      <div class="container">
-		        <div class="row">
-		          <div class="col-12">
-		            <h1>{{ $page->trans('title') }}</h1>
-		            <p>{{ $page->trans('subtitle') }}</p>
-		          </div>
-		          <!-- end col-12 --> 
-		        </div>
-		        <!-- end row --> 
-		      </div>
-		      <!-- end container -->
-		      <!-- end bottom-bar -->
-		      <aside class="left-side">
-		        <div class="social-links">
-		          <ul>
-			        <li><a href="{{ setting()->youtube }}" data-text="youtube">youtube</a></li>
-			        <li><a href="{{ setting()->instagram }}" data-text="instagram">instagram</a></li>
-			      </ul>
-		        </div>
-		        <!-- end social-links --> 
-		      </aside>
-		      <!-- end left-side -->
-		      <aside class="right-side"> <a href="#" data-text="{{ setting()->email }}">{{ setting()->email }}</a> </aside>
-		      <!-- end right-side --> 
-		    </header>
-		    <!-- end page-header -->
-	    @else
-	    	<header class="page-header">
-				<div class="photo-bg">
-				<img src="{{ Storage::url($page->photo) }}" >
+			</div>
+		</section>
+
+		<section class="contact-section pdt-110 pdb-95 pdb-lg-90" data-background="images/bg/abs-bg1.png" style="background-image: url(&quot;images/bg/abs-bg1.png&quot;);">
+			<div class="container">
+				<div class="row mrb-60">
+					<div class="col-lg-7">
+						<div class="contact-form">
+							<form id="contact" name="contact" method="post" action="{{ url('send_email') }}">
+								@CSRF
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="form-group mrb-25">
+											<input type="text" name="name" placeholder="{{ __('lang.Name') }}" class="form-control" required="">
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="form-group mrb-25">
+											<input type="text" name="phone" placeholder="{{ __('lang.Phone') }}" class="form-control" required="">
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="form-group mrb-25">
+											<input type="text" name="subject" placeholder="{{ __('lang.Subject') }}" class="form-control" required="">
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="form-group mrb-25">
+											<input type="email" name="email" placeholder="{{ __('lang.Email') }}" class="form-control" required="">
+										</div>
+									</div>
+									<div class="col-lg-12">
+										<div class="form-group mrb-25">
+											<textarea rows="4" name="message" placeholder="{{ __('lang.Message') }}" class="form-control" required=""></textarea>
+										</div>
+									</div>
+									<div class="col-lg-8">
+										<div class="form-group">
+											<button type="submit" name="submit" class="cs-btn-one btn-md btn-round btn-primary-color element-shadow" value="Send">{{ __('lang.Submit Now') }}</button>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="col-lg-5">
+						<!-- Google Map Start -->
+						<div class="mapouter fixed-height">
+							<div class="gmap_canvas">
+								<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3626.132653565211!2d46.863453914998736!3d24.653561884151905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xd92310f5b5b078a7!2zMjTCsDM5JzEyLjgiTiA0NsKwNTEnNTYuMyJF!5e0!3m2!1sen!2sjo!4v1644242711323!5m2!1sen!2sjo" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+							</div>
+						</div>
+						<!-- Google Map End -->
+					</div>
 				</div>
-				<!-- end video-bg -->
-		      <div class="container">
-		        <div class="row">
-		          <div class="col-12">
-		            <h1>{{ $page->trans('title') }}</h1>
-		            <p>{{ $page->trans('subtitle') }}</p>
-		          </div>
-		          <!-- end col-12 --> 
-		        </div>
-		        <!-- end row --> 
-		      </div>
-		      <!-- end container -->
-		      <!-- end bottom-bar -->
-		      <aside class="left-side">
-		        <div class="social-links">
-		          <ul>
-			        <li><a href="{{ setting()->youtube }}" data-text="youtube">youtube</a></li>
-			        <li><a href="{{ setting()->instagram }}" data-text="instagram">instagram</a></li>
-			      </ul>
-		        </div>
-		        <!-- end social-links --> 
-		      </aside>
-		      <!-- end left-side -->
-		      <aside class="right-side"> <a href="#" data-text="{{ setting()->email }}">{{ setting()->email }}</a> </aside>
-		      <!-- end right-side --> 
-		    </header>
-		    <!-- end page-header -->
-	    @endif
-
-
-		<section class="content-section contact">
-	      <div class="container">
-	        <div class="row align-items-center">
-	          <div class="col-12">
-	            <address class="contact-box">
-	            <small>Address</small>
-	            <p>{{ setting()->address }}</p>
-	            </address>
-	          </div>
-	          <!-- end col-12 -->
-	          <div class="col-md-4">
-	            <address class="contact-box">
-	            <small>Phone</small>
-	            <p>{{ setting()->phone }}</p>
-	            </address>
-	          </div>
-	          <!-- end col-4 -->
-	          <div class="col-md-4">
-	            <address class="contact-box">
-	            <small>E-mail</small> <a href="#">{{ setting()->email }}</a>
-	            </address>
-	          </div>
-	          <!-- end col-4 -->
-	          <div class="col-md-4">
-	            <address class="contact-box">
-	            <small>Career</small> <a href="#">{{ setting()->email }}</a>
-	            </address>
-	          </div>
-	          <!-- end col-4 -->
-	          <div class="col-12">
-	            <div class="map">
-	            	 <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3384.9738887220487!2d35.856903076171875!3d31.961605072021484!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151ca10ec97100cd%3A0xf5331aed2a1a64ad!2sPower%20Phone!5e0!3m2!1sen!2sjo!4v1611322384940!5m2!1sen!2sjo" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="0" aria-hidden="true" tabindex="0" info="false">
-	          </iframe>
-	          
-	              <div class="map-note">
-	                <h6>Direction</h6>
-	                <p>{!! $page->trans('content') !!}</p>
-	                <a href="{{ setting()->map }}" class="custom-btn">
-			            <svg>
-			              <rect width="218" height="56" x="1" y="1" rx="0" fill="none" stroke="#ffffff"></rect>
-			            </svg>
-		            	<span>Direction</span>
-		            </a> 
-		          </div>
-	              <!-- end map-note --> 
-	            </div>
-	            <!--   end map --> 
-	          </div>
-	          <!-- end col-12 -->
-
-	         
-	          <div class="contact-form col-md-6 col-xs-12 m-auto">
-	              <form id="contact" name="contact" method="post" action="{{ url('send_email') }}">
-	              		@CSRF
-	              		<div class="row">
-			                <div class="form-group col-md-6">
-			                  <p>Full Name</p>
-			                  <input type="text" name="name" id="name" autocomplete="off" required>
-			                </div>
-			                <!-- end form-group -->
-			                <div class="form-group col-md-6">
-			                  <p>Your E-mail Address *</p>
-			                  <input type="text" name="email" id="email" autocomplete="off" required>
-			                </div>
-
-			                <div class="form-group col-md-6">
-			                  <p>Your Phone *</p>
-			                  <input type="text" name="phone" id="phone" autocomplete="off" required>
-			                </div>
-
-			                <div class="form-group col-md-6">
-			                  <p>Email Subject *</p>
-			                  <input type="text" name="subject" id="subject" autocomplete="off" required>
-			                </div>
-
-			                <div class="form-group col-md-12">
-			                  <p>Write Your Project Description</p>
-			                  <textarea name="message" id="message" autocomplete="off" required></textarea>
-			                </div>
-			            </div>
-	                <!-- end form-group -->
-	                <div class="form-group" style="margin-top: 15px;">
-	                  <button class="m-auto btn-block" id="submit" type="submit" name="submit">SUBMIT</button>
-	                </div>
-	                <!-- end form-group -->
-	              </form>
-	              <!-- end form -->
-
-	              <div class="form-group">
-		              <div id="success" class="alert alert-success" role="alert"> 
-		                Your message was sent successfully! We will be in touch as soon as we can.
-		              </div>
-		              <!-- end success -->
-			          <div id="error" class="alert alert-danger" role="alert"> 
-			            Something went wrong, try refreshing and submitting the form again.
-			          </div>
-		                <!-- end error --> 
-	              </div>
-	              <!-- end form-group --> 
-	          </div>
-	          <!-- end contact-form --> 
-
-	        </div>
-	        <!-- end row --> 
-	      </div>
-	      <!-- end container --> 
-	    </section>
-		<!-- end content-section -->
-
-		@include('partials.smallfoot')
-		
+				<div class="row">
+					{{-- <div class="col-lg-6 col-xl-4">
+						<div class="contact-block d-flex mrb-30">
+							<div class="contact-icon">
+								<i class="webex-icon-map1"></i>
+							</div>
+							<div class="contact-details mrl-30">
+								<h5 class="icon-box-title mrb-10">Our Address</h5>
+								<p class="mrb-0">60 Broklyn Street USA</p>
+							</div>
+						</div>
+					</div> --}}
+					<div class="col-lg-6 col-xl-4">
+						<div class="contact-block d-flex mrb-30">
+							<div class="contact-icon">
+								<i class="webex-icon-Phone2"></i>
+							</div>
+							<div class="contact-details mrl-30">
+								<h5 class="icon-box-title mrb-10">{{ __('lang.Phone Number') }}</h5>
+								<p class="mrb-0">{{ setting()->phone }}</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6 col-xl-4">
+						<div class="contact-block d-flex mrb-30">
+							<div class="contact-icon">
+								<i class="webex-icon-envelope"></i>
+							</div>
+							<div class="contact-details mrl-30">
+								<h5 class="icon-box-title mrb-10">{{ __('lang.Email Us') }}</h5>
+								<p class="mrb-0">{{ setting()->email }}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 	@endforeach()
 @endsection

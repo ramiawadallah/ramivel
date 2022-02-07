@@ -47,71 +47,105 @@
 <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 <meta name="theme-color" content="#ffffff">
 
-<!-- CSS FILES -->
-<link rel="stylesheet" href="{{ theme('frontend/css/fontawesome.min.css') }}">
-<link rel="stylesheet" href="{{ theme('frontend/css/bundle.min.css') }}">
-<link rel="stylesheet" href="{{ theme('frontend/css/bootstrap.min.css') }}">
-<link rel="stylesheet" href="{{ theme('frontend/css/style.css') }}">
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.css">
+<!-- Main Stylesheet -->
+	<link rel="stylesheet" href="{{ theme('frontend/css/bootstrap.css') }}">
+	@if(App::currentLocale() == 'ar') 
+		<link rel="stylesheet" href="{{ theme('frontend/css/rtl.min.css') }}">
+	@endif
+	<link rel="stylesheet" href="{{ theme('frontend/css/style.css') }}">
+	<link rel="stylesheet" href="{{ theme('frontend/css/responsive.css') }}">
+
 </head>
-<body class="bg-dark">
-  <div class="cursor js-cursor"></div>
-  <!-- end cursor -->
-  <div class="preloader" id="preloader"> 
-    <span></span>
-    <div class="inner">
-      <canvas class="progress-bar" id="progress-bar" width="500" height="500"></canvas>
-      <img src="{{ Storage::url(setting()->icon) }}" srcset="{{ Storage::url(setting()->icon) }}" alt="Image">
-    </div>
-    <!-- end inner --> 
-  </div>
-  <!-- end preloder -->
+<body>
+	<!-- Preloader Start -->
+	<div class="preloader"></div>
+	<!-- Preloader End -->
 
-  <!-- end page-transition -->
-  <div class="site-navigation" style="">
-    <ul>
-      @include('partials.navigation')
-    </ul>
-  </div>
-  <!-- edn site-navigation -->
-  <nav class="navbar">
-    <div class="logo"> <a href="{{ url('/') }}">
-    	<img src="{{ Storage::url(setting()->logo) }}" srcset="{{ Storage::url(setting()->logo) }}" alt="Image"> </a> 
-    </div>
-    <!-- end logo -->
-    <!-- <ul class="languages">
-      <li><a href="#" data-text="Eng">Eng</a></li>
-      <li><a href="#" data-text="Rus">Rus</a></li>
-    </ul> -->
-    <!-- end languages --> 
-    <span class="menu-text">Navigation</span>
-    <div class="sandwich-menu">
-      <div class="sandwich">
-        <div class="sand"> <span></span> <span></span> </div>
-        <!-- end sand -->
-        <div class="closed"> <span></span> <span></span> </div>
-        <!-- end closed --> 
-      </div>
-      <!-- end sandwich --> 
-      
-    </div>
-    <!-- end sandwich-menu --> 
-  </nav>
-  <!-- end navbar -->
+	<header  class="header-style-two">
+		<div class="header-wrapper">
+			<div class="header-top-area bg-primary-color d-none d-lg-block">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-6 header-top-left-part">
+							<span class="phone"><i class="webexflaticon flaticon-phone-1"></i> {{ setting()->phone }}</span>
+							<span class="phone"><i class="webexflaticon flaticon-send"></i> {{ setting()->email }}</span>
+						</div>
+						<div class="col-lg-6 header-top-right-part text-right">
+							<ul class="social-links">
+								<li><a href="{{ setting()->linkedin }}"><i class="fab fa-linkedin"></i></a></li>
+								{{-- <li><a href="{{ setting()->twitter }}"><i class="fab fa-twitter"></i></a></li> --}}
+								<li><a href="{{ setting()->instagram }}"><i class="fab fa-instagram"></i></a></li>
+							</ul>
 
-  @yield('content')
+							<div class="language">
+								@if ( App::currentLocale() == 'en')
+									<a class="" 
+									href="{{ url('locale/'. \App\Models\Lang::where('code','ar')->first()->code) }}">
+									<i class="webexflaticon flaticon-internet"></i>
+									{{ \App\Models\Lang::where('code','ar')->first()->name }}
+									</a>
+								@elseif ( App::currentLocale() == 'ar' )
+									<a class="" 
+									href="{{ url('locale/'. \App\Models\Lang::where('code','en')->first()->code) }}"><i class="webexflaticon flaticon-internet"></i>
+									{{ \App\Models\Lang::where('code','en')->first()->name }}
+									</a>
+								@endif
+						</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="header-navigation-area two-layers-header">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<a class="navbar-brand logo f-left mrt-10 mrt-md-0" href="{{ url('/') }}">
+								{{-- <img id="logo-image" class="img-center" src="{{ media(setting()->logo) }}" alt=""> --}}
+								@if(App::currentLocale() == 'ar') 
+									<img id="logo-image" class="img-center" src="{{ theme('frontend/img/sdlogo-02.png') }}" alt="">
+								@else
+									<img id="logo-image" class="img-center" src="{{ theme('frontend/img/sdlogo-01.png') }}" alt="">
+								@endif
+							</a>
+							<div class="mobile-menu-right"></div>
+							<div class="main-menu f-right">
+								<nav id="mobile-menu-right">
+									<ul>
+										@include('partials.navigation')										
+									</ul>
+								</nav>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
 
-  
+  	@yield('content')
 
-<!-- JS FILES --> 
-<script src="{{ theme('frontend/js/jquery.min.js') }}"></script> 
-<script src="{{ theme('frontend/js/bootstrap.min.js') }}"></script> 
-<script src="{{ theme('frontend/js/bundle.js') }}"></script> 
-<script src="{{ theme('frontend/js/scripts.js') }}"></script>
-<script src="{{ theme('js/contact.form.min.js') }}"></script> 
-<script src="https://api-maps.yandex.ru/2.1/?lang=en_RU"></script>
-<script src="{{ theme('frontend/js/maps.min.js') }}"></script> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> 
+	  <div class="footer-bottom-area">
+			<div class="container footer-border-top pdt-30 pdb-10">
+				<div class="row">
+					<div class="col-xl-12">
+						<div class="text-center">
+							<span class="text-light-gray">Copyright © 2022 by <a class="text-primary-color" target="_blank" href="http://ramiawadallah.com"> Rami Awdallah</a> | All rights reserved </span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- Footer Area End -->
+	<!-- BACK TO TOP SECTION -->
+	<div class="back-to-top bg-primary-color">
+		<i class="fab fa-angle-up"></i>
+	</div>
+	<!-- Integrated important scripts here -->
+	<script src="{{ theme('frontend/js/jquery.v1.12.4.min.js') }}"></script>
+	<script src="{{ theme('frontend/js/bootstrap.min.js') }}"></script>
+	<script src="{{ theme('frontend/js/jquery-core-plugins.js') }}"></script>
+	<script src="{{ theme('frontend/js/main.js') }}"></script>
 </body>
 
 </html>

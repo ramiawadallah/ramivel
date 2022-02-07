@@ -32,11 +32,7 @@
                             ],$service->status) 
                         !!}
                         <hr>
-                        {!! bsForm::radio('show_more',[
-                                'yes'=> __('Yes'),
-                                'no'=> __('No'),
-                            ],$service->show_more) 
-                        !!}
+                        {!! bsForm::select('type',['' => 'None'] + App\Models\Section::all()->pluck('title', 'id')->toArray(), $service->type)!!}
                     </div>
                 </div>
             </div>

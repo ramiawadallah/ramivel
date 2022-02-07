@@ -18,7 +18,7 @@ class CommendController extends Controller
     // Guard Function and methods  
     public function indexGuard(){
     	$guards = Guard::all();
-    	return view('admin.guards.index',compact('guards', $guards));
+    	return view('admin.guards.index',compact('guards'));
     }
 
     public function createGuard(){

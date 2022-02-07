@@ -1,183 +1,94 @@
 @extends('layouts.frontend')
 
 @section('content')
+
+	<style>
+		/* Tell the list-items to not display numbers, but keep track of what the numbers should be */
+
+		.about-section ol li {
+			counter-increment: list;
+			list-style-type: none;
+			position: relative;
+		}
+
+		/* Output the numbers using the counter() function, but use a custom color, and position the numbers how we want */
+		.about-section ol li:before {
+			color: #e75204;
+			content: " ";
+			@if(App::currentLocale() == 'ar') right: -32px; @else left: -32px; @endif
+			position: absolute;
+			width: 15px;
+			height: 15px;
+			border: #FF4800 solid 1px;
+			border-radius: 100%;
+		}
+	</style>
+
+
 	@foreach(\App\Models\Page::where('uri', Request::path())->get() as $page)
-	    @if($page->type == 'video')
-			<header class="page-header">
-				<div class="video-bg">
-				<video src="{{ Storage::url($page->video) }}" autoplay muted playsinline loop></video>
+		<section 
+			class="page-title-section" 
+			style="background-image: url({{ media($page->photo) }}); background-size: cover;"
+			>
+			<div 
+				class="container"
+				>
+				<div class="row">
+					<div class="col-xl-12 text-center">
+						<div class="page-title-content "
+								{{-- @if(App::currentLocale() == 'ar') float-right @endif"
+								@if(App::currentLocale() == 'ar') dir="ltr" @endif --}}
+							>
+							<h3 class="title text-white">{{ $page->trans('title') }}</h3>
+							<nav aria-label="breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="{{url('/')}}">{{ __('lang.Home') }}</a></li>
+									<li class="breadcrumb-item active" aria-current="page">{{ $page->trans('title') }}</li>
+								</ol>
+							</nav>
+						</div>
+					</div>
 				</div>
-				<!-- end video-bg -->
-		      <div class="container">
-		        <div class="row">
-		          <div class="col-12">
-		            <h1>{{ $page->trans('title') }}</h1>
-		            <p>{{ $page->trans('subtitle') }}</p>
-		          </div>
-		          <!-- end col-12 --> 
-		        </div>
-		        <!-- end row --> 
-		      </div>
-		      <!-- end container -->
-		      <!-- end bottom-bar -->
-		      <aside class="left-side">
-		        <div class="social-links">
-		          <ul>
-			        <li><a href="{{ setting()->youtube }}" data-text="youtube">youtube</a></li>
-			        <li><a href="{{ setting()->instagram }}" data-text="instagram">instagram</a></li>
-			      </ul>
-		        </div>
-		        <!-- end social-links --> 
-		      </aside>
-		      <!-- end left-side -->
-		      <aside class="right-side"> <a href="#" data-text="{{ setting()->email }}">{{ setting()->email }}</a> </aside>
-		      <!-- end right-side --> 
-		    </header>
-		    <!-- end page-header -->
-	    @else
-	    	<header class="page-header">
-				<div class="photo-bg">
-				<img src="{{ Storage::url($page->photo) }}" >
-				</div>
-				<!-- end video-bg -->
-		      <div class="container">
-		        <div class="row">
-		          <div class="col-12">
-		            <h1>{{ $page->trans('title') }}</h1>
-		            <p>{{ $page->trans('subtitle') }}</p>
-		          </div>
-		          <!-- end col-12 --> 
-		        </div>
-		        <!-- end row --> 
-		      </div>
-		      <!-- end container -->
-		      <!-- end bottom-bar -->
-		      <aside class="left-side">
-		        <div class="social-links">
-		          <ul>
-			        <li><a href="{{ setting()->youtube }}" data-text="youtube">youtube</a></li>
-			        <li><a href="{{ setting()->instagram }}" data-text="instagram">instagram</a></li>
-			      </ul>
-		        </div>
-		        <!-- end social-links --> 
-		      </aside>
-		      <!-- end left-side -->
-		      <aside class="right-side"> <a href="#" data-text="{{ setting()->email }}">{{ setting()->email }}</a> </aside>
-		      <!-- end right-side --> 
-		    </header>
-		    <!-- end page-header -->
-	    @endif
-
-	    @if(\App\Models\Service::count() >= 1)
-	     <section class="content-section">
-		  <div class="container">
-		    <div class="row justify-content-center">
-		      <div class="col-12">
-		        <div class="section-title">
-		          <h6>Introduction of  user interface</h6>
-		          <h2>Solutions</h2>
-		        </div>
-		        <!-- end section-title --> 
-		      </div>
-		      <!-- end col-12 -->
-
-		      @foreach(\App\Models\Service::where('status', 'active')->get() as $key => $service)
-		      <div class="col-lg-4">
-		        <div class="icon-content-list-block">
-		          <figure><img src="{{ Storage::url($service->photo) }}" alt="Image"></figure>
-		          <small>@if($key >= 10){{ $key+1 }}@else 0{{ $key+1 }} @endif</small>
-		          <h5>{{ $service->trans('title') }}</h5>
-		          @if($service->show_more == 'yes')
-		          	<!-- <p>{!! str_limit($service->trans('content'), 100) !!}</p> -->
-		          	<a href="{{ url('service/'.$service->uri) }}" class="custom-btn">
-			            <svg>
-			              <rect width="218" height="56" x="1" y="1" rx="0" fill="none" stroke="#000"></rect>
-			            </svg>
-			            <span style="color:#000 !important;">Read More</span> 
-			        </a>
-			       @endif	
-		        </div>
-		        <!-- end icon-content-list-block --> 
-		       @endforeach
-		      </div>
-		    </div>
-		    <!-- end row --> 
-		  </div>
-		  <!-- end container --> 
-		</section>
-		<!-- end content-section -->
-		@endif
-
-	      <section class="content-section no-spacing">
-		  <div class="container">
-		    <div class="row align-items-center no-gutters">
-		      <div class="col-lg-6">
-		        <div class="left-side-content">
-		          <div class="inner">
-		            <p>
-		            	{!! $page->trans('content') !!}
-		            </p>
-		            <a href="{{ url('work') }}" class="custom-btn">
-		            <svg>
-		              <rect width="218" height="56" x="1" y="1" rx="0" fill="none" stroke="#ffffff"></rect>
-		            </svg>
-		            <span>SEE ALL PROJECTS</span> </a> </div>
-		          <!-- inner --> 
-		        </div>
-		        <!-- end left-side-content --> 
-		      </div>
-		      <!-- end col-6 -->
-		      <div class="col-lg-6">
-		        <figure class="right-side-image"> <img src="{{ Storage::url($page->photo) }}" alt="Image" class="image">
-		          <!-- <figcaption> 
-		          	<img src="images/logo-awwwards.png" alt="Image"> <small>Award Winning Website</small> 
-		          </figcaption> -->
-		        </figure>
-		        <!-- end right-side-image --> 
-		      </div>
-		      <!-- end col-6 --> 
-		    </div>
-		    <!-- end row --> 
-		  </div>
-		  <!-- end container --> 
-		  
-		</section>
-
-
-		<section class="content-section">
-			  <div class="container">
-			    <div class="row">
-			      <div class="col-12">
-			        <div class="section-title">
-			          <h2>In the Office</h2>
-			        </div>
-			        <!-- end section-title --> 
-			      </div>
-			      <!-- end col-12 -->
-			      @foreach(\App\Models\Team::all() as $team)
-			      		<div class="col-lg-3 col-md-6">
-					        <figure class="team"> 
-					          <img src="{{ Storage::url($team->photo) }}" alt="Image">
-					          <figcaption>
-					          	<img src="{{ Storage::url($team->cover) }}" alt="Image">
-					            <h5>{{ $team->name }}</h5>
-					            <small>{{ $team->title }}</small>
-					            <ul>
-					              <li><a href="#"><i class="fab fa-github"></i></a></li>
-					              <li><a href="#"><i class="fab fa-slack"></i></a></li>
-					              <li><a href="#"><i class="fab fa-medium-m"></i></a></li>
-					              <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-					              <li><a href="#"><i class="fab fa-behance"></i></a></li>
-					            </ul>
-					          </figcaption>
-					        </figure>
-				      	</div>
-			      @endforeach
-			  </div>
 			</div>
 		</section>
 
-		@include('partials.smallfoot')
-		
+		<section class="about-section anim-object pdt-110 pdb-170 pdb-lg-110">
+			<div class="container">
+				<div class="row align-items-center">
+					<div class="col-md-12 col-xl-6">
+						<div class="about-image-box mrr-lg-0 mrb-lg-110">
+							{{-- <img class="about-image1 img-full js-tilt d-none d-xl-block" 
+							src="{{ media($page->photo) }}" alt="" style=""> --}}
+							<img class="about-image2 img-full"
+							src="{{ media($page->photo) }}" alt="">
+						</div>
+					</div>
+					<div class="col-md-12 col-xl-6 pdl-60" @if(App::currentLocale() == 'ar') dir="rtl" @endif>
+						<h5 class="side-line-left text-primary-color mrb-15">{{ $page->trans('title') }}</h5>
+						<h2 class="text-uppercase mrb-30">{{ $page->trans('subtitle') }}</h2>
+						{!! $page->trans('content') !!}
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="pdb-90">
+			<div class="section-content">
+				<div class="container border-top pdt-80">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="owl-carousel client-items">
+								@foreach (\App\Models\Partner::where('status','active')->get() as $partner)
+									<div class="client-item">
+										<img src="{{ media($partner->photo) }}" alt="">
+									</div>
+								@endforeach
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
 	@endforeach()
 @endsection

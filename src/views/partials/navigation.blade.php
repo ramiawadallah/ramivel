@@ -1,21 +1,22 @@
 <?php 
 
 $lang = app()->getLocale();
-
+$pages = \App\Models\Page::all()->toHierarchy();
 ?>
-
 
 @foreach($pages as $page)
     @if($page->status == "active")
-      <li  class="{{Request::is($page->uri_wildcard) ? '' : '' }}{{count($page->children) ? ($page->isChild() ? '' : 'dropdown') : ''}}">
+      <li  class="nav-item  {{Request::is($page->uri_wildcard) ? 'active' : '' }}
+        {{count($page->children) ? ($page->isChild() ? '' : 'has-sub') : ''}}">
 
         @if(count($page->children))  
           <span>+</span>
         @endif
 
         <b>
-          <a class="{{count($page->children) ? ($page->isChild() ? '' : '') : ''}}"
-        href="{{ url($page->uri) }}" data-text="{{ $page->trans('title',$lang) }} ">{{ $page->trans('title',$lang) }} 
+          <a class="nav-link {{count($page->children) ? ($page->isChild() ? '' : '') : ''}}"
+          href="{{ url($page->uri) }}" data-text="{{ $page->trans('title',$lang) }} ">
+          {{ $page->trans('title',$lang) }} 
           </a>
         </b>
         @if(count($page->children))
@@ -26,10 +27,19 @@ $lang = app()->getLocale();
       </li>
     @endif
 @endforeach
-<!-- 
-<li class="dropdown"><span>+</span><b><a href="index-2.html" data-text="Home">Home</a></b>
-  <ul>
-    <li><a href="index-kinetic-slider.html">Kinetic Slider</a></li>
-      <li><a href="index-video-bg.html">Video Background</a></li>
-   </ul>
-</li> -->
+
+{{-- <li class="has-sub">
+  <a href="#">Home</a>
+  <ul class="sub-menu">
+    <li><a href="index-2.html">Home Layout 1</a></li>
+    <li><a href="index2.html">Home Layout 2</a></li>
+    <li><a href="index3.html">Home Layout 3</a></li>
+    <li class="has-sub-child">
+      <a href="#">Header Styles</a>
+      <ul class="sub-menu">
+        <li><a href="page-header-style-one.html">Header Style One</a></li>
+        <li><a href="page-header-style-two.html">Header Style Two</a></li>
+      </ul>
+    </li>
+  </ul>
+</li> --}}
