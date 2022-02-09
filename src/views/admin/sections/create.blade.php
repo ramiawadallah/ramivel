@@ -30,8 +30,8 @@
                         {!! bsForm::select('type',['' => 'None' , 'Post' => 'Post', 'Service' => 'Service', 'Partner' => 'Client', 'Project' => 'Project','Service'  => 'Service','Team' => 'Team','Parallax' => 'Parallax'] , null)!!}
                         <hr>
                         {!! bsForm::radio('status',[
-                            'active'=> __('Active'),
-                            'not active'=> __('Not-active'),
+                            'acti__('Active'),
+                            'not acti__('Active'),
                         ]) !!}
                         <hr>
                         <label>Order Section</label>
@@ -42,6 +42,13 @@
                             '3'=> __('3'),
                             '4'=> __('4'),
                             '5'=> __('5'),
+                        ]) !!}
+                        <hr>
+                        <label>Publish Content</label>
+                        <br>
+                        {!! bsForm::select('content_publish',[
+                            '1'=> __('Active'),
+                            '0'=> __('Not Active'),
                         ]) !!}
                     </div>
                 </div>

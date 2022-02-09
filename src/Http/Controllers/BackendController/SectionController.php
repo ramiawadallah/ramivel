@@ -75,6 +75,7 @@ class SectionController extends Controller
             'page_id' => $request->page_id,
             'type' => $request->type,
             'order' => $request->order,
+            'content_publish' => $request->content_publish,
             'photo' => $data['photo'],
             'updated_by'    => Auth::user('admin')->name,
         ],aurl().'/sections');
@@ -139,6 +140,7 @@ class SectionController extends Controller
             'page_id' => $request->page_id,
             'type' => $request->type,
             'order' => $request->order,
+            'content_publish' => $request->content_publish,
             'photo' => $data['photo'],
             'updated_by'    => Auth::user('admin')->name,
         ],aurl().'/sections');

@@ -43,6 +43,8 @@
                             '4'=> __('4'),
                             '5'=> __('5'),
                         ], $section->order) !!}
+                        <hr>
+                        {!! bsForm::select('content_publish',['active' => 'Active' , 'not_active' => 'Not Active' ] , $section->content_publish )!!}
                     </div>
                 </div>
             </div>
